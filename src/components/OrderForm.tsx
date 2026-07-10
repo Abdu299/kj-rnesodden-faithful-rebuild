@@ -38,22 +38,12 @@ const empty: FormState = {
   description: "",
 };
 
-// Placeholder submission — replace with a real backend or Lovable Cloud call later.
-async function saveSubmissionLocally(data: FormState) {
-  try {
-    const key = "kn_submissions";
-    const prev = JSON.parse(localStorage.getItem(key) ?? "[]");
-    prev.push({ ...data, at: new Date().toISOString() });
-    localStorage.setItem(key, JSON.stringify(prev));
-  } catch {
-    /* ignore storage errors */
-  }
-}
-
 export function OrderForm() {
   const [state, setState] = useState<FormState>(empty);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const placeOptions = useMemo(
     () => (state.deliveryType ? PLACES[state.deliveryType] ?? [] : []),
@@ -81,9 +71,30 @@ export function OrderForm() {
     const e = validate(state);
     setErrors(e);
     if (Object.keys(e).length > 0) return;
-    await saveSubmissionLocally(state);
-    setState(empty);
-    setSent(true);
+    setSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(state),
+      });
+
+      if (!response.ok) {
+        throw new Error("Bestillingen kunne ikke sendes");
+      }
+
+      setState(empty);
+      setSent(true);
+    } catch (error) {
+      console.error(error);
+      setSubmitError(
+        "Noe gikk galt. Bestillingen ble ikke sendt. Prøv igjen, eller kontakt oss på telefon.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (sent) {
@@ -191,9 +202,15 @@ export function OrderForm() {
       />
       {errors.description && <div className="field-error">{errors.description}</div>}
 
-      <button className="btn" type="submit">
-        Send
+      <button className="btn" type="submit" disabled={submitting}>
+        {submitting ? "Sender..." : "Send"}
       </button>
+
+      {submitError && (
+        <div className="field-error" role="alert" style={{ marginTop: "12px" }}>
+          {submitError}
+        </div>
+      )}
 
       <div className="meta">
         Vi kontakter deg snart og oppdaterer deg. Betaling skjer etter at du har mottatt varene.
