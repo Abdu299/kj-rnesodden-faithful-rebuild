@@ -116,7 +116,7 @@ function OmOss() {
             <div className="about-card about-contact">
               <h2 className="about-title">Kontakt oss:</h2>
               <p>
-                <strong>Arkan:</strong> <a href="tel:+4793461991">462 56 624</a>
+                <strong>Arkan:</strong> <a href="tel:+4793461991">934 61 991</a>
               </p>
               <p>
                 <strong>Zain:</strong> <a href="tel:+4746578242">465 78 242</a>
