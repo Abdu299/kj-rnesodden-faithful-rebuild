@@ -118,9 +118,7 @@ function OmOss() {
               <p>
                 <strong>Arkan:</strong> <a href="tel:+4793461991">934 61 991</a>
               </p>
-              <p>
-                <strong>Zain:</strong> <a href="tel:+4746578242">465 78 242</a>
-              </p>
+              
             </div>
           </div>
         </div>
