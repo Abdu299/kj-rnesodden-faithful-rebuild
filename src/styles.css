@@ -144,7 +144,7 @@
 }
 
 /* ============================================================
-   KjørNesodden site styles (ported verbatim from the original)
+   KjÃ¸rNesodden site styles (ported verbatim from the original)
    ============================================================ */
 :root {
   --accent: #ff8a00;
@@ -838,5 +838,115 @@
 
   .about-price-row {
     align-items: flex-start;
+  }
+}
+
+/* ============================================================
+   Om oss: mobile layout correction
+   Prevents the first card from covering the hero text.
+   ============================================================ */
+@media (max-width: 620px) {
+  .about-page {
+    overflow-x: hidden;
+  }
+
+  .about-hero {
+    min-height: auto;
+    padding-bottom: 42px;
+    background-position: center;
+  }
+
+  .about-page .topbar {
+    padding: 16px 6px 8px;
+  }
+
+  .about-page .logo {
+    font-size: 21px;
+    line-height: 1.15;
+  }
+
+  .about-page .menu-toggle {
+    color: #fff;
+  }
+
+  .about-intro {
+    width: calc(100% - 40px);
+    padding-top: 74px;
+  }
+
+  .about-eyebrow {
+    margin-bottom: 18px;
+    font-size: 0.76rem;
+    line-height: 1.4;
+  }
+
+  .about-intro h1 {
+    max-width: 100%;
+    font-size: clamp(2.35rem, 10.5vw, 3rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+
+  .about-intro p {
+    max-width: 100%;
+    margin-top: 24px;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .about-content {
+    width: calc(100% - 28px);
+    margin: 0 auto;
+    padding-top: 18px;
+    padding-bottom: 60px;
+  }
+
+  .about-section {
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+
+  .about-panel {
+    padding: 26px 22px;
+    border-radius: 20px;
+    box-shadow: 0 12px 32px rgba(20, 31, 58, 0.08);
+  }
+
+  .about-panel h2 {
+    font-size: 1.85rem;
+    line-height: 1.14;
+  }
+
+  .about-panel-copy,
+  .contact-panel p {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .restaurant-grid {
+    margin-top: 24px;
+    gap: 10px;
+  }
+
+  .restaurant-item {
+    min-height: 34px;
+    align-items: flex-start;
+    line-height: 1.4;
+  }
+
+  .about-price-row {
+    gap: 14px;
+    padding: 15px 0;
+    font-size: 0.96rem;
+  }
+
+  .service-columns {
+    gap: 26px;
+    margin-top: 24px;
+  }
+
+  .about-map {
+    margin-top: 22px;
+    border-radius: 12px;
   }
 }
