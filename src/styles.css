@@ -583,3 +583,260 @@
     text-align: left;
   }
 }
+
+
+/* Add this near the bottom of styles.css */
+
+.about-page {
+  min-height: 100vh;
+  background: #f5f6fa;
+  color: #17213b;
+}
+
+.about-hero {
+  min-height: 500px;
+  padding-bottom: 80px;
+  position: relative;
+  background-image:
+    linear-gradient(90deg, rgba(10, 18, 39, 0.88), rgba(10, 18, 39, 0.52)),
+    url('/nesodden-bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.about-intro {
+  width: min(1180px, calc(100% - 80px));
+  margin: 0 auto;
+  padding-top: 95px;
+  color: #fff;
+}
+
+.about-eyebrow,
+.about-panel-label {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #ff9418;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.about-intro h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(2.6rem, 5vw, 5rem);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+.about-intro p {
+  max-width: 660px;
+  margin: 26px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.12rem;
+  line-height: 1.75;
+}
+
+.about-content {
+  width: min(1180px, calc(100% - 80px));
+  margin: -68px auto 0;
+  padding-bottom: 90px;
+  position: relative;
+  z-index: 2;
+}
+
+.about-section {
+  display: grid;
+  gap: 28px;
+  margin-bottom: 28px;
+}
+
+.about-overview-grid {
+  grid-template-columns: minmax(0, 1.45fr) minmax(330px, 0.75fr);
+}
+
+.about-secondary-grid {
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+}
+
+.about-panel {
+  padding: 38px;
+  border: 1px solid rgba(24, 40, 75, 0.08);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 18px 50px rgba(20, 31, 58, 0.09);
+}
+
+.about-panel h2 {
+  margin: 0;
+  color: #1e3765;
+  font-size: clamp(1.8rem, 3vw, 2.55rem);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.about-panel-copy,
+.contact-panel p {
+  margin: 16px 0 0;
+  color: #687087;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.restaurant-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 26px;
+  margin-top: 30px;
+}
+
+.restaurant-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 38px;
+  color: #293149;
+  font-weight: 600;
+}
+
+.restaurant-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff9418;
+  flex: 0 0 auto;
+}
+
+.price-panel {
+  background: #263553;
+  color: #fff;
+}
+
+.price-panel h2 {
+  color: #fff;
+}
+
+.about-price-list {
+  margin-top: 28px;
+}
+
+.about-price-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 17px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.45;
+}
+
+.about-price-row strong {
+  color: #ff9a22;
+  white-space: nowrap;
+}
+
+.about-map {
+  margin-top: 28px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.about-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.service-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px;
+  margin-top: 30px;
+}
+
+.service-columns h3 {
+  margin: 0 0 14px;
+  color: #1e3765;
+  font-size: 1.1rem;
+}
+
+.service-columns p {
+  margin: 9px 0;
+  color: #626b80;
+}
+
+.contact-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background: linear-gradient(145deg, #fff7ec, #ffffff);
+}
+
+.contact-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 28px;
+  padding: 15px 22px;
+  border-radius: 10px;
+  background: #ff9418;
+  color: #17213b;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(255, 148, 24, 0.28);
+}
+
+@media (max-width: 900px) {
+  .about-overview-grid,
+  .about-secondary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-intro,
+  .about-content {
+    width: min(100% - 40px, 680px);
+  }
+
+  .about-intro {
+    padding-top: 70px;
+  }
+}
+
+@media (max-width: 620px) {
+  .about-hero {
+    min-height: 440px;
+    padding-bottom: 55px;
+  }
+
+  .about-intro,
+  .about-content {
+    width: calc(100% - 28px);
+  }
+
+  .about-intro h1 {
+    font-size: 2.55rem;
+  }
+
+  .about-panel {
+    padding: 26px 22px;
+    border-radius: 16px;
+  }
+
+  .restaurant-grid,
+  .service-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .about-price-row {
+    align-items: flex-start;
+  }
+}

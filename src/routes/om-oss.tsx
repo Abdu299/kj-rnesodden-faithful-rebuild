@@ -8,13 +8,12 @@ export const Route = createFileRoute("/om-oss")({
       {
         name: "description",
         content:
-          "KjørNesodden leverer fra restauranter, dagligvarebutikker og hurtigmatkjeder på Nesodden. Se leveringsområder, priser og kontaktinformasjon.",
+          "Les mer om KjørNesodden, våre leveringsområder, priser og steder vi henter fra.",
       },
       { property: "og:title", content: "Om oss – KjørNesodden" },
       {
         property: "og:description",
-        content:
-          "Våre tjenester, leveringsområder og kontaktinformasjon på Nesodden.",
+        content: "Våre tjenester, leveringsområder og kontaktinformasjon på Nesodden.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/om-oss" },
@@ -28,101 +27,120 @@ const RESTAURANTS = [
   "Viva Napoli Nesodden",
   "Pizzabakeren Nesodden",
   "Jafs Nesodden",
-  "Tony’s Sushi Og Thai Restaurant",
+  "Tony’s Sushi og Thai Restaurant",
   "Jonathan Sushi Nesodden",
   "Nye Flaskebekk Bistro",
   "Tåste Restaurant",
   "O’ Sole Mio",
-  "MAMA GREEK KITCHEN",
+  "Mama Greek Kitchen",
   "Primitivo Ristorante",
-  "Pio Pio pizzeria",
+  "Pio Pio Pizzeria",
   "Annas Hybel",
   "Fagerstrand Vertshus AS",
 ];
 
-const GROCERIES = ["Meny", "Kiwi", "Coop Extra", "Coop Prix", "Joker", "Mester Grønn (Tangen)"];
+const GROCERIES = [
+  "Meny",
+  "Kiwi",
+  "Coop Extra",
+  "Coop Prix",
+  "Joker",
+  "Mester Grønn (Tangen)",
+];
+
+const PRICES = [
+  { area: "Tangen / Bjørnemyr / Helvik", price: "75 kr" },
+  { area: "Alværn / Fjordvangen / Fjellstrand", price: "100 kr" },
+  { area: "Fagerstrand", price: "150 kr" },
+];
 
 function OmOss() {
   return (
-    <div className="about-page">
-      <section className="about-hero">
+    <div className="kn-root about-page">
+      <section className="hero about-hero">
         <TopBar active="about" />
 
-        <div className="about-container">
-          <div className="about-grid about-grid-top">
-            <div className="about-card">
-              <h2 className="about-title">Våre tjenester</h2>
-              <h3 className="about-subtitle">Restaurantlevering</h3>
-              <ul className="about-list">
-                {RESTAURANTS.map((r) => (
-                  <li key={r}>{r}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="about-card">
-              <h2 className="about-title">Våre leveringer priser</h2>
-              <div className="about-prices">
-                <div className="about-price-row">
-                  <span className="about-area">Tangen/Bjørnemyr/Helvik området</span>
-                  <span className="about-kr">75 kr</span>
-                </div>
-                <div className="about-price-row">
-                  <span className="about-area">Alværn/ Fjordvangen/ Fjellstrand</span>
-                  <span className="about-kr">100 kr</span>
-                </div>
-                <div className="about-price-row">
-                  <span className="about-area">Fagerstrand Området</span>
-                  <span className="about-kr">150 kr</span>
-                </div>
-              </div>
-
-              <div className="about-map">
-                <img src="/nesodden-map.png" alt="Leveringsområder på Nesodden" />
-              </div>
-
-              <div className="about-legend">
-                <div className="legend-row legend-orange">
-                  Oransje: <strong>75 kr</strong>
-                </div>
-                <div className="legend-row legend-green">
-                  Grønn: <strong>100 kr</strong>
-                </div>
-                <div className="legend-row legend-blue">
-                  Blå: <strong>150 kr</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="about-grid about-grid-bottom">
-            <div className="about-card">
-              <h2 className="about-subtitle">Vi kan også hente og levere mat fra</h2>
-              <ul className="about-list">
-                <li>McDonald's Nygaardskrysset</li>
-                <li>Burger King Vinterbro</li>
-              </ul>
-
-              <h3 className="about-subtitle" style={{ marginTop: 28 }}>
-                Dagligvarehenting
-              </h3>
-              <ul className="about-list">
-                {GROCERIES.map((g) => (
-                  <li key={g}>{g}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="about-card about-contact">
-              <h2 className="about-title">Kontakt oss:</h2>
-              <p>
-                <strong>Arkan:</strong> <a href="tel:+4793461991">934 61 991</a>
-              </p>
-              
-            </div>
-          </div>
+        <div className="about-intro">
+          <span className="about-eyebrow">LOKAL LEVERING PÅ NESODDEN</span>
+          <h1>En enklere måte å få maten levert hjem</h1>
+          <p>
+            Vi henter fra restauranter og lokale butikker og leverer raskt til døren din.
+            Enkelt, lokalt og rimelig.
+          </p>
         </div>
       </section>
+
+      <main className="about-content">
+        <section className="about-section about-overview-grid">
+          <article className="about-panel about-panel-large">
+            <span className="about-panel-label">Våre tjenester</span>
+            <h2>Restaurantlevering</h2>
+            <p className="about-panel-copy">
+              Velg blant populære restauranter på Nesodden. Vi henter bestillingen og
+              leverer den direkte til deg.
+            </p>
+
+            <div className="restaurant-grid">
+              {RESTAURANTS.map((restaurant) => (
+                <div className="restaurant-item" key={restaurant}>
+                  <span className="restaurant-dot" aria-hidden="true" />
+                  <span>{restaurant}</span>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          <aside className="about-panel price-panel">
+            <span className="about-panel-label">Leveringspriser</span>
+            <h2>Fast pris etter område</h2>
+
+            <div className="about-price-list">
+              {PRICES.map((item) => (
+                <div className="about-price-row" key={item.area}>
+                  <span>{item.area}</span>
+                  <strong>{item.price}</strong>
+                </div>
+              ))}
+            </div>
+
+            <div className="about-map">
+              <img src="/nesodden-map.png" alt="Kart over leveringsområder på Nesodden" />
+            </div>
+          </aside>
+        </section>
+
+        <section className="about-section about-secondary-grid">
+          <article className="about-panel">
+            <span className="about-panel-label">Vi henter også fra</span>
+            <h2>Butikker og restauranter utenfor Nesodden</h2>
+            <div className="service-columns">
+              <div>
+                <h3>Hurtigmat</h3>
+                <p>McDonald&apos;s Nygaardskrysset</p>
+                <p>Burger King Vinterbro</p>
+              </div>
+              <div>
+                <h3>Dagligvarer</h3>
+                {GROCERIES.map((store) => (
+                  <p key={store}>{store}</p>
+                ))}
+              </div>
+            </div>
+          </article>
+
+          <article className="about-panel contact-panel">
+            <span className="about-panel-label">Kontakt</span>
+            <h2>Har du spørsmål?</h2>
+            <p>
+              Ring oss, så hjelper vi deg med bestilling, leveringsområde eller andre
+              spørsmål.
+            </p>
+            <a className="contact-button" href="tel:+4793461991">
+              Ring Arkan: 934 61 991
+            </a>
+          </article>
+        </section>
+      </main>
     </div>
   );
 }
