@@ -8,7 +8,7 @@ const PLACES: Record<string, string[]> = {
     "Tony’s Sushi Og Thai Restaurant",
     "Jonathan Sushi Nesodden",
     "Nye Flaskebekk Bistro",
-    "Tåste Restaurant",
+    "Taste Restaurant",
     "O’ Sole Mio",
     "MAMA GREEK KITCHEN",
     "Primitivo Ristorante",
@@ -16,7 +16,7 @@ const PLACES: Record<string, string[]> = {
     "Annas Hybel",
     "Fagerstrand Vertshus AS",
   ],
-  Dagligvarer: ["Meny", "Kiwi", "Coop Extra", "Coop Prix", "Joker", "Mester Grønn (Tangen)"],
+  Dagligvarer: ["Meny", "Kiwi", "Coop Extra", "REMA 1000", "Joker", "Mester Grønn (Tangen)"],
   "McDonald’s / Burger King": ["McDonald's Nygaardskrysset", "Burger King Vinterbro"],
 };
 

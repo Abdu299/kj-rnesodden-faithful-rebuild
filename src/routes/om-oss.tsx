@@ -30,7 +30,7 @@ const RESTAURANTS = [
   "Tony’s Sushi og Thai Restaurant",
   "Jonathan Sushi Nesodden",
   "Nye Flaskebekk Bistro",
-  "Tåste Restaurant",
+  "Taste Restaurant",
   "O’ Sole Mio",
   "Mama Greek Kitchen",
   "Primitivo Ristorante",
@@ -43,7 +43,7 @@ const GROCERIES = [
   "Meny",
   "Kiwi",
   "Coop Extra",
-  "Coop Prix",
+  "REMA 1000",
   "Joker",
   "Mester Grønn (Tangen)",
 ];
