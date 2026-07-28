@@ -3,7 +3,7 @@ import { useMemo, useState, type FormEvent } from "react";
 const PLACES: Record<string, string[]> = {
   Restauranter: [ "Skriv resturanger du vil og vi gir beskyed om vi kan hente fra de!"
   ],
-  Dagligvarer: ["Meny", "Kiwi", "Coop Extra", "REMA 1000", "Joker"],
+  Dagligvarer: [ "Kiwi", "Coop Extra", "REMA 1000", "Joker"],
   "McDonald’s / Burger King": ["McDonald's Nygaardskrysset", "Burger King Vinterbro"],
 };
 

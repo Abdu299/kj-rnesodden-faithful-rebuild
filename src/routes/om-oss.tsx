@@ -28,7 +28,7 @@ const RESTAURANTS = [
 ];
 
 const GROCERIES = [
-  "Meny",
+
   "Kiwi",
   "Coop Extra",
   "REMA 1000",
