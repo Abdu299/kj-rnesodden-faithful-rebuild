@@ -24,7 +24,7 @@ export const Route = createFileRoute("/om-oss")({
 });
 
 const RESTAURANTS = [
-  "Skriv resturanten også gir ved beskyd om vi kan hente"
+  "Skriv resturanten også gir ved beskyd om vi kan hente!"
 ];
 
 const GROCERIES = [
