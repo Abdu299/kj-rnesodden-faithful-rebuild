@@ -24,19 +24,7 @@ export const Route = createFileRoute("/om-oss")({
 });
 
 const RESTAURANTS = [
-  "Viva Napoli Nesodden",
-  "Pizzabakeren Nesodden",
-  "Jafs Nesodden",
-  "Tony’s Sushi og Thai Restaurant",
-  "Jonathan Sushi Nesodden",
-  "Nye Flaskebekk Bistro",
-  "Taste Restaurant",
-  "O’ Sole Mio",
-  "Mama Greek Kitchen",
-  "Primitivo Ristorante",
-  "Pio Pio Pizzeria",
-  "Annas Hybel",
-  "Fagerstrand Vertshus AS",
+  "Skriv resturanten også gir ved beskyd om vi kan hente"
 ];
 
 const GROCERIES = [
@@ -45,7 +33,7 @@ const GROCERIES = [
   "Coop Extra",
   "REMA 1000",
   "Joker",
-  "Mester Grønn (Tangen)",
+
 ];
 
 const PRICES = [

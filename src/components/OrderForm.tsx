@@ -1,22 +1,9 @@
 import { useMemo, useState, type FormEvent } from "react";
 
 const PLACES: Record<string, string[]> = {
-  Restauranter: [
-    "Viva Napoli Nesodden",
-    "Pizzabakeren Nesodden",
-    "Jafs Nesodden",
-    "Tony’s Sushi Og Thai Restaurant",
-    "Jonathan Sushi Nesodden",
-    "Nye Flaskebekk Bistro",
-    "Taste Restaurant",
-    "O’ Sole Mio",
-    "MAMA GREEK KITCHEN",
-    "Primitivo Ristorante",
-    "Pio Pio pizzeria",
-    "Annas Hybel",
-    "Fagerstrand Vertshus AS",
+  Restauranter: [ "Alle, velg og vi gir beskyed om vi kan hente fra de"
   ],
-  Dagligvarer: ["Meny", "Kiwi", "Coop Extra", "REMA 1000", "Joker", "Mester Grønn (Tangen)"],
+  Dagligvarer: ["Meny", "Kiwi", "Coop Extra", "REMA 1000", "Joker"],
   "McDonald’s / Burger King": ["McDonald's Nygaardskrysset", "Burger King Vinterbro"],
 };
 
