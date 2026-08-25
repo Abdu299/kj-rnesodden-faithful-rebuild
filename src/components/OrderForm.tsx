@@ -1,10 +1,31 @@
 import { useMemo, useState, type FormEvent } from "react";
 
 const PLACES: Record<string, string[]> = {
-  Restauranter: [ "Skriv resturanger du vil og vi gir beskyed om vi kan hente fra de!"
+  Restauranter: [
+    "Signalen Sjøbad - Trattoria al Mare",
+    "Jonathan Sushi Nesodden",
+    "Tony’s Sushi Og Thai Restaurant",
+    "O' Sole Mio",
+    "Pizzabakeren Nesodden",
+    "Nye Flaskebekk Bistro",
+    "Jafs Nesodden",
+    "Mama Greek Kitchen",
+    "Annen restaurant – skriv hvilken i beskrivelsen",
   ],
-  Dagligvarer: [ "Kiwi", "Coop Extra", "REMA 1000", "Joker"],
-  "McDonald’s / Burger King": ["McDonald's Nygaardskrysset", "Burger King Vinterbro"],
+
+  Dagligvarer: [
+    "Kiwi",
+    "Coop Extra",
+    "REMA 1000",
+    "Joker",
+  ],
+
+  "McDonald’s / Burger King": [
+    "McDonald's Nygaardskrysset",
+    "Burger King Vinterbro",
+  ],
+
+  Annet: [],
 };
 
 type FormState = {
@@ -157,25 +178,44 @@ export function OrderForm() {
       </select>
       {errors.deliveryType && <div className="field-error">{errors.deliveryType}</div>}
 
-      <label htmlFor="deliveryPlace">Sted</label>
-      <select
-        id="deliveryPlace"
-        value={state.deliveryPlace}
-        onChange={(e) => set("deliveryPlace", e.target.value)}
-        disabled={!state.deliveryType}
-        aria-invalid={!!errors.deliveryPlace}
-        required
-      >
-        <option value="" disabled>
-          {state.deliveryType ? "Velg sted ..." : "Velg først type ..."}
-        </option>
-        {placeOptions.map((p) => (
-          <option key={p} value={p}>
-            {p}
+      <label htmlFor="deliveryPlace">
+        {state.deliveryType === "Annet" ? "Hvor skal vi hente fra?" : "Sted"}
+      </label>
+
+      {state.deliveryType === "Annet" ? (
+        <input
+          id="deliveryPlace"
+          type="text"
+          placeholder="Skriv butikk, restaurant eller annet sted..."
+          value={state.deliveryPlace}
+          onChange={(e) => set("deliveryPlace", e.target.value)}
+          aria-invalid={!!errors.deliveryPlace}
+          required
+        />
+      ) : (
+        <select
+          id="deliveryPlace"
+          value={state.deliveryPlace}
+          onChange={(e) => set("deliveryPlace", e.target.value)}
+          disabled={!state.deliveryType}
+          aria-invalid={!!errors.deliveryPlace}
+          required
+        >
+          <option value="" disabled>
+            {state.deliveryType ? "Velg sted ..." : "Velg først type ..."}
           </option>
-        ))}
-      </select>
-      {errors.deliveryPlace && <div className="field-error">{errors.deliveryPlace}</div>}
+
+          {placeOptions.map((p) => (
+            <option key={p} value={p}>
+              {p}
+            </option>
+          ))}
+        </select>
+      )}
+
+      {errors.deliveryPlace && (
+        <div className="field-error">{errors.deliveryPlace}</div>
+      )}
 
       <label htmlFor="description">Beskriv hva du vil kjøpe</label>
       <textarea
