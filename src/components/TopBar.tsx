@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 type Props = {
-  active: "home" | "about";
+  active: "home" | "about" | "delete";
 };
 
 export function TopBar({ active }: Props) {
