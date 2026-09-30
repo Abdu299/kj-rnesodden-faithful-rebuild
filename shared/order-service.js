@@ -59,9 +59,9 @@ export function validateMenuOrder(body, address, now = new Date()) {
     };
   });
   const subtotal = lines.reduce((sum, line) => sum + line.lineTotal, 0);
-  const deliveryFee = address.zone.fee;
-  const total = subtotal + deliveryFee;
-  if (body.quotedTotal !== undefined && body.quotedTotal !== total)
+  const deliveryFee = address.zone?.fee ?? null;
+  const total = deliveryFee === null ? null : subtotal + deliveryFee;
+  if (total !== null && body.quotedTotal !== undefined && body.quotedTotal !== total)
     throw new OrderError(
       "Prisen er endret. Velg adressen på nytt og kontroller totalen før du sender.",
       409,
@@ -98,15 +98,16 @@ function validateRequest(body, address, now, legacy = false) {
       .replace(/[\u0300-\u036f]/g, "")
       .trim();
   const normalizedPlace = ` ${fold(place).replace(/[(),;\/–—-]/g, " ")} `;
-  const knownPlaces = catalog.filter(
-    (r) =>
-      r.orderingMode === "menu" &&
-      [r.name, r.shortName].some((name) => normalizedPlace.includes(` ${fold(name)} `)),
+  const knownPlaces = catalog.filter((r) =>
+    [r.name, r.shortName].some((name) => normalizedPlace.includes(` ${fold(name)} `)),
   );
+  if (restaurant && !knownPlaces.some((place) => place.id === restaurant.id))
+    knownPlaces.push(restaurant);
   if (knownPlaces.length) {
-    const closed = knownPlaces.find((place) => !openingStatus(place, now).open);
+    const closed = knownPlaces.find((place) => place.hours && !openingStatus(place, now).open);
     if (closed) throw new OrderError(`${closed.name} tar ikke imot bestillinger nå.`, 409);
-    if (!legacy) throw new OrderError("Bruk restaurantens meny for å bestille.");
+    if (!legacy && knownPlaces.some((place) => place.orderingMode === "menu"))
+      throw new OrderError("Bruk restaurantens meny for å bestille.");
   }
   const description = textField(body.description, "Hva du vil kjøpe", 1800);
   return {
@@ -119,7 +120,7 @@ function validateRequest(body, address, now, legacy = false) {
     address,
     lines: [],
     subtotal: null,
-    deliveryFee: address.zone.fee,
+    deliveryFee: address.zone?.fee ?? null,
     total: null,
   };
 }
@@ -131,7 +132,9 @@ export function formatTelegramOrder(order) {
     `👤 Navn: ${order.fullName}`,
     `📞 Telefon: ${order.phone}`,
     `📍 Leveringsadresse: ${order.address.label}`,
-    `Leveringsområde: ${order.address.zone.name}`,
+    order.address.zone
+      ? `Leveringsområde: ${order.address.zone.name}`
+      : "Adresse og leveringsområde må bekreftes med kunden.",
     "",
     `🏪 ${order.kind === "menu" ? "Restaurant" : "Hentested"}: ${order.restaurantName}`,
     "",
@@ -147,15 +150,15 @@ export function formatTelegramOrder(order) {
     parts.push(
       "",
       `Varer: ${money(order.subtotal)}`,
-      `Levering: ${money(order.deliveryFee)}`,
-      `TOTALT: ${money(order.total)}`,
+      `Levering: ${order.deliveryFee === null ? "Fra adressen – bekreftes med kunden" : money(order.deliveryFee)}`,
+      `TOTALT: ${order.total === null ? "Bekreftes med kunden" : money(order.total)}`,
     );
   } else
     parts.push(
       `Type: ${order.type}`,
       order.description,
       "",
-      `Levering: ${money(order.deliveryFee)}`,
+      `Levering: ${order.deliveryFee === null ? "Fra adressen – bekreftes med kunden" : money(order.deliveryFee)}`,
       "Varepris og endelig total må bekreftes med kunden før innkjøp.",
     );
   if (order.note) parts.push("", `Beskjed: ${order.note}`);
@@ -234,17 +237,37 @@ export async function orderHandler(request, dependencies = {}) {
       return Response.json(previous.result ?? (await previous.promise), { headers });
     }
     const promise = (async () => {
-      let address;
+      const addressText = textField(
+        body.addressText ?? body.deliveryAddress ?? body.address?.streetAddress,
+        "Adresse",
+        250,
+      );
+      let address = {
+        label: addressText,
+        streetAddress: addressText,
+        verified: false,
+        zone: null,
+      };
       if (legacy && !body.address) {
-        const query = textField(body.deliveryAddress, "Adresse", 250);
-        const matches = await searchAddresses(query, fetchFn);
-        const street = query.split(",")[0].trim().toLocaleLowerCase("nb-NO");
-        address = matches.find(
-          (candidate) => candidate.streetAddress.toLocaleLowerCase("nb-NO") === street,
-        );
-        if (!address)
-          throw new OrderError("Adressen må være en full gateadresse med husnummer på Nesodden.");
-      } else address = await verifyAddress(body.address, fetchFn);
+        try {
+          const street = addressText.split(",")[0].trim().toLocaleLowerCase("nb-NO");
+          const matches = await searchAddresses(street, fetchFn);
+          address =
+            matches.find(
+              (candidate) => candidate.streetAddress.toLocaleLowerCase("nb-NO") === street,
+            ) ?? address;
+        } catch (error) {
+          if (!(error instanceof OrderError)) throw error;
+        }
+      } else if (body.address) {
+        try {
+          address = await verifyAddress(body.address, fetchFn);
+        } catch (error) {
+          // Never drop an order because the address provider fails or cannot
+          // recognize it. The typed address goes to Telegram for confirmation.
+          if (!(error instanceof OrderError)) throw error;
+        }
+      }
       const validated =
         body.kind === "menu"
           ? validateMenuOrder(body, address, now())
@@ -258,7 +281,7 @@ export async function orderHandler(request, dependencies = {}) {
       const message = formatTelegramOrder(order);
       const orderedRestaurants = (order.checkedRestaurantIds ?? [order.restaurantId])
         .map((id) => catalog.find((r) => r.id === id))
-        .filter((restaurant) => restaurant?.orderingMode === "menu");
+        .filter((restaurant) => restaurant?.hours);
       if (orderedRestaurants.some((restaurant) => !openingStatus(restaurant, now()).open))
         throw new OrderError("Restauranten stengte før bestillingen kunne sendes.", 409);
       let response;

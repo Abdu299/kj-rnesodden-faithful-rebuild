@@ -60,9 +60,9 @@ export type Receipt = {
   kind: "menu" | "request";
   restaurantName: string;
   fullName: string;
-  address: Address;
+  address: Address | { label: string; streetAddress: string; verified: false; zone: null };
   subtotal: number | null;
-  deliveryFee: number;
+  deliveryFee: number | null;
   total: number | null;
   lines: {
     name: string;

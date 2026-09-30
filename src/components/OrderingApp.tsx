@@ -414,6 +414,7 @@ export function OrderingApp() {
   const [cart, setCart] = useState<Cart>(emptyCart);
   const [restored, setRestored] = useState(false);
   const [address, setAddress] = useState<Address | null>(null);
+  const [addressText, setAddressText] = useState("");
   const [customer, setCustomer] = useState<Customer>({ fullName: "", phone: "", note: "" });
   const [cartOpen, setCartOpen] = useState(false);
   const [pendingRestaurant, setPendingRestaurant] = useState<string | null>(null);
@@ -567,6 +568,7 @@ export function OrderingApp() {
       setCart(emptyCart);
       setCartOpen(false);
       setAddress(null);
+      setAddressText("");
       setCustomer({ fullName: "", phone: "", note: "" });
       submissionRef.current = null;
       window.scrollTo({ top: 0, behavior: "instant" });
@@ -585,6 +587,8 @@ export function OrderingApp() {
   }
   const checkoutProps = {
     address,
+    addressText,
+    onAddressText: setAddressText,
     onAddress: setAddress,
     customer,
     onCustomer: setCustomer,
@@ -630,7 +634,7 @@ export function OrderingApp() {
             </div>
           </>
         ) : (
-          <RequestForm key={view} restaurant={restaurant} {...checkoutProps} />
+          <RequestForm key={view} restaurant={restaurant} now={now} {...checkoutProps} />
         )}
       </div>
       <Footer />

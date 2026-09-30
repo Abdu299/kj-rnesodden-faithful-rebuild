@@ -43,7 +43,7 @@ async function lookup(query, fetchFn, count = 8) {
     return result.adresser.map(normalizeAddress).filter(Boolean);
   } catch {
     throw new OrderError(
-      "Adresseoppslaget er midlertidig utilgjengelig. Prøv igjen, eller ring 934 61 991.",
+      "Adresseoppslaget er midlertidig utilgjengelig. Skriv hele adressen og send likevel, så bekrefter vi leveringsprisen med deg.",
       503,
     );
   }
@@ -51,7 +51,15 @@ async function lookup(query, fetchFn, count = 8) {
 export async function searchAddresses(query, fetchFn = fetch) {
   if (typeof query !== "string" || query.length > 120) throw new OrderError("Ugyldig adressesøk.");
   if (query.trim().length < 3) return [];
-  const matches = await lookup(query.trim(), fetchFn);
+  // Geonorge matches whole words unless a wildcard is supplied. Expand street
+  // prefixes without changing the exact lookup used to verify a selected address.
+  const prefix = query
+    .trim()
+    .replace(/\s+/g, " ")
+    .split(" ")
+    .map((word) => (/^\d/.test(word) || word.endsWith("*") ? word : `${word}*`))
+    .join(" ");
+  const matches = await lookup(prefix, fetchFn);
   return [...new Map(matches.map((address) => [address.id, address])).values()];
 }
 export async function verifyAddress(selection, fetchFn = fetch) {

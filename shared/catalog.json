@@ -9338,7 +9338,36 @@
     "image": "/images/os-kort.webp",
     "logo": "",
     "banner": "",
-    "hours": null,
+    "hours": [
+      [
+        900,
+        1260
+      ],
+      [
+        900,
+        1260
+      ],
+      [
+        900,
+        1260
+      ],
+      [
+        930,
+        1290
+      ],
+      [
+        930,
+        1290
+      ],
+      [
+        930,
+        1290
+      ],
+      [
+        930,
+        1290
+      ]
+    ],
     "orderingMode": "request",
     "note": "Menyen ligger ikke på nett ennå. Skriv hva du vil ha, så ringer vi deg.",
     "sources": [
@@ -9360,7 +9389,36 @@
     "image": "/images/greek-kitchen.svg",
     "logo": "",
     "banner": "",
-    "hours": null,
+    "hours": [
+      [
+        660,
+        1200
+      ],
+      [
+        660,
+        1200
+      ],
+      [
+        660,
+        1200
+      ],
+      [
+        660,
+        1200
+      ],
+      [
+        660,
+        1200
+      ],
+      [
+        660,
+        1200
+      ],
+      [
+        660,
+        1200
+      ]
+    ],
     "orderingMode": "request",
     "note": "Menyen ligger ikke på nett ennå. Skriv hva du vil ha, så ordner vi det.",
     "sources": [],

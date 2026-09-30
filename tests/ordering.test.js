@@ -57,6 +57,7 @@ function mockNetwork({
   telegramStatus = 200,
   telegramBody = { ok: true },
   failure = false,
+  addressFailure = false,
 } = {}) {
   const messages = [];
   const fetchFn = async (url, options) => {
@@ -64,6 +65,7 @@ function mockNetwork({
     if (parsed.hostname === "ws.geonorge.no") {
       assert.equal(parsed.searchParams.get("kommunenummer"), "3212");
       assert.equal(parsed.searchParams.get("utkoordsys"), "4258");
+      if (addressFailure) throw new Error("Address provider unavailable");
       return Response.json({ adresser: records });
     }
     assert.equal(parsed.hostname, "api.telegram.org");
@@ -120,6 +122,18 @@ test("autocomplete filters non-Nesodden results and duplicates, and skips short 
     await searchAddresses("Te", () => assert.fail("Short queries must not call the provider")),
     [],
   );
+});
+test("partial street names use wildcard search, including when a house number is present", async () => {
+  const queries = [];
+  const fetchFn = async (url) => {
+    const parsed = new URL(url);
+    assert.equal(parsed.searchParams.get("kommunenummer"), "3212");
+    queries.push(parsed.searchParams.get("sok"));
+    return Response.json({ adresser: [addressRecord] });
+  };
+  for (const query of ["Hasl", "Haslev", " Haslev   11 "])
+    assert.equal((await searchAddresses(query, fetchFn)).length, 1);
+  assert.deepEqual(queries, ["Hasl*", "Haslev*", "Haslev* 11"]);
 });
 test("checkout re-fetches the address and ignores client supplied delivery fee and coordinates", async () => {
   const network = mockNetwork({
@@ -244,6 +258,47 @@ test("a successful receipt and Telegram message contain the same canonical total
   assert.match(outcome.messages[0].text, /TOTALT: 535 kr/);
   assert.match(outcome.messages[0].text, /Testveien 12/);
 });
+test("a typed address submits with canonical goods prices and unconfirmed delivery", async () => {
+  const outcome = await send(
+    body({
+      address: undefined,
+      addressText: "Ukjentveien 12, Nesodden",
+      quotedTotal: undefined,
+    }),
+  );
+  assert.equal(outcome.response.status, 200);
+  assert.equal(outcome.result.receipt.address.label, "Ukjentveien 12, Nesodden");
+  assert.equal(outcome.result.receipt.address.verified, false);
+  assert.equal(outcome.result.receipt.subtotal, 460);
+  assert.equal(outcome.result.receipt.deliveryFee, null);
+  assert.equal(outcome.result.receipt.total, null);
+  assert.match(outcome.messages[0].text, /2 × Margherita/);
+  assert.match(outcome.messages[0].text, /Levering: Fra adressen/);
+  assert.match(outcome.messages[0].text, /TOTALT: Bekreftes med kunden/);
+});
+for (const [label, network, selection] of [
+  ["provider outage", { addressFailure: true }, address],
+  ["unrecognized address", { records: [] }, address],
+  ["address outside Nesodden", {}, { ...address, id: "0301:1234:12:", zone: { fee: 0 } }],
+])
+  test(`${label} keeps the request and marks delivery for confirmation`, async () => {
+    const outcome = await send(
+      body({ address: selection, addressText: "Min adresse 12" }),
+      mockNetwork(network),
+    );
+    assert.equal(outcome.response.status, 200);
+    assert.equal(outcome.result.receipt.address.label, "Min adresse 12");
+    assert.equal(outcome.result.receipt.deliveryFee, null);
+    assert.equal(outcome.result.receipt.total, null);
+    assert.equal(outcome.messages.length, 1);
+    assert.match(outcome.messages[0].text, /Min adresse 12/);
+    assert.match(outcome.messages[0].text, /Levering: Fra adressen/);
+  });
+test("an empty address still requires the customer to enter an address", async () => {
+  const outcome = await send(body({ address: undefined, addressText: "   " }));
+  assert.equal(outcome.response.status, 400);
+  assert.equal(outcome.messages.length, 0);
+});
 test("retries and concurrent submissions with the same request ID send once", async () => {
   const payload = body();
   const network = mockNetwork();
@@ -280,6 +335,98 @@ test("Noe annet sends an inquiry with a known delivery fee and unconfirmed goods
   assert.equal(outcome.result.receipt.deliveryFee, 75);
   assert.match(outcome.messages[0].text, /endelig total må bekreftes/);
 });
+test("Noe annet can submit a typed address without a selected suggestion", async () => {
+  const outcome = await send(
+    body({
+      kind: "request",
+      restaurantId: undefined,
+      type: "Dagligvarer",
+      place: "Kiwi Tangen",
+      description: "2 liter melk",
+      address: undefined,
+      addressText: "Ny gate 7",
+    }),
+  );
+  assert.equal(outcome.response.status, 200);
+  assert.equal(outcome.result.receipt.deliveryFee, null);
+  assert.match(outcome.messages[0].text, /Ny gate 7/);
+  assert.match(outcome.messages[0].text, /Levering: Fra adressen/);
+});
+test("the legacy free-text API also survives an address provider outage", async () => {
+  const outcome = await send(
+    {
+      fullName: "Test Kunde",
+      phone: "40000000",
+      deliveryAddress: "Ukjent gate 7",
+      deliveryType: "Dagligvarer",
+      deliveryPlace: "Kiwi Tangen",
+      description: "Melk",
+    },
+    mockNetwork({ addressFailure: true }),
+  );
+  assert.equal(outcome.response.status, 200);
+  assert.equal(outcome.result.receipt.deliveryFee, null);
+  assert.match(outcome.messages[0].text, /Ukjent gate 7/);
+});
+test("O' Sole Mio and Mama Greek use the supplied hours on every day of the week", () => {
+  const sole = catalog.find((r) => r.id === "osolemio");
+  const mama = catalog.find((r) => r.id === "mamagreek");
+  for (let offset = 0; offset < 7; offset++) {
+    const base = new Date(new Date("2026-09-27T00:00:00Z").getTime() + offset * 86400000);
+    const start = offset <= 2 ? 900 : 930;
+    const end = offset <= 2 ? 1260 : 1290;
+    assert.deepEqual(sole.hours[offset], [start, end]);
+    assert.deepEqual(mama.hours[offset], [660, 1200]);
+    for (const [r, opening, closing] of [
+      [sole, start, end],
+      [mama, 660, 1200],
+    ]) {
+      const at = (minute) => new Date(base.getTime() + (minute - 120) * 60000);
+      assert.equal(openingStatus(r, at(opening - 1)).open, false);
+      assert.equal(openingStatus(r, at(opening)).open, true);
+      assert.equal(openingStatus(r, at(closing - 1)).open, true);
+      assert.equal(openingStatus(r, at(closing)).open, false);
+    }
+  }
+});
+for (const [restaurantId, place, closing] of [
+  ["osolemio", "O' Sole Mio", "2026-09-30T19:30:00Z"],
+  ["mamagreek", "Mama Greek Kitchen", "2026-09-30T18:00:00Z"],
+])
+  test(`${place} accepts requests while open and rejects closed requests even with an unknown address`, async () => {
+    const payload = body({
+      kind: "request",
+      restaurantId,
+      place,
+      type: "Restaurant",
+      description: "Mat",
+      address: undefined,
+      addressText: "Ukjent gate 7",
+    });
+    const open = await send(payload);
+    assert.equal(open.response.status, 200);
+    const closedPayload = { ...payload, requestId: crypto.randomUUID() };
+    const closed = await send(closedPayload, mockNetwork(), { now: () => new Date(closing) });
+    assert.equal(closed.response.status, 409);
+    assert.equal(closed.messages.length, 0);
+    const freeText = await send(
+      { ...closedPayload, restaurantId: undefined, requestId: crypto.randomUUID() },
+      mockNetwork(),
+      { now: () => new Date(closing) },
+    );
+    assert.equal(freeText.response.status, 409);
+    assert.equal(freeText.messages.length, 0);
+    let calls = 0;
+    const closingDuringSend = await send(
+      { ...payload, requestId: crypto.randomUUID() },
+      mockNetwork(),
+      {
+        now: () => (calls++ === 0 ? openTime : new Date(closing)),
+      },
+    );
+    assert.equal(closingDuringSend.response.status, 409);
+    assert.equal(closingDuringSend.messages.length, 0);
+  });
 test("an inquiry cannot bypass a known restaurant's closing time", async () => {
   const outcome = await send(
     body({

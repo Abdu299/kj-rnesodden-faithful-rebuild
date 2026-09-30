@@ -1,6 +1,14 @@
 import { useId, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, CheckCircle2, LoaderCircle, Minus, Plus, ShoppingBag } from "lucide-react";
+import {
+  ArrowLeft,
+  CheckCircle2,
+  Clock3,
+  LoaderCircle,
+  Minus,
+  Plus,
+  ShoppingBag,
+} from "lucide-react";
 import { AddressInput } from "./AddressInput";
 import {
   formatKr,
@@ -10,11 +18,13 @@ import {
   type Receipt,
   type Restaurant,
 } from "../lib/catalog";
-import { openingStatus } from "../../shared/order-rules.js";
+import { dayNames, formatTime, openingStatus } from "../../shared/order-rules.js";
 
 export type Customer = { fullName: string; phone: string; note: string };
 export type CheckoutProps = {
   address: Address | null;
+  addressText: string;
+  onAddressText: (text: string) => void;
   onAddress: (address: Address | null) => void;
   customer: Customer;
   onCustomer: (customer: Customer) => void;
@@ -129,8 +139,8 @@ export function CartPanel({
     : 0;
   function submit(e: FormEvent) {
     e.preventDefault();
-    if (!props.address) {
-      setAddressError("Velg en Nesodden-adresse fra forslagene.");
+    if (!props.addressText.trim()) {
+      setAddressError("Skriv adressen vi skal levere til.");
       return;
     }
     setAddressError("");
@@ -138,8 +148,11 @@ export function CartPanel({
       kind: "menu",
       restaurantId: restaurant?.id,
       items: lines,
-      address: { id: props.address.id, streetAddress: props.address.streetAddress },
-      quotedTotal: subtotal + props.address.zone.fee,
+      address: props.address
+        ? { id: props.address.id, streetAddress: props.address.streetAddress }
+        : undefined,
+      addressText: props.addressText.trim(),
+      quotedTotal: props.address ? subtotal + props.address.zone.fee : undefined,
       ...props.customer,
     });
   }
@@ -199,6 +212,11 @@ export function CartPanel({
           <form onSubmit={submit} className="checkout-form">
             <AddressInput
               value={props.address}
+              query={props.addressText}
+              onQuery={(text) => {
+                props.onAddressText(text);
+                setAddressError("");
+              }}
               onChange={(a) => {
                 props.onAddress(a);
                 setAddressError("");
@@ -240,17 +258,21 @@ export function CartPanel({
 }
 export function RequestForm({
   restaurant,
+  now,
   ...props
-}: CheckoutProps & { restaurant: Restaurant | null }) {
+}: CheckoutProps & { restaurant: Restaurant | null; now: Date }) {
   const [type, setType] = useState(restaurant ? "Restaurant" : "");
   const [place, setPlace] = useState(restaurant?.name ?? "");
   const [description, setDescription] = useState("");
   const [addressError, setAddressError] = useState("");
   const id = useId();
+  const status = restaurant ? openingStatus(restaurant, now) : null;
+  const closed = !!restaurant?.hours && !status?.open;
   function submit(e: FormEvent) {
     e.preventDefault();
-    if (!props.address) {
-      setAddressError("Velg en Nesodden-adresse fra forslagene.");
+    if (closed) return;
+    if (!props.addressText.trim()) {
+      setAddressError("Skriv adressen vi skal levere til.");
       return;
     }
     setAddressError("");
@@ -260,7 +282,10 @@ export function RequestForm({
       type,
       place,
       description,
-      address: { id: props.address.id, streetAddress: props.address.streetAddress },
+      address: props.address
+        ? { id: props.address.id, streetAddress: props.address.streetAddress }
+        : undefined,
+      addressText: props.addressText.trim(),
       ...props.customer,
     });
   }
@@ -272,9 +297,32 @@ export function RequestForm({
       <h1>{restaurant ? `Noe fra ${restaurant.name}?` : "Noe annet du vil ha levert?"}</h1>
       <p className="request-lead">
         {restaurant
-          ? "Send oss hva du ønsker. Vi sjekker meny, pris og åpningstider og ringer deg før vi bestiller."
+          ? "Send oss hva du ønsker. Vi sjekker meny, pris og tilgjengelighet og ringer deg før vi bestiller."
           : "Dagligvarer, hurtigmat eller noe fra et annet sted. Skriv hva du vil ha, så ringer vi deg og bekrefter pris før vi handler."}
       </p>
+      {restaurant?.hours && (
+        <div className="request-opening">
+          <span className={`opening-status ${status?.open ? "is-open" : "is-closed"}`}>
+            <span aria-hidden="true">●</span> {status?.text}
+          </span>
+          <details className="opening-hours">
+            <summary>
+              <Clock3 size={16} /> Bestillingstider
+            </summary>
+            <div>
+              {[1, 2, 3, 4, 5, 6, 0].map((day) => {
+                const hours = restaurant.hours![day];
+                return (
+                  <p key={day}>
+                    <span>{dayNames[day]}</span>
+                    <b>{hours ? `${formatTime(hours[0])}–${formatTime(hours[1])}` : "Stengt"}</b>
+                  </p>
+                );
+              })}
+            </div>
+          </details>
+        </div>
+      )}
       <div className="request-layout">
         <form className="request-form" onSubmit={submit}>
           <label htmlFor={`${id}-type`}>Type</label>
@@ -313,6 +361,11 @@ export function RequestForm({
           />
           <AddressInput
             value={props.address}
+            query={props.addressText}
+            onQuery={(text) => {
+              props.onAddressText(text);
+              setAddressError("");
+            }}
             onChange={(a) => {
               props.onAddress(a);
               setAddressError("");
@@ -331,9 +384,15 @@ export function RequestForm({
             </div>
           </div>
           <CustomerFields {...props} />
+          {closed && (
+            <p className="field-error" role="status">
+              Restauranten er stengt. Du kan sende når den åpner igjen.
+            </p>
+          )}
           <SubmitFoot
             submitting={props.submitting}
             submitError={props.submitError}
+            disabled={closed}
             label="Send forespørsel"
           />
         </form>
@@ -348,8 +407,9 @@ export function RequestForm({
               "Kiwi, REMA 1000, Coop Extra, Joker, McDonald’s og Burger King."}
           </p>
           <p>
-            Du får leveringsprisen fra adressen med en gang. Vi bekrefter varepris og
-            tilgjengelighet med deg før vi handler.
+            Velg et adresseforslag for å se leveringsprisen. Hvis du skriver adressen selv,
+            bekrefter vi leveringsprisen med deg. Varepris og tilgjengelighet bekreftes før vi
+            handler.
           </p>
           <a href="tel:+4793461991">Ring oss: 934 61 991</a>
         </aside>
@@ -391,7 +451,7 @@ export function ReceiptPage({ receipt, onReset }: { receipt: Receipt; onReset: (
           )}
           <div>
             <span>Levering</span>
-            <b>{formatKr(receipt.deliveryFee)}</b>
+            <b>{receipt.deliveryFee !== null ? formatKr(receipt.deliveryFee) : "Fra adressen"}</b>
           </div>
           <div className="grand-total">
             <span>Totalt</span>

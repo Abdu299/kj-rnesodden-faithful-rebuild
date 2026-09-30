@@ -33,7 +33,7 @@ test("Vercel GET adapter preserves the query and serves only Nesodden addresses"
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async (url) => {
     const lookup = new URL(url);
-    assert.equal(lookup.searchParams.get("sok"), "Testveien");
+    assert.equal(lookup.searchParams.get("sok"), "Testveien*");
     assert.equal(lookup.searchParams.get("kommunenummer"), "3212");
     return Response.json({ adresser: [record, { ...record, kommunenummer: "0301" }] });
   };

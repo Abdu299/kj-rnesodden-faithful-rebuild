@@ -5,25 +5,20 @@ import { formatKr } from "../lib/catalog";
 
 type Props = {
   value: Address | null;
+  query: string;
+  onQuery: (query: string) => void;
   onChange: (address: Address | null) => void;
   error?: string;
   disabled?: boolean;
 };
-export function AddressInput({ value, onChange, error, disabled }: Props) {
+export function AddressInput({ value, query, onQuery, onChange, error, disabled }: Props) {
   const id = useId();
-  const [query, setQuery] = useState(value?.label ?? "");
   const [suggestions, setSuggestions] = useState<Address[]>([]);
   const [loading, setLoading] = useState(false);
   const [lookupError, setLookupError] = useState("");
   const [expanded, setExpanded] = useState(false);
   const [active, setActive] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    if (value) {
-      setQuery(value.label);
-      setExpanded(false);
-    }
-  }, [value]);
   useEffect(() => {
     setSuggestions([]);
     setActive(-1);
@@ -56,7 +51,7 @@ export function AddressInput({ value, onChange, error, disabled }: Props) {
   }, [query, value]);
   function select(address: Address) {
     onChange(address);
-    setQuery(address.label);
+    onQuery(address.label);
     setExpanded(false);
     setSuggestions([]);
     inputRef.current?.focus();
@@ -72,6 +67,8 @@ export function AddressInput({ value, onChange, error, disabled }: Props) {
           id={id}
           role="combobox"
           type="text"
+          required
+          maxLength={250}
           autoComplete="off"
           spellCheck={false}
           placeholder="Begynn å skrive gate og husnummer"
@@ -86,7 +83,7 @@ export function AddressInput({ value, onChange, error, disabled }: Props) {
           onFocus={() => setExpanded(true)}
           onBlur={() => setExpanded(false)}
           onChange={(event) => {
-            setQuery(event.target.value);
+            onQuery(event.target.value);
             onChange(null);
             setExpanded(true);
           }}
@@ -119,7 +116,10 @@ export function AddressInput({ value, onChange, error, disabled }: Props) {
           {loading && <p role="status">Søker etter adresser …</p>}
           {!loading && lookupError && <p role="alert">{lookupError}</p>}
           {!loading && !lookupError && !suggestions.length && (
-            <p>Ingen treff på Nesodden. Prøv gate og husnummer.</p>
+            <p>
+              Ingen treff. Skriv hele adressen og send likevel. Vi bekrefter leveringsprisen med
+              deg.
+            </p>
           )}
           {suggestions.map((address, i) => (
             <button
@@ -154,7 +154,7 @@ export function AddressInput({ value, onChange, error, disabled }: Props) {
             <CheckCircle2 size={16} /> Levering: {formatKr(value.zone.fee)} · {value.zone.name}
           </>
         ) : (
-          "Vi leverer bare til Nesodden. Velg en adresse fra forslagene."
+          "Velg et forslag for leveringspris på Nesodden, eller skriv hele adressen. Du kan sende uansett, så bekrefter vi leveringsprisen med deg."
         )}
       </div>
       {error && (

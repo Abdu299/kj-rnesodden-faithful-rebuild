@@ -1121,6 +1121,9 @@
 .request-page { max-width: 1160px; margin: auto; padding: 35px 40px 60px; }
 .request-page h1 { font-size: 34px; font-weight: 800; line-height: 1.2; margin: 14px 0; }
 .request-lead { max-width: 720px; color: #5a6070; font-size: 16px; margin-bottom: 24px; }
+.request-opening { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 24px; }
+.request-opening .opening-hours { margin-left: 0; }
+.request-opening .opening-hours > div { left: 0; right: auto; }
 .request-layout { display: grid; grid-template-columns: minmax(0,1fr) 320px; gap: 30px; align-items: start; }
 .request-form { background: white; padding: 25px; border: 1px solid #e6e1d8; border-radius: 13px; }
 .request-form > label:first-child { margin-top: 0; }
