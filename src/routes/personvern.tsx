@@ -52,7 +52,7 @@ function Personvern() {
 
           <p>
             Denne personvernerklæringen forklarer hvordan KjørNesodden
-            behandler personopplysninger når du bruker appen og
+            behandler personopplysninger når du bruker nettsiden, appen og
             leveringstjenesten vår.
           </p>
         </div>
@@ -160,6 +160,26 @@ function Personvern() {
           </article>
         </section>
 
+
+        <section className="about-section">
+          <article className="about-panel">
+            <span className="about-panel-label">Bestilling på nettsiden</span>
+            <h2>Adressesøk og handlekurv</h2>
+            <p>
+              Du kan bestille på nettsiden uten en kundekonto. Når du søker etter
+              en leveringsadresse, sendes adresseteksten til Kartverkets
+              Geonorge-tjeneste for å finne adresser på Nesodden og beregne
+              leveringsprisen. Den valgte adressen kontrolleres på nytt når du
+              sender bestillingen.
+            </p>
+            <p>
+              Navn, telefonnummer, leveringsadresse, varer og eventuell beskjed
+              sendes til KjørNesoddens bestillingskanal i Telegram. Nettleseren
+              lagrer bare varenumre, tilvalg og antall i handlekurven mellom
+              besøk; kundeopplysningene lagres ikke i nettleserens lokale lager.
+            </p>
+          </article>
+        </section>
 
         <section className="about-section about-secondary-grid">
           <article className="about-panel">

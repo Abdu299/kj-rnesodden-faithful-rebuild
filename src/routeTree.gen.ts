@@ -9,48 +9,114 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as OmOssRouteImport } from './routes/om-oss'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OmOssRouteImport } from './routes/om-oss'
+import { Route as PersonvernRouteImport } from './routes/personvern'
+import { Route as SlettKontoRouteImport } from './routes/slett-konto'
+import { Route as ApiAddressesRouteImport } from './routes/api.addresses'
+import { Route as ApiSendRouteImport } from './routes/api.send'
 
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OmOssRoute = OmOssRouteImport.update({
   id: '/om-oss',
   path: '/om-oss',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const PersonvernRoute = PersonvernRouteImport.update({
+  id: '/personvern',
+  path: '/personvern',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SlettKontoRoute = SlettKontoRouteImport.update({
+  id: '/slett-konto',
+  path: '/slett-konto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAddressesRoute = ApiAddressesRouteImport.update({
+  id: '/api/addresses',
+  path: '/api/addresses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSendRoute = ApiSendRouteImport.update({
+  id: '/api/send',
+  path: '/api/send',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/om-oss': typeof OmOssRoute
+  '/personvern': typeof PersonvernRoute
+  '/slett-konto': typeof SlettKontoRoute
+  '/api/addresses': typeof ApiAddressesRoute
+  '/api/send': typeof ApiSendRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/om-oss': typeof OmOssRoute
+  '/personvern': typeof PersonvernRoute
+  '/slett-konto': typeof SlettKontoRoute
+  '/api/addresses': typeof ApiAddressesRoute
+  '/api/send': typeof ApiSendRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/om-oss': typeof OmOssRoute
+  '/personvern': typeof PersonvernRoute
+  '/slett-konto': typeof SlettKontoRoute
+  '/api/addresses': typeof ApiAddressesRoute
+  '/api/send': typeof ApiSendRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/om-oss'
+  fullPaths:
+    | '/'
+    | '/om-oss'
+    | '/personvern'
+    | '/slett-konto'
+    | '/api/addresses'
+    | '/api/send'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/om-oss'
-  id: '__root__' | '/' | '/om-oss'
+  to:
+    | '/'
+    | '/om-oss'
+    | '/personvern'
+    | '/slett-konto'
+    | '/api/addresses'
+    | '/api/send'
+  id:
+    | '__root__'
+    | '/'
+    | '/om-oss'
+    | '/personvern'
+    | '/slett-konto'
+    | '/api/addresses'
+    | '/api/send'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   OmOssRoute: typeof OmOssRoute
+  PersonvernRoute: typeof PersonvernRoute
+  SlettKontoRoute: typeof SlettKontoRoute
+  ApiAddressesRoute: typeof ApiAddressesRoute
+  ApiSendRoute: typeof ApiSendRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/om-oss': {
       id: '/om-oss'
       path: '/om-oss'
@@ -58,11 +124,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OmOssRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/personvern': {
+      id: '/personvern'
+      path: '/personvern'
+      fullPath: '/personvern'
+      preLoaderRoute: typeof PersonvernRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/slett-konto': {
+      id: '/slett-konto'
+      path: '/slett-konto'
+      fullPath: '/slett-konto'
+      preLoaderRoute: typeof SlettKontoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/addresses': {
+      id: '/api/addresses'
+      path: '/api/addresses'
+      fullPath: '/api/addresses'
+      preLoaderRoute: typeof ApiAddressesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/send': {
+      id: '/api/send'
+      path: '/api/send'
+      fullPath: '/api/send'
+      preLoaderRoute: typeof ApiSendRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -71,6 +158,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   OmOssRoute: OmOssRoute,
+  PersonvernRoute: PersonvernRoute,
+  SlettKontoRoute: SlettKontoRoute,
+  ApiAddressesRoute: ApiAddressesRoute,
+  ApiSendRoute: ApiSendRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
