@@ -9030,7 +9030,7 @@
         "items": [
           {
             "id": "dish-rekechips",
-            "number": "rekechips",
+            "number": null,
             "name": "Rekechips",
             "description": "",
             "allergens": [
@@ -9051,7 +9051,7 @@
           },
           {
             "id": "dish-edamame",
-            "number": "edamame",
+            "number": null,
             "name": "Edamamebønner",
             "description": "",
             "allergens": [
@@ -9072,7 +9072,7 @@
           },
           {
             "id": "dish-kjott",
-            "number": "kjott",
+            "number": null,
             "name": "Ekstra kjøtt",
             "description": "",
             "allergens": [],
@@ -9091,7 +9091,7 @@
           },
           {
             "id": "dish-fries",
-            "number": "fries",
+            "number": null,
             "name": "Pommes frites",
             "description": "",
             "allergens": [],
@@ -9110,7 +9110,7 @@
           },
           {
             "id": "dish-scampi",
-            "number": "scampi",
+            "number": null,
             "name": "Ekstra scampi",
             "description": "2 stk.",
             "allergens": [],
@@ -9129,7 +9129,7 @@
           },
           {
             "id": "dish-saus",
-            "number": "saus",
+            "number": null,
             "name": "Ekstra saus",
             "description": "",
             "allergens": [],
@@ -9148,7 +9148,7 @@
           },
           {
             "id": "dish-notter",
-            "number": "notter",
+            "number": null,
             "name": "Nøtter",
             "description": "",
             "allergens": [],
@@ -9167,7 +9167,7 @@
           },
           {
             "id": "dish-ris",
-            "number": "ris",
+            "number": null,
             "name": "Ekstra ris",
             "description": "",
             "allergens": [],
@@ -9193,7 +9193,7 @@
         "items": [
           {
             "id": "dish-drikke-0",
-            "number": "drikke-0",
+            "number": null,
             "name": "Farris",
             "description": "",
             "allergens": [],
@@ -9212,7 +9212,7 @@
           },
           {
             "id": "dish-drikke-1",
-            "number": "drikke-1",
+            "number": null,
             "name": "Pepsi Max",
             "description": "",
             "allergens": [],
@@ -9231,7 +9231,7 @@
           },
           {
             "id": "dish-drikke-2",
-            "number": "drikke-2",
+            "number": null,
             "name": "Coca-Cola",
             "description": "",
             "allergens": [],
@@ -9250,7 +9250,7 @@
           },
           {
             "id": "dish-drikke-3",
-            "number": "drikke-3",
+            "number": null,
             "name": "Coca-Cola Zero",
             "description": "",
             "allergens": [],
@@ -9269,7 +9269,7 @@
           },
           {
             "id": "dish-drikke-4",
-            "number": "drikke-4",
+            "number": null,
             "name": "Sprite",
             "description": "",
             "allergens": [],
@@ -9288,7 +9288,7 @@
           },
           {
             "id": "dish-drikke-5",
-            "number": "drikke-5",
+            "number": null,
             "name": "Solo",
             "description": "",
             "allergens": [],
@@ -9307,7 +9307,7 @@
           },
           {
             "id": "dish-drikke-6",
-            "number": "drikke-6",
+            "number": null,
             "name": "Eplemost",
             "description": "",
             "allergens": [],
