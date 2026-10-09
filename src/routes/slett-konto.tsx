@@ -20,12 +20,12 @@ export const Route = createFileRoute("/slett-konto")({
           "Informasjon om sletting av KjørNesodden-konto og personopplysninger.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://kjornesodden.vercel.app/slett-konto" },
+      { property: "og:url", content: "https://www.kjornesodden.no/slett-konto" },
     ],
     links: [
       {
         rel: "canonical",
-        href: "https://kjornesodden.vercel.app/slett-konto",
+        href: "https://www.kjornesodden.no/slett-konto",
       },
     ],
   }),

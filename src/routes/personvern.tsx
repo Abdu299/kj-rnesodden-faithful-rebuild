@@ -22,13 +22,13 @@ export const Route = createFileRoute("/personvern")({
       { property: "og:type", content: "website" },
       {
         property: "og:url",
-        content: "https://kjornesodden.vercel.app/personvern",
+        content: "https://www.kjornesodden.no/personvern",
       },
     ],
     links: [
       {
         rel: "canonical",
-        href: "https://kjornesodden.vercel.app/personvern",
+        href: "https://www.kjornesodden.no/personvern",
       },
     ],
   }),

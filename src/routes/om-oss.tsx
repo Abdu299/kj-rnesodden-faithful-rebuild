@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { TopBar } from "../components/TopBar";
+import { SITE_IMAGE, SITE_URL } from "../lib/site";
 
 export const Route = createFileRoute("/om-oss")({
   head: () => ({
@@ -16,15 +17,16 @@ export const Route = createFileRoute("/om-oss")({
         content: "Våre tjenester, leveringsområder og kontaktinformasjon på Nesodden.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/om-oss" },
+      { property: "og:url", content: `${SITE_URL}/om-oss` },
+      { property: "og:image", content: SITE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/om-oss" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/om-oss` }],
   }),
   component: OmOss,
 });
 
 const RESTAURANTS = [
-  "Skriv resturanten også gir ved beskyd om vi kan hente!"
+  "Skriv hvilken restaurant du vil ha mat fra, så gir vi beskjed om vi kan hente."
 ];
 
 const GROCERIES = [
