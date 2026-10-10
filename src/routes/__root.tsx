@@ -84,6 +84,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      // Google Search Console (Onlinemarkedsføring.no). Må ikke fjernes, da mister vi tilgangen.
+      { name: "google-site-verification", content: "nH1EK5qc3e244DmZ0Dwqv48w5sl1JICXtRPAnwipmh8" },
       { title: "KjørNesodden | Rask levering på Nesodden" },
       {
         name: "description",
