@@ -223,9 +223,12 @@ function Menu({
       ),
     }))
     .filter((c) => c.items.length);
+  // Forsidebilde: eget banner, ellers kortbildet. Tegninger (svg) brukes ikke som forsidebilde.
+  const cover = restaurant.banner || (restaurant.image && !restaurant.image.endsWith(".svg") ? restaurant.image : "");
   return (
     <>
-      <section className="menu-intro">
+      <section className={`menu-intro${cover ? " has-cover" : ""}`} data-place={restaurant.id}>
+        {cover && <div className="menu-cover" style={{ backgroundImage: `url(${cover})` }} aria-hidden="true" />}
         <div className="menu-intro-inner">
           {restaurant.logo && (
             <img className="menu-logo" src={restaurant.logo} alt={`${restaurant.name} logo`} />
