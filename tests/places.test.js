@@ -37,6 +37,22 @@ test("page texts are filled in and have no dashes used as punctuation", () => {
   }
 });
 
+test("every place has its own questions, not only the shared ones", () => {
+  for (const place of places) {
+    assert.ok(place.faq.length >= 1, place.id);
+    for (const item of place.faq) assert.equal(/[–—]/.test(item.q + item.a), false, place.id);
+  }
+});
+
+test("titles stay within what Google shows", () => {
+  for (const place of places) {
+    const restaurant = catalog.find((r) => r.id === place.id);
+    const what = restaurant.orderingMode === "menu" ? "Meny og levering" : "Bestill levering";
+    const title = `${place.seoName} | ${what} | KjørNesodden`;
+    assert.ok(title.length <= 64, `${title} (${title.length})`);
+  }
+});
+
 test("sitemap lists the overview and every place page", () => {
   assert.ok(sitemap.includes("<loc>https://www.kjornesodden.no/restauranter</loc>"));
   for (const place of places) {

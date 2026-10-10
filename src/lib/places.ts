@@ -34,7 +34,8 @@ export function headingFor({ place, restaurant }: PlacePage) {
 }
 
 export function titleFor(page: PlacePage) {
-  return `${page.place.seoName} | Meny og levering | KjørNesodden`;
+  const what = page.restaurant.orderingMode === "menu" ? "Meny og levering" : "Bestill levering";
+  return `${page.place.seoName} | ${what} | KjørNesodden`;
 }
 
 export function descriptionFor({ restaurant }: PlacePage) {
@@ -77,12 +78,13 @@ export function openingRows(restaurant: Restaurant) {
   });
 }
 
-export function faqFor({ restaurant }: PlacePage) {
+export function faqFor({ place, restaurant }: PlacePage) {
   const prices = zones.map((zone) => `${zone.name} ${formatKr(zone.fee)}`).join(", ");
   const hours = openingRows(restaurant)
     .map((row) => `${row.day} ${row.text.toLowerCase()}`)
     .join(", ");
   const faq = [
+    ...place.faq,
     {
       q: `Kan jeg få mat fra ${restaurant.name} levert hjem?`,
       a:
@@ -98,7 +100,7 @@ export function faqFor({ restaurant }: PlacePage) {
     { q: "Hvordan betaler jeg?", a: "Du betaler når maten er levert." },
   ];
   if (hours)
-    faq.splice(2, 0, {
+    faq.splice(faq.length - 1, 0, {
       q: `Når kan jeg bestille fra ${restaurant.name}?`,
       a: `Vi tar imot bestillinger når ${restaurant.name} har åpent: ${hours}.`,
     });

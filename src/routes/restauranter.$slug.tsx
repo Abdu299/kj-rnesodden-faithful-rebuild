@@ -71,7 +71,6 @@ function restaurantSchema(page: PlacePage) {
     servesCuisine: restaurant.cuisine,
     image: placeImage(restaurant),
     url,
-    ...(restaurant.phone ? { telephone: restaurant.phone } : {}),
     address: {
       "@type": "PostalAddress",
       streetAddress: restaurant.address,

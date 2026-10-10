@@ -1440,3 +1440,10 @@ a.restaurant-card { text-decoration: none; }
 .place-info-prices b { color: #c46a2a; white-space: nowrap; }
 .ordering-root .place-chips a { text-decoration: none; }
 @media (max-width: 900px) { .place-info { grid-template-columns: 1fr; padding: 0 16px 40px; } }
+/* Stedssider, steg 3: brødsmuler */
+.app-crumbs { display: flex; flex-wrap: wrap; gap: 0 4px; align-items: center; }
+.app-crumbs a { text-underline-offset: 3px; }
+.app-crumbs span[aria-current] { color: #5a6070; font-weight: 600; }
+
+/* Smal skjerm: Restauranter-lenken i toppen tar for mye plass. Den finnes i brødsmulene og bunnen. */
+@media (max-width: 560px) { .site-header nav a[href="/restauranter"] { display: none; } }

@@ -1,9 +1,11 @@
+export type PlaceFaq = { q: string; a: string };
 export type Place = {
   id: string;
   slug: string;
   seoName: string;
   intro: string;
   website: string;
+  faq: PlaceFaq[];
 };
 export const places: Place[];
 export function placeBySlug(slug: string): Place | undefined;

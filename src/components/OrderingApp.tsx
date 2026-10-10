@@ -26,6 +26,7 @@ import {
 import { dayNames, formatTime, openingStatus, zones } from "../../shared/order-rules.js";
 import { CartPanel, RequestForm, ReceiptPage } from "./Checkout";
 import { placeById } from "../../shared/places.js";
+import { Crumbs } from "./Crumbs";
 
 type Cart = { restaurantId: string | null; lines: CartLine[] };
 type Customer = { fullName: string; phone: string; note: string };
@@ -230,9 +231,13 @@ function Menu({
             <img className="menu-logo" src={restaurant.logo} alt={`${restaurant.name} logo`} />
           )}
           <div>
-            <Link to="/" className="back-link">
-              <ArrowLeft size={16} /> Alle restauranter
-            </Link>
+            {heading ? (
+              <Crumbs name={restaurant.name} />
+            ) : (
+              <Link to="/" className="back-link">
+                <ArrowLeft size={16} /> Alle restauranter
+              </Link>
+            )}
             <h1>{heading ?? restaurant.name}</h1>
             <p>
               {restaurant.cuisine} · {restaurant.address}
