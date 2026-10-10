@@ -28,6 +28,7 @@ import { CartPanel, RequestForm, ReceiptPage } from "./Checkout";
 import { placeById } from "../../shared/places.js";
 import { Crumbs } from "./Crumbs";
 import { Credit } from "./Credit";
+import { SiteHeader } from "./SiteHeader";
 
 type Cart = { restaurantId: string | null; lines: CartLine[] };
 type Customer = { fullName: string; phone: string; note: string };
@@ -45,25 +46,7 @@ function Header({
   places?: boolean;
 }) {
   return (
-    <header className={`site-header${home ? " on-hero" : ""}`}>
-      <Link className="site-brand" to="/" aria-label="KjørNesodden, til forsiden">
-        <img className="brand-logo" src="/images/kjornesodden-logo-mork.webp" alt="KjørNesodden" width="809" height="160" />
-      </Link>
-      <nav aria-label="Hovedmeny">
-        <Link className={home || places ? "current" : ""} to="/" hash="restauranter">
-          Restauranter
-        </Link>
-        <Link to="/om-oss">Om oss</Link>
-        <button
-          type="button"
-          className={`cart-trigger${count ? " has-items" : ""}`}
-          onClick={onCart}
-          aria-label={`Åpne kurven (${count})`}
-        >
-          <ShoppingBag size={18} /> <span>Kurv ({count})</span>
-        </button>
-      </nav>
-    </header>
+    <SiteHeader count={count} onCart={onCart} onHero={home} current={home || places ? "places" : null} />
   );
 }
 function Status({ restaurant, now }: { restaurant: Restaurant; now: Date }) {

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TopBar } from "../components/TopBar";
+import { SiteHeader } from "../components/SiteHeader";
 
 export const Route = createFileRoute("/slett-konto")({
   head: () => ({
@@ -38,7 +38,7 @@ function SlettKonto() {
   return (
     <div className="kn-root about-page">
       <section className="hero about-hero">
-        <TopBar active="delete" />
+        <SiteHeader onHero current={null} />
 
         <div className="about-intro">
           <span className="about-eyebrow">

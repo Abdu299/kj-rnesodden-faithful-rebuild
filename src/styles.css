@@ -1181,7 +1181,6 @@
   .site-brand { font-size: 18px; }
   .site-header nav { gap: 4px; }
   .site-header nav > a { padding: 8px; font-size: 12px; }
-  .site-header nav > a:first-child { display: none; }
   .cart-trigger { padding: 8px; gap: 5px; font-size: 11px !important; }
   .cart-trigger svg { width: 16px; }
   .home-intro { padding: 24px 20px 30px; }
@@ -1266,7 +1265,6 @@
   .dialog-close { width: 44px; height: 44px; }
   .cart-trigger, .menu-tabs button, .add-dish { min-height: 44px; }
   .site-header nav > a { display: flex; align-items: center; min-height: 44px; }
-  .site-header nav > a:first-child { display: none; }
   .cart-dialog .cart-panel > h2 { padding-right: 48px; }
 }
 
@@ -1445,8 +1443,6 @@ a.restaurant-card { text-decoration: none; }
 .app-crumbs a { text-underline-offset: 3px; }
 .app-crumbs span[aria-current] { color: #5a6070; font-weight: 600; }
 
-/* Smal skjerm: Restauranter-lenken i toppen tar for mye plass. Den finnes i brødsmulene og bunnen. */
-@media (max-width: 560px) { .site-header nav a[href="/restauranter"] { display: none; } }
 /* Om oss: restaurantene er lenker */
 a.restaurant-item { color: inherit; text-decoration: none; }
 a.restaurant-item:hover span:last-child { text-decoration: underline; }
@@ -1462,3 +1458,13 @@ a.restaurant-item:hover span:last-child { text-decoration: underline; }
 .footer-credit { margin: 10px 0 0; font-size: 13px; }
 .footer-credit a { color: #c46a2a; font-weight: 700; }
 .place-info-card > p > a { color: #c46a2a; font-weight: 700; text-underline-offset: 3px; }
+/* Kurv som lenke (sider uten bestilling) skal se ut som Kurv-knappen */
+.site-header nav > a.cart-trigger { color: #ffb45c; padding: 9px 13px; border-radius: 8px; font-size: 15px; }
+.site-header nav > a.cart-trigger.has-items { color: #17213b; }
+@media (max-width: 600px) { .site-header nav > a.cart-trigger { padding: 8px; } }
+/* Felles toppmeny over heltebildet på Om oss, personvern og slett konto */
+.about-hero > .site-header { margin: -24px -24px 0; }
+@media (max-width: 520px) { .about-hero > .site-header { margin: -16px -16px 0; } }
+.site-brand { min-width: 0; }
+/* Logoen kan krympe på smal skjerm, men beholder formen (før ble den klemt) */
+.site-header .brand-logo { max-width: 100%; object-fit: contain; object-position: left center; }

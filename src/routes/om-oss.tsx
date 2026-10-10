@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { TopBar } from "../components/TopBar";
+import { SiteHeader } from "../components/SiteHeader";
 import { SITE_IMAGE, SITE_URL } from "../lib/site";
 import { placePages } from "../lib/places";
 
@@ -46,7 +46,7 @@ function OmOss() {
   return (
     <div className="kn-root about-page">
       <section className="hero about-hero">
-        <TopBar active="about" />
+        <SiteHeader onHero current={"about"} />
 
         <div className="about-intro">
           <span className="about-eyebrow">LOKAL LEVERING PÅ NESODDEN</span>
