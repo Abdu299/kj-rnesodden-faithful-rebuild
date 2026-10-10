@@ -7918,21 +7918,15 @@
     "address": "Tangenveien 129, Nesoddtangen",
     "phone": "939 26 141",
     "image": "/images/os-kort.webp",
-    "logo": "",
+    "logo": "/images/os-logo.webp",
     "banner": "",
     "hours": [
       [
         900,
         1260
       ],
-      [
-        900,
-        1260
-      ],
-      [
-        900,
-        1260
-      ],
+      null,
+      null,
       [
         930,
         1290

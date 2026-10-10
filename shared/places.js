@@ -104,6 +104,10 @@ export const places = [
         a: "Ja. Seks hvite pizzaer er laget uten tomatsaus, blant annet Quattro Formaggi, Al Pesto og Salsiccia e Broccoli.",
       },
       {
+        q: "Har O' Sole Mio åpent på mandag?",
+        a: "Nei. O' Sole Mio har stengt mandag og tirsdag. Onsdag til lørdag kan du bestille fra 15.30, og søndag fra 15.",
+      },
+      {
         q: "Har O' Sole Mio pizza uten ost?",
         a: "Ja. Napoletana er laget uten mozzarella, med tomatsaus, hvitløk, oregano og basilikum.",
       },
