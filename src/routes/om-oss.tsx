@@ -6,13 +6,13 @@ import { placePages } from "../lib/places";
 export const Route = createFileRoute("/om-oss")({
   head: () => ({
     meta: [
-      { title: "Om oss – KjørNesodden" },
+      { title: "Om KjørNesodden | Leveringsområder og priser på Nesodden" },
       {
         name: "description",
         content:
-          "Les mer om KjørNesodden, våre leveringsområder, priser og steder vi henter fra.",
+          "Slik fungerer KjørNesodden: vi henter mat fra restauranter og butikker på Nesodden og kjører den hjem til deg. Fast pris fra 75 kr, du betaler ved levering.",
       },
-      { property: "og:title", content: "Om oss – KjørNesodden" },
+      { property: "og:title", content: "Om KjørNesodden | Leveringsområder og priser på Nesodden" },
       {
         property: "og:description",
         content: "Våre tjenester, leveringsområder og kontaktinformasjon på Nesodden.",

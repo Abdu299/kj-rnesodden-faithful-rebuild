@@ -77,6 +77,17 @@ function restaurantSchema(page: PlacePage) {
       addressCountry: "NO",
     },
     ...(restaurant.orderingMode === "menu" ? { hasMenu: url } : {}),
+        // hours[0] er søndag. Stengte dager (null) utelates.
+        ...(restaurant.hours
+          ? {
+              openingHoursSpecification: restaurant.hours.flatMap((h, day) => {
+                if (!h) return [];
+                const tid = (m: number) => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+                const dag = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][day];
+                return [{ "@type": "OpeningHoursSpecification", dayOfWeek: `https://schema.org/${dag}`, opens: tid(h[0]), closes: tid(h[1]) }];
+              }),
+            }
+          : {}),
     ...(place.website ? { sameAs: [place.website] } : {}),
   };
 }

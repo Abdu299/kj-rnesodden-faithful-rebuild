@@ -258,7 +258,7 @@ function Menu({
                     <span>{dayNames[day]}</span>
                     <b>
                       {restaurant.hours![day]
-                        ? `${formatTime(restaurant.hours![day]![0])}–${formatTime(restaurant.hours![day]![1])}`
+                        ? `${formatTime(restaurant.hours![day]![0])}-${formatTime(restaurant.hours![day]![1])}`
                         : "Stengt"}
                     </b>
                   </p>
@@ -447,6 +447,8 @@ export function OrderingApp({
   const [customer, setCustomer] = useState<Customer>({ fullName: "", phone: "", note: "" });
   const [cartOpen, setCartOpen] = useState(false);
   const [pendingRestaurant, setPendingRestaurant] = useState<string | null>(null);
+  // Retten kunden prøvde å legge i kurven da byttet ble spurt om. Legges inn etter «Tøm og bytt».
+  const [pendingLine, setPendingLine] = useState<CartLine | null>(null);
   const [optionSelection, setOptionSelection] = useState<{
     restaurantId: string;
     item: MenuItem;
@@ -551,6 +553,7 @@ export function OrderingApp({
       return;
     }
     if (cart.lines.length && cart.restaurantId !== restaurant.id) {
+      setPendingLine({ itemId: item.id, variantId, optionIds: [...optionIds].sort(), quantity: 1 });
       setPendingRestaurant(restaurant.id);
       return;
     }
@@ -733,7 +736,10 @@ export function OrderingApp({
       <Dialog.Root
         open={!!pendingRestaurant}
         onOpenChange={(open) => {
-          if (!open) setPendingRestaurant(null);
+          if (!open) {
+            setPendingRestaurant(null);
+            setPendingLine(null);
+          }
         }}
       >
         <Dialog.Portal>
@@ -751,7 +757,9 @@ export function OrderingApp({
                 className="primary-button"
                 onClick={() => {
                   const id = pendingRestaurant!;
-                  setCart(emptyCart);
+                  setCart(pendingLine ? { restaurantId: id, lines: [pendingLine] } : emptyCart);
+                  if (pendingLine) setAnnouncement("Kurven er tømt, og retten du valgte er lagt i kurven.");
+                  setPendingLine(null);
                   setPendingRestaurant(null);
                   navigate(id);
                 }}

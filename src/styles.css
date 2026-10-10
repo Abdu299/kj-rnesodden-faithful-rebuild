@@ -1484,3 +1484,5 @@ a.restaurant-item:hover span:last-child { text-decoration: underline; }
 @media (max-width: 600px) { .has-cover .menu-intro-inner > div:not(.opening-hours) { flex-basis: 100%; padding-top: 4px; } }
 /* Kurven på store skjermer: kan scrolles inni seg, så «Send bestilling» alltid kan nås */
 .desktop-cart { max-height: calc(100vh - 112px); max-height: calc(100dvh - 112px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; border-radius: 13px; }
+/* Logoen i toppen er en lenke til forsiden: stor nok trykkflate på mobil */
+.site-brand { min-height: 44px; }

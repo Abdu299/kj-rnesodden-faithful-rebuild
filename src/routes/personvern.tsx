@@ -4,15 +4,15 @@ import { SiteHeader } from "../components/SiteHeader";
 export const Route = createFileRoute("/personvern")({
   head: () => ({
     meta: [
-      { title: "Personvernerklæring – KjørNesodden" },
+      { title: "Personvernerklæring | KjørNesodden" },
       {
         name: "description",
         content:
-          "Personvernerklæring for KjørNesodden. Les hvordan vi behandler personopplysninger i appen og leveringstjenesten.",
+          "Personvernerklæring for KjørNesodden. Les hvilke opplysninger vi samler inn når du bestiller levering på Nesodden, og hvordan vi behandler og sletter dem.",
       },
       {
         property: "og:title",
-        content: "Personvernerklæring – KjørNesodden",
+        content: "Personvernerklæring | KjørNesodden",
       },
       {
         property: "og:description",

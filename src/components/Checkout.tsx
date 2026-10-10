@@ -323,7 +323,7 @@ export function RequestForm({
                 return (
                   <p key={day}>
                     <span>{dayNames[day]}</span>
-                    <b>{hours ? `${formatTime(hours[0])}–${formatTime(hours[1])}` : "Stengt"}</b>
+                    <b>{hours ? `${formatTime(hours[0])}-${formatTime(hours[1])}` : "Stengt"}</b>
                   </p>
                 );
               })}

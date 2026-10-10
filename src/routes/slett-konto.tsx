@@ -4,15 +4,15 @@ import { SiteHeader } from "../components/SiteHeader";
 export const Route = createFileRoute("/slett-konto")({
   head: () => ({
     meta: [
-      { title: "Slett konto – KjørNesodden" },
+      { title: "Slett konto | KjørNesodden" },
       {
         name: "description",
         content:
-          "Slik sletter du KjørNesodden-kontoen din og tilknyttede personopplysninger.",
+          "Slik sletter du KjørNesodden-kontoen din og personopplysningene dine, enten direkte i appen eller ved å sende oss en e-post.",
       },
       {
         property: "og:title",
-        content: "Slett konto – KjørNesodden",
+        content: "Slett konto | KjørNesodden",
       },
       {
         property: "og:description",
