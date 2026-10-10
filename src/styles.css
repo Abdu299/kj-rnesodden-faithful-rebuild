@@ -1452,3 +1452,7 @@ a.restaurant-item { color: inherit; text-decoration: none; }
 a.restaurant-item:hover span:last-child { text-decoration: underline; }
 #leveringsomrader { scroll-margin-top: 90px; }
 .about-panel-copy a { color: #c46a2a; font-weight: 700; text-decoration: underline; }
+/* Logo fra Google-profilen, lys tekst for mørk bakgrunn */
+.brand-logo { display: block; height: 40px; width: auto; }
+.site-brand, .logo { display: inline-flex; align-items: center; line-height: 0; }
+@media (max-width: 560px) { .brand-logo { height: 30px; } }

@@ -11,8 +11,8 @@ export function TopBar({ active }: Props) {
 
   return (
     <div className="topbar">
-      <Link to="/" className="logo" onClick={close}>
-        KjørNesodden.no
+      <Link to="/" className="logo" onClick={close} aria-label="KjørNesodden, til forsiden">
+        <img className="brand-logo" src="/images/kjornesodden-logo-mork.webp" alt="KjørNesodden" width="809" height="160" />
       </Link>
 
       <button

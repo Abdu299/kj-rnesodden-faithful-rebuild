@@ -43,8 +43,8 @@ function Header({
 }) {
   return (
     <header className={`site-header${home ? " on-hero" : ""}`}>
-      <Link className="site-brand" to="/">
-        KjørNesodden.no
+      <Link className="site-brand" to="/" aria-label="KjørNesodden, til forsiden">
+        <img className="brand-logo" src="/images/kjornesodden-logo-mork.webp" alt="KjørNesodden" width="809" height="160" />
       </Link>
       <nav aria-label="Hovedmeny">
         <Link className={home ? "current" : ""} to="/">

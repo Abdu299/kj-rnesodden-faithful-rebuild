@@ -11,6 +11,7 @@ const LOCAL_BUSINESS_SCHEMA = {
     "Lokal levering på Nesodden fra restauranter, hurtigmat og dagligvarebutikker. Fast pris etter område, betaling ved levering.",
   url: SITE_URL,
   image: SITE_IMAGE,
+  logo: `${SITE_URL}/images/kjornesodden-logo-kvadrat.png`,
   telephone: "+4793461991",
   email: "kjrnesodden@gmail.com",
   priceRange: "75 til 150 kr per levering",
