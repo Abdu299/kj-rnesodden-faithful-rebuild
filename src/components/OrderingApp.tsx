@@ -50,10 +50,7 @@ function Header({
         <img className="brand-logo" src="/images/kjornesodden-logo-mork.webp" alt="KjørNesodden" width="809" height="160" />
       </Link>
       <nav aria-label="Hovedmeny">
-        <Link className={home && !places ? "current" : ""} to="/">
-          Hjem
-        </Link>
-        <Link className={places ? "current" : ""} to="/" hash="restauranter">
+        <Link className={home || places ? "current" : ""} to="/" hash="restauranter">
           Restauranter
         </Link>
         <Link to="/om-oss">Om oss</Link>

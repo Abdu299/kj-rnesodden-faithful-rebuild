@@ -27,12 +27,9 @@ export function TopBar({ active }: Props) {
       </button>
 
       <nav id="primary-nav" className={`nav${open ? " open" : ""}`}>
-        <Link to="/" className={active === "home" ? "active" : ""} onClick={close}>
-          Hjem
-        </Link>
         <Link
           to="/" hash="restauranter"
-          className={active === "places" ? "active" : ""}
+          className={active === "places" || active === "home" ? "active" : ""}
           onClick={close}
         >
           Restauranter
