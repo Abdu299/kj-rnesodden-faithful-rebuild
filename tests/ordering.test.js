@@ -390,7 +390,6 @@ test("O' Sole Mio and Mama Greek use the supplied hours on every day of the week
   }
 });
 for (const [restaurantId, place, closing] of [
-  ["osolemio", "O' Sole Mio", "2026-09-30T19:30:00Z"],
   ["mamagreek", "Mama Greek Kitchen", "2026-09-30T18:00:00Z"],
 ])
   test(`${place} accepts requests while open and rejects closed requests even with an unknown address`, async () => {

@@ -92,12 +92,20 @@ export const places = [
     slug: "o-sole-mio",
     seoName: "O' Sole Mio Nesodden",
     intro:
-      "O' Sole Mio ligger i Tangenveien 129 på Nesoddtangen og lager napolitansk pizza. Menyen ligger ikke på nett ennå, så du skriver hva du vil ha. Vi sjekker menyen og prisen med restauranten og ringer deg før vi bestiller. Så henter vi pizzaen og kjører den hjem til deg. Bor du på Tangen, Bjørnemyr eller Helvik, koster leveringen 75 kr.",
+      "O' Sole Mio ligger i Tangenveien 129 på Nesoddtangen og lager ekte napolitansk pizza. Menyen har 16 klassiske pizzaer med tomatsaus, seks hvite pizzaer uten tomatsaus, hjemmelaget tiramisù og italiensk brus. Husets egen pizza, O' Sole Mio, har skorpe fylt med fersk ricotta. Hele menyen står her med priser. Bestill, så henter vi pizzaen og kjører den hjem til deg. Bor du på Tangen, Bjørnemyr eller Helvik, koster leveringen 75 kr.",
     website: "",
     faq: [
       {
-        q: "Hvordan bestiller jeg fra O' Sole Mio når menyen ikke er på nett?",
-        a: "Skriv hvilke pizzaer du vil ha i skjemaet. Vi sjekker pris og om de har det, og ringer deg før vi bestiller. Du betaler ingenting før maten er levert.",
+        q: "Hva koster pizza fra O' Sole Mio?",
+        a: "Pizzaene koster fra 130 kr for Napoletana til 240 kr for husets pizza O' Sole Mio. De fleste ligger mellom 190 og 220 kr. Levering kommer i tillegg og avhenger av hvor du bor.",
+      },
+      {
+        q: "Har O' Sole Mio pizza uten tomatsaus?",
+        a: "Ja. Seks hvite pizzaer er laget uten tomatsaus, blant annet Quattro Formaggi, Al Pesto og Salsiccia e Broccoli.",
+      },
+      {
+        q: "Har O' Sole Mio pizza uten ost?",
+        a: "Ja. Napoletana er laget uten mozzarella, med tomatsaus, hvitløk, oregano og basilikum.",
       },
     ],
   },
