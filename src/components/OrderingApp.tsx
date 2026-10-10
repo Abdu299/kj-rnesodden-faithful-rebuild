@@ -48,6 +48,7 @@ function Header({
         <a className={home ? "current" : ""} href="#">
           Hjem
         </a>
+        <Link to="/restauranter">Restauranter</Link>
         <Link to="/om-oss">Om oss</Link>
         <button
           type="button"
@@ -79,6 +80,8 @@ function Footer() {
       </div>
       <div>
         <p>Du betaler når varene er levert.</p>
+        <Link to="/restauranter">Restauranter</Link>
+        <span> · </span>
         <Link to="/om-oss">Om oss</Link>
         <span> · </span>
         <Link to="/personvern">Personvern</Link>

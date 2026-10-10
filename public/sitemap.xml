@@ -6,6 +6,46 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://www.kjornesodden.no/restauranter</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.kjornesodden.no/restauranter/signalen</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.kjornesodden.no/restauranter/tonys-sushi</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.kjornesodden.no/restauranter/jafs</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.kjornesodden.no/restauranter/jonathan-sushi</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.kjornesodden.no/restauranter/flaskebekk-bistro</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.kjornesodden.no/restauranter/o-sole-mio</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.kjornesodden.no/restauranter/mama-greek-kitchen</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.kjornesodden.no/om-oss</loc>
     <lastmod>2026-10-09</lastmod>
     <priority>0.8</priority>

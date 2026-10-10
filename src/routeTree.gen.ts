@@ -15,6 +15,8 @@ import { Route as PersonvernRouteImport } from './routes/personvern'
 import { Route as SlettKontoRouteImport } from './routes/slett-konto'
 import { Route as ApiAddressesRouteImport } from './routes/api.addresses'
 import { Route as ApiSendRouteImport } from './routes/api.send'
+import { Route as RestauranterIndexRouteImport } from './routes/restauranter.index'
+import { Route as RestauranterSlugRouteImport } from './routes/restauranter.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +48,16 @@ const ApiSendRoute = ApiSendRouteImport.update({
   path: '/api/send',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RestauranterIndexRoute = RestauranterIndexRouteImport.update({
+  id: '/restauranter/',
+  path: '/restauranter/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RestauranterSlugRoute = RestauranterSlugRouteImport.update({
+  id: '/restauranter/$slug',
+  path: '/restauranter/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +66,8 @@ export interface FileRoutesByFullPath {
   '/slett-konto': typeof SlettKontoRoute
   '/api/addresses': typeof ApiAddressesRoute
   '/api/send': typeof ApiSendRoute
+  '/restauranter/$slug': typeof RestauranterSlugRoute
+  '/restauranter/': typeof RestauranterIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +76,8 @@ export interface FileRoutesByTo {
   '/slett-konto': typeof SlettKontoRoute
   '/api/addresses': typeof ApiAddressesRoute
   '/api/send': typeof ApiSendRoute
+  '/restauranter/$slug': typeof RestauranterSlugRoute
+  '/restauranter': typeof RestauranterIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +87,8 @@ export interface FileRoutesById {
   '/slett-konto': typeof SlettKontoRoute
   '/api/addresses': typeof ApiAddressesRoute
   '/api/send': typeof ApiSendRoute
+  '/restauranter/$slug': typeof RestauranterSlugRoute
+  '/restauranter/': typeof RestauranterIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +99,8 @@ export interface FileRouteTypes {
     | '/slett-konto'
     | '/api/addresses'
     | '/api/send'
+    | '/restauranter/$slug'
+    | '/restauranter/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +109,8 @@ export interface FileRouteTypes {
     | '/slett-konto'
     | '/api/addresses'
     | '/api/send'
+    | '/restauranter/$slug'
+    | '/restauranter'
   id:
     | '__root__'
     | '/'
@@ -97,6 +119,8 @@ export interface FileRouteTypes {
     | '/slett-konto'
     | '/api/addresses'
     | '/api/send'
+    | '/restauranter/$slug'
+    | '/restauranter/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +130,8 @@ export interface RootRouteChildren {
   SlettKontoRoute: typeof SlettKontoRoute
   ApiAddressesRoute: typeof ApiAddressesRoute
   ApiSendRoute: typeof ApiSendRoute
+  RestauranterSlugRoute: typeof RestauranterSlugRoute
+  RestauranterIndexRoute: typeof RestauranterIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,6 +178,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSendRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/restauranter/': {
+      id: '/restauranter/'
+      path: '/restauranter'
+      fullPath: '/restauranter/'
+      preLoaderRoute: typeof RestauranterIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/restauranter/$slug': {
+      id: '/restauranter/$slug'
+      path: '/restauranter/$slug'
+      fullPath: '/restauranter/$slug'
+      preLoaderRoute: typeof RestauranterSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -162,6 +202,8 @@ const rootRouteChildren: RootRouteChildren = {
   SlettKontoRoute: SlettKontoRoute,
   ApiAddressesRoute: ApiAddressesRoute,
   ApiSendRoute: ApiSendRoute,
+  RestauranterSlugRoute: RestauranterSlugRoute,
+  RestauranterIndexRoute: RestauranterIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

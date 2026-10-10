@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 type Props = {
-  active: "home" | "about" | "delete" | "privacy";
+  active: "home" | "about" | "delete" | "privacy" | "places";
 };
 
 export function TopBar({ active }: Props) {
@@ -29,6 +29,13 @@ export function TopBar({ active }: Props) {
       <nav id="primary-nav" className={`nav${open ? " open" : ""}`}>
         <Link to="/" className={active === "home" ? "active" : ""} onClick={close}>
           Hjem
+        </Link>
+        <Link
+          to="/restauranter"
+          className={active === "places" ? "active" : ""}
+          onClick={close}
+        >
+          Restauranter
         </Link>
         <Link
           to="/om-oss"
