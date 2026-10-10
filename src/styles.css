@@ -1427,3 +1427,16 @@
     gap: 2px;
   }
 }
+/* Stedssider, steg 2: tekst under menyen på bestillingssiden */
+a.restaurant-card { text-decoration: none; }
+.place-info { max-width: 1300px; margin: 0 auto; padding: 0 40px 50px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.place-info-card { background: white; border-radius: 13px; padding: 24px 26px; }
+.place-info-wide { grid-column: 1 / -1; }
+.place-info h2 { font-size: 20px; font-weight: 800; margin: 0 0 10px; }
+.place-info h3 { font-size: 15px; font-weight: 800; margin: 16px 0 4px; }
+.place-info p { color: #5a6070; margin: 0 0 8px; }
+.place-info-prices { list-style: none; margin: 0; padding: 0; }
+.place-info-prices li { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px solid #eee8de; }
+.place-info-prices b { color: #c46a2a; white-space: nowrap; }
+.ordering-root .place-chips a { text-decoration: none; }
+@media (max-width: 900px) { .place-info { grid-template-columns: 1fr; padding: 0 16px 40px; } }

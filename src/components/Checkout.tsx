@@ -259,8 +259,9 @@ export function CartPanel({
 export function RequestForm({
   restaurant,
   now,
+  heading,
   ...props
-}: CheckoutProps & { restaurant: Restaurant | null; now: Date }) {
+}: CheckoutProps & { restaurant: Restaurant | null; now: Date; heading?: string }) {
   const [type, setType] = useState(restaurant ? "Restaurant" : "");
   const [place, setPlace] = useState(restaurant?.name ?? "");
   const [description, setDescription] = useState("");
@@ -291,10 +292,12 @@ export function RequestForm({
   }
   return (
     <main className="request-page">
-      <a className="back-link" href="#">
+      <Link className="back-link" to="/">
         <ArrowLeft size={16} /> Alle restauranter
-      </a>
-      <h1>{restaurant ? `Noe fra ${restaurant.name}?` : "Noe annet du vil ha levert?"}</h1>
+      </Link>
+      <h1>
+        {heading ?? (restaurant ? `Noe fra ${restaurant.name}?` : "Noe annet du vil ha levert?")}
+      </h1>
       <p className="request-lead">
         {restaurant
           ? "Send oss hva du ønsker. Vi sjekker meny, pris og tilgjengelighet og ringer deg før vi bestiller."

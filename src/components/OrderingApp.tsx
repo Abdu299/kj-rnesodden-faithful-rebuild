@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
   ArrowLeft,
@@ -25,6 +25,7 @@ import {
 } from "../lib/catalog";
 import { dayNames, formatTime, openingStatus, zones } from "../../shared/order-rules.js";
 import { CartPanel, RequestForm, ReceiptPage } from "./Checkout";
+import { placeById } from "../../shared/places.js";
 
 type Cart = { restaurantId: string | null; lines: CartLine[] };
 type Customer = { fullName: string; phone: string; note: string };
@@ -41,13 +42,13 @@ function Header({
 }) {
   return (
     <header className={`site-header${home ? " on-hero" : ""}`}>
-      <a className="site-brand" href="#">
+      <Link className="site-brand" to="/">
         KjørNesodden.no
-      </a>
+      </Link>
       <nav aria-label="Hovedmeny">
-        <a className={home ? "current" : ""} href="#">
+        <Link className={home ? "current" : ""} to="/">
           Hjem
-        </a>
+        </Link>
         <Link to="/restauranter">Restauranter</Link>
         <Link to="/om-oss">Om oss</Link>
         <button
@@ -121,10 +122,10 @@ function Home({ now, onSelect }: { now: Date; onSelect: (id: string) => void }) 
         </p>
         <div className="restaurant-cards">
           {restaurants.map((r) => (
-            <button
+            <Link
               className={`restaurant-card restaurant-${r.id}`}
-              type="button"
-              onClick={() => onSelect(r.id)}
+              to="/restauranter/$slug"
+              params={{ slug: placeById(r.id)?.slug ?? r.id }}
               key={r.id}
             >
               <div className="restaurant-photo">
@@ -154,7 +155,7 @@ function Home({ now, onSelect }: { now: Date; onSelect: (id: string) => void }) 
                   <ArrowRight size={16} />
                 </span>
               </div>
-            </button>
+            </Link>
           ))}
           <button
             type="button"
@@ -190,9 +191,11 @@ function Menu({
   restaurant,
   now,
   onAdd,
+  heading,
 }: {
   restaurant: Restaurant;
   now: Date;
+  heading?: string;
   onAdd: (item: MenuItem, variantId: string) => void;
 }) {
   const [query, setQuery] = useState("");
@@ -227,10 +230,10 @@ function Menu({
             <img className="menu-logo" src={restaurant.logo} alt={`${restaurant.name} logo`} />
           )}
           <div>
-            <a href="#" className="back-link">
+            <Link to="/" className="back-link">
               <ArrowLeft size={16} /> Alle restauranter
-            </a>
-            <h1>{restaurant.name}</h1>
+            </Link>
+            <h1>{heading ?? restaurant.name}</h1>
             <p>
               {restaurant.cuisine} · {restaurant.address}
             </p>
@@ -411,8 +414,13 @@ function Menu({
   );
 }
 
-export function OrderingApp() {
-  const [view, setView] = useState("home");
+export function OrderingApp({
+  initialView = "home",
+  heading,
+  extra,
+}: { initialView?: string; heading?: string; extra?: ReactNode } = {}) {
+  const routerNavigate = useNavigate();
+  const [view, setView] = useState(initialView);
   const [now, setNow] = useState(() => new Date());
   const [cart, setCart] = useState<Cart>(emptyCart);
   const [restored, setRestored] = useState(false);
@@ -434,8 +442,16 @@ export function OrderingApp() {
   const submissionRef = useRef<{ content: string; id: string } | null>(null);
   useEffect(() => {
     function readHash() {
+      // Restaurantsidene har egen adresse. # brukes bare på forsiden.
+      if (initialView !== "home") return;
       const hash = window.location.hash.slice(1);
-      setView(hash === "annet" || restaurantById(hash) ? hash : "home");
+      // Gamle lenker som /#tonys sendes videre til restaurantens egen side.
+      const legacy = restaurantById(hash) ? placeById(hash) : undefined;
+      if (legacy) {
+        window.location.replace(`/restauranter/${legacy.slug}`);
+        return;
+      }
+      setView(hash === "annet" ? hash : "home");
       setSubmitError("");
       setReceipt(null);
     }
@@ -490,9 +506,17 @@ export function OrderingApp() {
     setOptionSelection(null);
     setSubmitError("");
     setReceipt(null);
-    const next = id === "home" ? "" : id;
-    if (window.location.hash.slice(1) === next) setView(id);
-    else window.location.hash = next;
+    const place = placeById(id);
+    if (id === view) setView(id);
+    else if (place)
+      void routerNavigate({ to: "/restauranter/$slug", params: { slug: place.slug } });
+    else if (initialView !== "home")
+      void routerNavigate({ to: "/", hash: id === "home" ? undefined : id });
+    else {
+      const next = id === "home" ? "" : id;
+      if (window.location.hash.slice(1) === next) setView(id);
+      else window.location.hash = next;
+    }
     window.scrollTo({ top: 0, behavior: "instant" });
   }
   function select(id: string) {
@@ -629,7 +653,13 @@ export function OrderingApp() {
           <>
             <div className="restaurant-layout">
               <div className="menu-column">
-                <Menu key={restaurant.id} restaurant={restaurant} now={now} onAdd={add} />
+                <Menu
+                  key={restaurant.id}
+                  restaurant={restaurant}
+                  now={now}
+                  onAdd={add}
+                  heading={heading}
+                />
               </div>
               <aside className="desktop-cart" aria-label="Din bestilling">
                 {panel}
@@ -637,8 +667,15 @@ export function OrderingApp() {
             </div>
           </>
         ) : (
-          <RequestForm key={view} restaurant={restaurant} now={now} {...checkoutProps} />
+          <RequestForm
+            key={view}
+            restaurant={restaurant}
+            now={now}
+            heading={heading}
+            {...checkoutProps}
+          />
         )}
+        {!receipt && extra}
       </div>
       <Footer />
       <div className="sr-only" role="status" aria-live="polite">
