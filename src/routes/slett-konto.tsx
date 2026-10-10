@@ -1,18 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TopBar } from "../components/TopBar";
+import { SiteHeader } from "../components/SiteHeader";
 
 export const Route = createFileRoute("/slett-konto")({
   head: () => ({
     meta: [
-      { title: "Slett konto – KjørNesodden" },
+      { title: "Slett konto | KjørNesodden" },
       {
         name: "description",
         content:
-          "Slik sletter du KjørNesodden-kontoen din og tilknyttede personopplysninger.",
+          "Slik sletter du KjørNesodden-kontoen din og personopplysningene dine, enten direkte i appen eller ved å sende oss en e-post.",
       },
       {
         property: "og:title",
-        content: "Slett konto – KjørNesodden",
+        content: "Slett konto | KjørNesodden",
       },
       {
         property: "og:description",
@@ -20,12 +20,12 @@ export const Route = createFileRoute("/slett-konto")({
           "Informasjon om sletting av KjørNesodden-konto og personopplysninger.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://kjornesodden.vercel.app/slett-konto" },
+      { property: "og:url", content: "https://www.kjornesodden.no/slett-konto" },
     ],
     links: [
       {
         rel: "canonical",
-        href: "https://kjornesodden.vercel.app/slett-konto",
+        href: "https://www.kjornesodden.no/slett-konto",
       },
     ],
   }),
@@ -38,7 +38,7 @@ function SlettKonto() {
   return (
     <div className="kn-root about-page">
       <section className="hero about-hero">
-        <TopBar active="delete" />
+        <SiteHeader onHero current={null} />
 
         <div className="about-intro">
           <span className="about-eyebrow">

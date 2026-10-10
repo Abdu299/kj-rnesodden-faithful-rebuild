@@ -1,31 +1,31 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { TopBar } from "../components/TopBar";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { SiteHeader } from "../components/SiteHeader";
+import { SITE_IMAGE, SITE_URL } from "../lib/site";
+import { placePages } from "../lib/places";
 
 export const Route = createFileRoute("/om-oss")({
   head: () => ({
     meta: [
-      { title: "Om oss – KjørNesodden" },
+      { title: "Om KjørNesodden | Leveringsområder og priser på Nesodden" },
       {
         name: "description",
         content:
-          "Les mer om KjørNesodden, våre leveringsområder, priser og steder vi henter fra.",
+          "Slik fungerer KjørNesodden: vi henter mat fra restauranter og butikker på Nesodden og kjører den hjem til deg. Fast pris fra 75 kr, du betaler ved levering.",
       },
-      { property: "og:title", content: "Om oss – KjørNesodden" },
+      { property: "og:title", content: "Om KjørNesodden | Leveringsområder og priser på Nesodden" },
       {
         property: "og:description",
         content: "Våre tjenester, leveringsområder og kontaktinformasjon på Nesodden.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/om-oss" },
+      { property: "og:url", content: `${SITE_URL}/om-oss` },
+      { property: "og:image", content: SITE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/om-oss" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/om-oss` }],
   }),
   component: OmOss,
 });
 
-const RESTAURANTS = [
-  "Skriv resturanten også gir ved beskyd om vi kan hente!"
-];
 
 const GROCERIES = [
 
@@ -46,7 +46,7 @@ function OmOss() {
   return (
     <div className="kn-root about-page">
       <section className="hero about-hero">
-        <TopBar active="about" />
+        <SiteHeader onHero current={"about"} />
 
         <div className="about-intro">
           <span className="about-eyebrow">LOKAL LEVERING PÅ NESODDEN</span>
@@ -69,16 +69,25 @@ function OmOss() {
             </p>
 
             <div className="restaurant-grid">
-              {RESTAURANTS.map((restaurant) => (
-                <div className="restaurant-item" key={restaurant}>
+              {placePages.map(({ place, restaurant }) => (
+                <Link
+                  className="restaurant-item"
+                  key={place.slug}
+                  to="/restauranter/$slug"
+                  params={{ slug: place.slug }}
+                >
                   <span className="restaurant-dot" aria-hidden="true" />
-                  <span>{restaurant}</span>
-                </div>
+                  <span>{restaurant.name}</span>
+                </Link>
               ))}
             </div>
+            <p className="about-panel-copy">
+              Finner du ikke stedet du vil ha mat fra? Skriv det til oss, så gir vi beskjed om vi kan
+              hente. <Link to="/" hash="restauranter">Se alle restaurantene</Link>.
+            </p>
           </article>
 
-          <aside className="about-panel price-panel">
+          <aside className="about-panel price-panel" id="leveringsomrader">
             <span className="about-panel-label">Leveringspriser</span>
             <h2>Fast pris etter område</h2>
 

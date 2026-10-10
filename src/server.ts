@@ -44,8 +44,31 @@ function isH3SwallowedErrorBody(body: string): boolean {
   }
 }
 
+// kjornesodden.vercel.app viser samme innhold som kjornesodden.no. Send sidevisninger
+// dit med 301 så Google bare ser én adresse. /api/ unntas, så eldre klienter som poster
+// bestillinger til vercel-adressen fortsatt virker.
+const DUPLICATE_HOST = "kjornesodden.vercel.app";
+const PRIMARY_ORIGIN = "https://www.kjornesodden.no";
+
+function duplicateHostRedirect(request: Request): Response | undefined {
+  const url = new URL(request.url);
+  const host = (request.headers.get("x-forwarded-host") ?? request.headers.get("host") ?? url.host)
+    .split(",")[0]
+    .trim()
+    .toLowerCase();
+  if (host !== DUPLICATE_HOST) return undefined;
+  if (url.pathname.startsWith("/api/")) return undefined;
+  if (request.method !== "GET" && request.method !== "HEAD") return undefined;
+  return new Response(null, {
+    status: 301,
+    headers: { location: `${PRIMARY_ORIGIN}${url.pathname}${url.search}` },
+  });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    const redirect = duplicateHostRedirect(request);
+    if (redirect) return redirect;
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);

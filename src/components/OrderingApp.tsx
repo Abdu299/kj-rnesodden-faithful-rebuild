@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
   ArrowLeft,
@@ -25,6 +25,10 @@ import {
 } from "../lib/catalog";
 import { dayNames, formatTime, openingStatus, zones } from "../../shared/order-rules.js";
 import { CartPanel, RequestForm, ReceiptPage } from "./Checkout";
+import { placeById } from "../../shared/places.js";
+import { Crumbs } from "./Crumbs";
+import { Credit } from "./Credit";
+import { SiteHeader } from "./SiteHeader";
 
 type Cart = { restaurantId: string | null; lines: CartLine[] };
 type Customer = { fullName: string; phone: string; note: string };
@@ -34,31 +38,15 @@ function Header({
   count,
   onCart,
   home = false,
+  places = false,
 }: {
   count: number;
   onCart: () => void;
   home?: boolean;
+  places?: boolean;
 }) {
   return (
-    <header className={`site-header${home ? " on-hero" : ""}`}>
-      <a className="site-brand" href="#">
-        KjørNesodden.no
-      </a>
-      <nav aria-label="Hovedmeny">
-        <a className={home ? "current" : ""} href="#">
-          Hjem
-        </a>
-        <Link to="/om-oss">Om oss</Link>
-        <button
-          type="button"
-          className={`cart-trigger${count ? " has-items" : ""}`}
-          onClick={onCart}
-          aria-label={`Åpne kurven (${count})`}
-        >
-          <ShoppingBag size={18} /> <span>Kurv ({count})</span>
-        </button>
-      </nav>
-    </header>
+    <SiteHeader count={count} onCart={onCart} onHero={home} current={home || places ? "places" : null} />
   );
 }
 function Status({ restaurant, now }: { restaurant: Restaurant; now: Date }) {
@@ -79,26 +67,43 @@ function Footer() {
       </div>
       <div>
         <p>Du betaler når varene er levert.</p>
+        <Link to="/" hash="restauranter">Restauranter</Link>
+        <span> · </span>
         <Link to="/om-oss">Om oss</Link>
         <span> · </span>
         <Link to="/personvern">Personvern</Link>
+        <Credit className="footer-credit" />
       </div>
     </footer>
   );
 }
-function Home({ now, onSelect }: { now: Date; onSelect: (id: string) => void }) {
+function Home({
+  now,
+  onSelect,
+  title,
+  intro,
+}: {
+  now: Date;
+  onSelect: (id: string) => void;
+  title?: ReactNode;
+  intro?: string;
+}) {
   return (
     <>
       <section className="home-intro">
         <div>
           <h1>
-            Bestill med
-            <br />
-            KjørNesodden!
+            {title ?? (
+              <>
+                Bestill med
+                <br />
+                KjørNesodden!
+              </>
+            )}
           </h1>
           <p>
-            Velg restaurant, legg maten i kurven, så henter vi den og kjører den hjem til deg. Du
-            betaler når varene er levert.
+            {intro ??
+              "Velg restaurant, legg maten i kurven, så henter vi den og kjører den hjem til deg. Du betaler når varene er levert."}
           </p>
         </div>
         <div className="delivery-prices">
@@ -112,16 +117,16 @@ function Home({ now, onSelect }: { now: Date; onSelect: (id: string) => void }) 
         </div>
       </section>
       <main className="restaurant-picker" id="restauranter">
-        <h2>Hvor vil du bestille fra?</h2>
+        <h2>Restauranter på Nesodden</h2>
         <p className="picker-intro">
           Finn din favoritt på Nesodden. Se menyen eller send oss et ønske.
         </p>
         <div className="restaurant-cards">
           {restaurants.map((r) => (
-            <button
+            <Link
               className={`restaurant-card restaurant-${r.id}`}
-              type="button"
-              onClick={() => onSelect(r.id)}
+              to="/restauranter/$slug"
+              params={{ slug: placeById(r.id)?.slug ?? r.id }}
               key={r.id}
             >
               <div className="restaurant-photo">
@@ -151,7 +156,7 @@ function Home({ now, onSelect }: { now: Date; onSelect: (id: string) => void }) 
                   <ArrowRight size={16} />
                 </span>
               </div>
-            </button>
+            </Link>
           ))}
           <button
             type="button"
@@ -187,9 +192,11 @@ function Menu({
   restaurant,
   now,
   onAdd,
+  heading,
 }: {
   restaurant: Restaurant;
   now: Date;
+  heading?: string;
   onAdd: (item: MenuItem, variantId: string) => void;
 }) {
   const [query, setQuery] = useState("");
@@ -216,18 +223,25 @@ function Menu({
       ),
     }))
     .filter((c) => c.items.length);
+  // Forsidebilde: eget banner, ellers kortbildet. Tegninger (svg) brukes ikke som forsidebilde.
+  const cover = restaurant.banner || (restaurant.image && !restaurant.image.endsWith(".svg") ? restaurant.image : "");
   return (
     <>
-      <section className="menu-intro">
+      <section className={`menu-intro${cover ? " has-cover" : ""}`} data-place={restaurant.id}>
+        {cover && <div className="menu-cover" style={{ backgroundImage: `url(${cover})` }} aria-hidden="true" />}
         <div className="menu-intro-inner">
           {restaurant.logo && (
             <img className="menu-logo" src={restaurant.logo} alt={`${restaurant.name} logo`} />
           )}
           <div>
-            <a href="#" className="back-link">
-              <ArrowLeft size={16} /> Alle restauranter
-            </a>
-            <h1>{restaurant.name}</h1>
+            {heading ? (
+              <Crumbs name={restaurant.name} />
+            ) : (
+              <Link to="/" className="back-link">
+                <ArrowLeft size={16} /> Alle restauranter
+              </Link>
+            )}
+            <h1>{heading ?? restaurant.name}</h1>
             <p>
               {restaurant.cuisine} · {restaurant.address}
             </p>
@@ -244,7 +258,7 @@ function Menu({
                     <span>{dayNames[day]}</span>
                     <b>
                       {restaurant.hours![day]
-                        ? `${formatTime(restaurant.hours![day]![0])}–${formatTime(restaurant.hours![day]![1])}`
+                        ? `${formatTime(restaurant.hours![day]![0])}-${formatTime(restaurant.hours![day]![1])}`
                         : "Stengt"}
                     </b>
                   </p>
@@ -408,8 +422,23 @@ function Menu({
   );
 }
 
-export function OrderingApp() {
-  const [view, setView] = useState("home");
+export function OrderingApp({
+  initialView = "home",
+  heading,
+  extra,
+  homeTitle,
+  homeIntro,
+  active = "home",
+}: {
+  initialView?: string;
+  heading?: string;
+  extra?: ReactNode;
+  homeTitle?: ReactNode;
+  homeIntro?: string;
+  active?: "home" | "places";
+} = {}) {
+  const routerNavigate = useNavigate();
+  const [view, setView] = useState(initialView);
   const [now, setNow] = useState(() => new Date());
   const [cart, setCart] = useState<Cart>(emptyCart);
   const [restored, setRestored] = useState(false);
@@ -418,6 +447,8 @@ export function OrderingApp() {
   const [customer, setCustomer] = useState<Customer>({ fullName: "", phone: "", note: "" });
   const [cartOpen, setCartOpen] = useState(false);
   const [pendingRestaurant, setPendingRestaurant] = useState<string | null>(null);
+  // Retten kunden prøvde å legge i kurven da byttet ble spurt om. Legges inn etter «Tøm og bytt».
+  const [pendingLine, setPendingLine] = useState<CartLine | null>(null);
   const [optionSelection, setOptionSelection] = useState<{
     restaurantId: string;
     item: MenuItem;
@@ -431,8 +462,16 @@ export function OrderingApp() {
   const submissionRef = useRef<{ content: string; id: string } | null>(null);
   useEffect(() => {
     function readHash() {
+      // Restaurantsidene har egen adresse. # brukes bare på forsiden.
+      if (initialView !== "home") return;
       const hash = window.location.hash.slice(1);
-      setView(hash === "annet" || restaurantById(hash) ? hash : "home");
+      // Gamle lenker som /#tonys sendes videre til restaurantens egen side.
+      const legacy = restaurantById(hash) ? placeById(hash) : undefined;
+      if (legacy) {
+        window.location.replace(`/restauranter/${legacy.slug}`);
+        return;
+      }
+      setView(hash === "annet" ? hash : "home");
       setSubmitError("");
       setReceipt(null);
     }
@@ -487,9 +526,17 @@ export function OrderingApp() {
     setOptionSelection(null);
     setSubmitError("");
     setReceipt(null);
-    const next = id === "home" ? "" : id;
-    if (window.location.hash.slice(1) === next) setView(id);
-    else window.location.hash = next;
+    const place = placeById(id);
+    if (id === view) setView(id);
+    else if (place)
+      void routerNavigate({ to: "/restauranter/$slug", params: { slug: place.slug } });
+    else if (initialView !== "home")
+      void routerNavigate({ to: "/", hash: id === "home" ? undefined : id });
+    else {
+      const next = id === "home" ? "" : id;
+      if (window.location.hash.slice(1) === next) setView(id);
+      else window.location.hash = next;
+    }
     window.scrollTo({ top: 0, behavior: "instant" });
   }
   function select(id: string) {
@@ -506,6 +553,7 @@ export function OrderingApp() {
       return;
     }
     if (cart.lines.length && cart.restaurantId !== restaurant.id) {
+      setPendingLine({ itemId: item.id, variantId, optionIds: [...optionIds].sort(), quantity: 1 });
       setPendingRestaurant(restaurant.id);
       return;
     }
@@ -617,16 +665,22 @@ export function OrderingApp() {
   return (
     <div className={`ordering-root${home ? " home-view" : ""}`}>
       <div className={home ? "home-surface" : "page-surface"}>
-        <Header home={home} count={count} onCart={() => setCartOpen(true)} />
+        <Header home={home} places={active === "places"} count={count} onCart={() => setCartOpen(true)} />
         {receipt ? (
           <ReceiptPage receipt={receipt} onReset={() => navigate("home")} />
         ) : home ? (
-          <Home now={now} onSelect={select} />
+          <Home now={now} onSelect={select} title={homeTitle} intro={homeIntro} />
         ) : restaurant?.orderingMode === "menu" ? (
           <>
             <div className="restaurant-layout">
               <div className="menu-column">
-                <Menu key={restaurant.id} restaurant={restaurant} now={now} onAdd={add} />
+                <Menu
+                  key={restaurant.id}
+                  restaurant={restaurant}
+                  now={now}
+                  onAdd={add}
+                  heading={heading}
+                />
               </div>
               <aside className="desktop-cart" aria-label="Din bestilling">
                 {panel}
@@ -634,8 +688,15 @@ export function OrderingApp() {
             </div>
           </>
         ) : (
-          <RequestForm key={view} restaurant={restaurant} now={now} {...checkoutProps} />
+          <RequestForm
+            key={view}
+            restaurant={restaurant}
+            now={now}
+            heading={heading}
+            {...checkoutProps}
+          />
         )}
+        {!receipt && extra}
       </div>
       <Footer />
       <div className="sr-only" role="status" aria-live="polite">
@@ -675,7 +736,10 @@ export function OrderingApp() {
       <Dialog.Root
         open={!!pendingRestaurant}
         onOpenChange={(open) => {
-          if (!open) setPendingRestaurant(null);
+          if (!open) {
+            setPendingRestaurant(null);
+            setPendingLine(null);
+          }
         }}
       >
         <Dialog.Portal>
@@ -693,7 +757,9 @@ export function OrderingApp() {
                 className="primary-button"
                 onClick={() => {
                   const id = pendingRestaurant!;
-                  setCart(emptyCart);
+                  setCart(pendingLine ? { restaurantId: id, lines: [pendingLine] } : emptyCart);
+                  if (pendingLine) setAnnouncement("Kurven er tømt, og retten du valgte er lagt i kurven.");
+                  setPendingLine(null);
                   setPendingRestaurant(null);
                   navigate(id);
                 }}

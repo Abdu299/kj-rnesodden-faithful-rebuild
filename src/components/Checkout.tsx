@@ -1,5 +1,6 @@
 import { useId, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
+import { Crumbs } from "./Crumbs";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -259,8 +260,9 @@ export function CartPanel({
 export function RequestForm({
   restaurant,
   now,
+  heading,
   ...props
-}: CheckoutProps & { restaurant: Restaurant | null; now: Date }) {
+}: CheckoutProps & { restaurant: Restaurant | null; now: Date; heading?: string }) {
   const [type, setType] = useState(restaurant ? "Restaurant" : "");
   const [place, setPlace] = useState(restaurant?.name ?? "");
   const [description, setDescription] = useState("");
@@ -291,10 +293,16 @@ export function RequestForm({
   }
   return (
     <main className="request-page">
-      <a className="back-link" href="#">
-        <ArrowLeft size={16} /> Alle restauranter
-      </a>
-      <h1>{restaurant ? `Noe fra ${restaurant.name}?` : "Noe annet du vil ha levert?"}</h1>
+      {heading && restaurant ? (
+        <Crumbs name={restaurant.name} />
+      ) : (
+        <Link className="back-link" to="/">
+          <ArrowLeft size={16} /> Alle restauranter
+        </Link>
+      )}
+      <h1>
+        {heading ?? (restaurant ? `Noe fra ${restaurant.name}?` : "Noe annet du vil ha levert?")}
+      </h1>
       <p className="request-lead">
         {restaurant
           ? "Send oss hva du ønsker. Vi sjekker meny, pris og tilgjengelighet og ringer deg før vi bestiller."
@@ -315,7 +323,7 @@ export function RequestForm({
                 return (
                   <p key={day}>
                     <span>{dayNames[day]}</span>
-                    <b>{hours ? `${formatTime(hours[0])}–${formatTime(hours[1])}` : "Stengt"}</b>
+                    <b>{hours ? `${formatTime(hours[0])}-${formatTime(hours[1])}` : "Stengt"}</b>
                   </p>
                 );
               })}

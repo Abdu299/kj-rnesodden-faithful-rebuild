@@ -3956,11 +3956,11 @@
     "note": "Direkte takeaway-priser fra Jonathan Sushi Nesoddtangens egen nettbutikk, september 2026. Kjøkkenet stenger 30 minutter før restauranten; vi avslutter bestilling kl. 19.15. Oppgi ønsket fiskemiks eller bao-typer i beskjedfeltet der menyen ber om det.",
     "sources": [
       {
-        "label": "Jonathan Sushi – Nesodden takeaway-meny",
+        "label": "Jonathan Sushi, takeaway-meny for Nesodden",
         "url": "https://jonathansushi.munu.shop/articles/r8134-nesodden-akershus--o7582-ta-med-nesodden"
       },
       {
-        "label": "Jonathan Sushi – restaurant og åpningstider",
+        "label": "Jonathan Sushi, restaurant og åpningstider",
         "url": "https://jonathansushi.munu.shop/places"
       }
     ],
@@ -7918,21 +7918,15 @@
     "address": "Tangenveien 129, Nesoddtangen",
     "phone": "939 26 141",
     "image": "/images/os-kort.webp",
-    "logo": "",
+    "logo": "/images/os-logo.webp",
     "banner": "",
     "hours": [
       [
         900,
         1260
       ],
-      [
-        900,
-        1260
-      ],
-      [
-        900,
-        1260
-      ],
+      null,
+      null,
       [
         930,
         1290
@@ -7950,16 +7944,1073 @@
         1290
       ]
     ],
-    "orderingMode": "request",
-    "note": "Menyen ligger ikke på nett ennå. Skriv hva du vil ha, så ringer vi deg.",
+    "orderingMode": "menu",
+    "note": "Ekte napolitansk pizza. Allergener står ved hver pizza. Spør restauranten hvis du er usikker.",
     "sources": [
       {
-        "label": "O’ Sole Mio",
+        "label": "O’ Sole Mio på Facebook",
         "url": "https://www.facebook.com/Osolemionesodden/"
       }
     ],
-    "verifiedAt": "2026-09-30",
-    "categories": []
+    "verifiedAt": "2026-10-10",
+    "categories": [
+      {
+        "id": "klassisk",
+        "name": "Klassisk pizza",
+        "description": "Pizze classiche, napolitansk med tomatsaus",
+        "items": [
+          {
+            "id": "klassisk-0",
+            "number": null,
+            "name": "Napoletana",
+            "description": "Uten mozzarella. Tomatsaus, hvitløk, oregano og basilikum.",
+            "allergens": [
+              "Hvetemel"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 130
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-1",
+            "number": null,
+            "name": "Margherita",
+            "description": "Tomatsaus, mozzarella og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 150
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-2",
+            "number": null,
+            "name": "Marinara",
+            "description": "Tomatsaus, mozzarella, ansjos, kapers, oregano og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk",
+              "Fisk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 190
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-3",
+            "number": null,
+            "name": "Al Cotto",
+            "description": "Tomatsaus, mozzarella, kokt italiensk skinke og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 190
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-4",
+            "number": null,
+            "name": "Diavola",
+            "description": "Tomatsaus, mozzarella, salame Napoli (sterk italiensk salami), chili og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 190
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-5",
+            "number": null,
+            "name": "Quattro Stagioni",
+            "description": "Fire årstider. Tomatsaus, mozzarella, kokt italiensk skinke, aubergine, oliven, artisjokker, sopp og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 220
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-6",
+            "number": null,
+            "name": "Al Tonno",
+            "description": "Tomatsaus, mozzarella, løk, tunfisk, cherrytomater og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk",
+              "Fisk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 180
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-7",
+            "number": null,
+            "name": "Calzone",
+            "description": "Innbakt pizza fylt med tomatsaus, mozzarella, kokt italiensk skinke og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 210
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-8",
+            "number": null,
+            "name": "Tricolore",
+            "description": "Tomatsaus, mozzarella, spinat, ricotta, cherrytomater og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 190
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-9",
+            "number": null,
+            "name": "Ortolana",
+            "description": "Tomatsaus, mozzarella, squash, løk, aubergine, oliven, artisjokker, paprika og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 190
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-10",
+            "number": null,
+            "name": "O' Sole Mio",
+            "description": "Husets pizza. Tomatsaus, mozzarella, parmaskinke, ferske mozzarellakuler, cherrytomater og basilikum, med skorpe fylt med fersk ricotta og pepper.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 240
+              }
+            ],
+            "image": "",
+            "tag": "Husets pizza",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-11",
+            "number": null,
+            "name": "Amalfi",
+            "description": "Tomatsaus, mozzarella, pancetta (italiensk bacon), gorgonzola, løk, cherrytomater, oliven, sopp og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 220
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-12",
+            "number": null,
+            "name": "Bellissima",
+            "description": "Tomatsaus, mozzarella, mascarpone, cherrytomater, parmesan og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 190
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-13",
+            "number": null,
+            "name": "Aurora",
+            "description": "Tomatsaus, mozzarella, mascarpone, sopp, cherrytomater, parmaskinke, parmesan og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 220
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-14",
+            "number": null,
+            "name": "Vesuvio",
+            "description": "Tomatsaus, mozzarella, salame Napoli (sterk italiensk salami), løk, oliven, kokt italiensk skinke, mascarpone, cherrytomater, paprika, chili, gorgonzola, parmesan og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 230
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "klassisk-15",
+            "number": null,
+            "name": "Parma",
+            "description": "Tomatsaus, mozzarella, parmaskinke, ruccola, parmesan og cherrytomater.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 220
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "hvit",
+        "name": "Hvit pizza",
+        "description": "Pizze bianche, uten tomatsaus",
+        "items": [
+          {
+            "id": "hvit-0",
+            "number": null,
+            "name": "Quattro Formaggi",
+            "description": "Fire oster. Mozzarella, provola (røkt mozzarella), mascarpone, gorgonzola, parmesan og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 200
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "hvit-1",
+            "number": null,
+            "name": "Salsiccia e Broccoli",
+            "description": "Mozzarella, provola (røkt mozzarella), salsiccia (hjemmelaget italiensk pølse med fennikel, pepper og rødvin), italiensk brokkoli og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 210
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "hvit-2",
+            "number": null,
+            "name": "Paesana",
+            "description": "Mozzarella, provola (røkt mozzarella), pancetta (italiensk bacon), sopp, cherrytomater og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 210
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "hvit-3",
+            "number": null,
+            "name": "Al Pesto",
+            "description": "Mozzarella, pesto, parmesan, cherrytomater og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk",
+              "Nøtter"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 190
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "hvit-4",
+            "number": null,
+            "name": "Rustica",
+            "description": "Mozzarella, provola (røkt mozzarella), salsiccia, squash, aubergine og sopp, toppet med husets olje med rosmarin, hvitløk og chili.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 220
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          },
+          {
+            "id": "hvit-5",
+            "number": null,
+            "name": "Vulcano",
+            "description": "Mozzarella, provola (røkt mozzarella), krem av soltørkede tomater, hvitløk og chili, sterk italiensk salami, aubergine, cherrytomater og basilikum.",
+            "allergens": [
+              "Hvetemel",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 220
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "ost",
+                "label": "Ekstra ost",
+                "price": 30
+              },
+              {
+                "id": "kjott",
+                "label": "Ekstra kjøtt",
+                "price": 40
+              },
+              {
+                "id": "tomatsaus",
+                "label": "Ekstra tomatsaus",
+                "price": 10
+              },
+              {
+                "id": "gronnsaker",
+                "label": "Ekstra grønnsaker",
+                "price": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "dessert",
+        "name": "Dessert",
+        "description": "",
+        "items": [
+          {
+            "id": "dessert-0",
+            "number": null,
+            "name": "Tiramisù",
+            "description": "Hjemmelaget.",
+            "allergens": [
+              "Hvetemel",
+              "Egg",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 90
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "drikke",
+        "name": "Drikke",
+        "description": "Italiensk mineralvann og brus",
+        "items": [
+          {
+            "id": "drikke-0",
+            "number": null,
+            "name": "Gazzosa",
+            "description": "Italiensk sitronbrus.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 40
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "drikke-1",
+            "number": null,
+            "name": "Chinotto",
+            "description": "Italiensk brus med pomerans.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 40
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "drikke-2",
+            "number": null,
+            "name": "Aranciata",
+            "description": "Italiensk appelsinbrus.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 40
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "mamagreek",
@@ -7967,7 +9018,7 @@
     "shortName": "Mama Greek",
     "cuisine": "Gresk foodtruck",
     "address": "Fagerstrand",
-    "phone": "",
+    "phone": "405 14 463",
     "image": "/images/greek-kitchen.svg",
     "logo": "",
     "banner": "",
@@ -8001,10 +9052,573 @@
         1200
       ]
     ],
-    "orderingMode": "request",
-    "note": "Menyen ligger ikke på nett ennå. Skriv hva du vil ha, så ordner vi det.",
-    "sources": [],
-    "verifiedAt": "2026-09-30",
-    "categories": []
+    "orderingMode": "menu",
+    "note": "Gresk mat fra foodtrucken på Fagerstrand. Allergener står ikke på menyen, så spør restauranten hvis du er usikker.",
+    "sources": [
+      {
+        "label": "Meny på Facebook (20. september 2026)",
+        "url": "https://www.facebook.com/profile.php?id=100055217215263"
+      }
+    ],
+    "verifiedAt": "2026-10-10",
+    "categories": [
+      {
+        "id": "gyros",
+        "name": "Gyros",
+        "description": "",
+        "items": [
+          {
+            "id": "gyros-0",
+            "number": null,
+            "name": "Gyros pita",
+            "description": "Gyros i pitabrød.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Svin",
+                "price": 171
+              },
+              {
+                "id": "1",
+                "label": "Kylling",
+                "price": 176
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "gyros-1",
+            "number": null,
+            "name": "Gyros tallerken",
+            "description": "Gyros servert som tallerkenrett.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Svin",
+                "price": 250
+              },
+              {
+                "id": "1",
+                "label": "Kylling",
+                "price": 265
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "gyros-2",
+            "number": null,
+            "name": "Gyros vegetar",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 180
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "hovedretter",
+        "name": "Hovedretter",
+        "description": "",
+        "items": [
+          {
+            "id": "hovedretter-0",
+            "number": null,
+            "name": "Mix meze for 2 personer",
+            "description": "Blandet meze til to.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 600
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "hovedretter-1",
+            "number": null,
+            "name": "Moussaka med salat",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 250
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "hovedretter-2",
+            "number": null,
+            "name": "Spareribs",
+            "description": "Med salat eller fries.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Med salat",
+                "price": 250
+              },
+              {
+                "id": "1",
+                "label": "Med fries",
+                "price": 250
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "hovedretter-3",
+            "number": null,
+            "name": "Kyllingburger med fries",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 185
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "hovedretter-4",
+            "number": null,
+            "name": "Chicken nuggets med potatoes",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 170
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "meze",
+        "name": "Meze og småretter",
+        "description": "",
+        "items": [
+          {
+            "id": "meze-0",
+            "number": null,
+            "name": "Saganaki",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 95
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-1",
+            "number": null,
+            "name": "Feta saganaki",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 120
+              },
+              {
+                "id": "1",
+                "label": "Med hot honey",
+                "price": 155
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-2",
+            "number": null,
+            "name": "Halloumi saganaki",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 120
+              },
+              {
+                "id": "1",
+                "label": "Med hot honey",
+                "price": 155
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-3",
+            "number": null,
+            "name": "Greske kjempebønner",
+            "description": "Gigantes.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Liten",
+                "price": 89
+              },
+              {
+                "id": "1",
+                "label": "Tallerken",
+                "price": 150
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-4",
+            "number": null,
+            "name": "Bakt aubergine",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Liten",
+                "price": 89
+              },
+              {
+                "id": "1",
+                "label": "Tallerken",
+                "price": 150
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-5",
+            "number": null,
+            "name": "Dolmades med tzatziki",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 145
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-6",
+            "number": null,
+            "name": "Cherry paprika fylt med fetaost",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 75
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-7",
+            "number": null,
+            "name": "Halloumi",
+            "description": "Porsjon.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 90
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-8",
+            "number": null,
+            "name": "Mix oliven",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 70
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-9",
+            "number": null,
+            "name": "Spinat- og fetaostpai",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 48
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-10",
+            "number": null,
+            "name": "Tzatziki",
+            "description": "100 g.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 45
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "salat",
+        "name": "Salat",
+        "description": "",
+        "items": [
+          {
+            "id": "salat-0",
+            "number": null,
+            "name": "Gresk salat",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 175
+              },
+              {
+                "id": "1",
+                "label": "Med halloumi",
+                "price": 185
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "tilbehor",
+        "name": "Tilbehør",
+        "description": "",
+        "items": [
+          {
+            "id": "tilbehor-0",
+            "number": null,
+            "name": "Fries",
+            "description": "Porsjon.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 50
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tilbehor-1",
+            "number": null,
+            "name": "Noisettes",
+            "description": "Porsjon.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 58
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tilbehor-2",
+            "number": null,
+            "name": "Pitabrød",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 10
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "drikke",
+        "name": "Drikke",
+        "description": "",
+        "items": [
+          {
+            "id": "drikke-0",
+            "number": null,
+            "name": "Cola",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 35
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "drikke-1",
+            "number": null,
+            "name": "Cola Zero",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 35
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      }
+    ]
   }
 ]

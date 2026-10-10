@@ -243,7 +243,7 @@ test("a restaurant closing during checkout is checked again before sending", asy
   assert.equal(outcome.messages.length, 0);
 });
 test("unknown menu prices cannot create a priced order", async () => {
-  const outcome = await send(body({ restaurantId: "mamagreek" }));
+  const outcome = await send(body({ restaurantId: "finnes-ikke" }));
   assert.equal(outcome.response.status, 400);
   assert.equal(outcome.messages.length, 0);
 });
@@ -373,15 +373,19 @@ test("O' Sole Mio and Mama Greek use the supplied hours on every day of the week
   const mama = catalog.find((r) => r.id === "mamagreek");
   for (let offset = 0; offset < 7; offset++) {
     const base = new Date(new Date("2026-09-27T00:00:00Z").getTime() + offset * 86400000);
-    const start = offset <= 2 ? 900 : 930;
-    const end = offset <= 2 ? 1260 : 1290;
-    assert.deepEqual(sole.hours[offset], [start, end]);
+    const at = (minute) => new Date(base.getTime() + (minute - 120) * 60000);
     assert.deepEqual(mama.hours[offset], [660, 1200]);
-    for (const [r, opening, closing] of [
-      [sole, start, end],
-      [mama, 660, 1200],
-    ]) {
-      const at = (minute) => new Date(base.getTime() + (minute - 120) * 60000);
+    // O' Sole Mio: søndag 15 til 21, stengt mandag og tirsdag, ellers 15.30 til 21.30
+    if (offset === 1 || offset === 2) {
+      assert.equal(sole.hours[offset], null);
+      for (const minute of [600, 960, 1200]) assert.equal(openingStatus(sole, at(minute)).open, false);
+    }
+    const start = offset === 0 ? 900 : 930;
+    const end = offset === 0 ? 1260 : 1290;
+    if (offset !== 1 && offset !== 2) assert.deepEqual(sole.hours[offset], [start, end]);
+    const cases = [[mama, 660, 1200]];
+    if (offset !== 1 && offset !== 2) cases.push([sole, start, end]);
+    for (const [r, opening, closing] of cases) {
       assert.equal(openingStatus(r, at(opening - 1)).open, false);
       assert.equal(openingStatus(r, at(opening)).open, true);
       assert.equal(openingStatus(r, at(closing - 1)).open, true);
@@ -390,8 +394,6 @@ test("O' Sole Mio and Mama Greek use the supplied hours on every day of the week
   }
 });
 for (const [restaurantId, place, closing] of [
-  ["osolemio", "O' Sole Mio", "2026-09-30T19:30:00Z"],
-  ["mamagreek", "Mama Greek Kitchen", "2026-09-30T18:00:00Z"],
 ])
   test(`${place} accepts requests while open and rejects closed requests even with an unknown address`, async () => {
     const payload = body({

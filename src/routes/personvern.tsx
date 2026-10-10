@@ -1,18 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TopBar } from "../components/TopBar";
+import { SiteHeader } from "../components/SiteHeader";
 
 export const Route = createFileRoute("/personvern")({
   head: () => ({
     meta: [
-      { title: "Personvernerklæring – KjørNesodden" },
+      { title: "Personvernerklæring | KjørNesodden" },
       {
         name: "description",
         content:
-          "Personvernerklæring for KjørNesodden. Les hvordan vi behandler personopplysninger i appen og leveringstjenesten.",
+          "Personvernerklæring for KjørNesodden. Les hvilke opplysninger vi samler inn når du bestiller levering på Nesodden, og hvordan vi behandler og sletter dem.",
       },
       {
         property: "og:title",
-        content: "Personvernerklæring – KjørNesodden",
+        content: "Personvernerklæring | KjørNesodden",
       },
       {
         property: "og:description",
@@ -22,13 +22,13 @@ export const Route = createFileRoute("/personvern")({
       { property: "og:type", content: "website" },
       {
         property: "og:url",
-        content: "https://kjornesodden.vercel.app/personvern",
+        content: "https://www.kjornesodden.no/personvern",
       },
     ],
     links: [
       {
         rel: "canonical",
-        href: "https://kjornesodden.vercel.app/personvern",
+        href: "https://www.kjornesodden.no/personvern",
       },
     ],
   }),
@@ -41,7 +41,7 @@ function Personvern() {
   return (
     <div className="kn-root about-page">
       <section className="hero about-hero">
-        <TopBar active="privacy" />
+        <SiteHeader onHero current={null} />
 
         <div className="about-intro">
           <span className="about-eyebrow">
