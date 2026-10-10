@@ -27,6 +27,7 @@ import { dayNames, formatTime, openingStatus, zones } from "../../shared/order-r
 import { CartPanel, RequestForm, ReceiptPage } from "./Checkout";
 import { placeById } from "../../shared/places.js";
 import { Crumbs } from "./Crumbs";
+import { Credit } from "./Credit";
 
 type Cart = { restaurantId: string | null; lines: CartLine[] };
 type Customer = { fullName: string; phone: string; note: string };
@@ -91,6 +92,7 @@ function Footer() {
         <Link to="/om-oss">Om oss</Link>
         <span> · </span>
         <Link to="/personvern">Personvern</Link>
+        <Credit className="footer-credit" />
       </div>
     </footer>
   );

@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -12,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SITE_IMAGE } from "../lib/site";
+import { Credit } from "../components/Credit";
 
 function NotFoundComponent() {
   return (
@@ -125,15 +127,14 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const hasFooter = pathname === "/" || pathname.startsWith("/restauranter/");
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
-      <p className="site-credit">
-        Nettside levert av{" "}
-        <a href="https://xn--onlinemarkedsfring-t4b.no/">Onlinemarkedsføring.no</a>
-      </p>
+      {!hasFooter && <Credit />}
     </QueryClientProvider>
   );
 }

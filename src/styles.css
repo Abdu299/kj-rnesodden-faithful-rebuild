@@ -1459,3 +1459,6 @@ a.restaurant-item:hover span:last-child { text-decoration: underline; }
 /* Kreditering nederst på alle sider */
 .site-credit { margin: 0; padding: 14px 16px 22px; text-align: center; font: 500 12px/1.5 Montserrat, system-ui, sans-serif; color: #5a6070; background: #f7f4ef; }
 .site-credit a { color: #c46a2a; font-weight: 700; text-underline-offset: 3px; }
+.footer-credit { margin: 10px 0 0; font-size: 13px; }
+.footer-credit a { color: #c46a2a; font-weight: 700; }
+.place-info-card > p > a { color: #c46a2a; font-weight: 700; text-underline-offset: 3px; }
