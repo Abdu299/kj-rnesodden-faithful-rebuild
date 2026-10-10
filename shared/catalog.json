@@ -9024,7 +9024,7 @@
     "shortName": "Mama Greek",
     "cuisine": "Gresk foodtruck",
     "address": "Fagerstrand",
-    "phone": "",
+    "phone": "405 14 463",
     "image": "/images/greek-kitchen.svg",
     "logo": "",
     "banner": "",
@@ -9058,10 +9058,573 @@
         1200
       ]
     ],
-    "orderingMode": "request",
-    "note": "Menyen ligger ikke på nett ennå. Skriv hva du vil ha, så ordner vi det.",
-    "sources": [],
-    "verifiedAt": "2026-09-30",
-    "categories": []
+    "orderingMode": "menu",
+    "note": "Gresk mat fra foodtrucken på Fagerstrand. Allergener står ikke på menyen, så spør restauranten hvis du er usikker.",
+    "sources": [
+      {
+        "label": "Meny på Facebook (20. september 2026)",
+        "url": "https://www.facebook.com/profile.php?id=100055217215263"
+      }
+    ],
+    "verifiedAt": "2026-10-10",
+    "categories": [
+      {
+        "id": "gyros",
+        "name": "Gyros",
+        "description": "",
+        "items": [
+          {
+            "id": "gyros-0",
+            "number": null,
+            "name": "Gyros pita",
+            "description": "Gyros i pitabrød.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Svin",
+                "price": 171
+              },
+              {
+                "id": "1",
+                "label": "Kylling",
+                "price": 176
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "gyros-1",
+            "number": null,
+            "name": "Gyros tallerken",
+            "description": "Gyros servert som tallerkenrett.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Svin",
+                "price": 250
+              },
+              {
+                "id": "1",
+                "label": "Kylling",
+                "price": 265
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "gyros-2",
+            "number": null,
+            "name": "Gyros vegetar",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 180
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "hovedretter",
+        "name": "Hovedretter",
+        "description": "",
+        "items": [
+          {
+            "id": "hovedretter-0",
+            "number": null,
+            "name": "Mix meze for 2 personer",
+            "description": "Blandet meze til to.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 600
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "hovedretter-1",
+            "number": null,
+            "name": "Moussaka med salat",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 250
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "hovedretter-2",
+            "number": null,
+            "name": "Spareribs",
+            "description": "Med salat eller fries.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Med salat",
+                "price": 250
+              },
+              {
+                "id": "1",
+                "label": "Med fries",
+                "price": 250
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "hovedretter-3",
+            "number": null,
+            "name": "Kyllingburger med fries",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 185
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "hovedretter-4",
+            "number": null,
+            "name": "Chicken nuggets med potatoes",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 170
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "meze",
+        "name": "Meze og småretter",
+        "description": "",
+        "items": [
+          {
+            "id": "meze-0",
+            "number": null,
+            "name": "Saganaki",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 95
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-1",
+            "number": null,
+            "name": "Feta saganaki",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 120
+              },
+              {
+                "id": "1",
+                "label": "Med hot honey",
+                "price": 155
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-2",
+            "number": null,
+            "name": "Halloumi saganaki",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 120
+              },
+              {
+                "id": "1",
+                "label": "Med hot honey",
+                "price": 155
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-3",
+            "number": null,
+            "name": "Greske kjempebønner",
+            "description": "Gigantes.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Liten",
+                "price": 89
+              },
+              {
+                "id": "1",
+                "label": "Tallerken",
+                "price": 150
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-4",
+            "number": null,
+            "name": "Bakt aubergine",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Liten",
+                "price": 89
+              },
+              {
+                "id": "1",
+                "label": "Tallerken",
+                "price": 150
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-5",
+            "number": null,
+            "name": "Dolmades med tzatziki",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 145
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-6",
+            "number": null,
+            "name": "Cherry paprika fylt med fetaost",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 75
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-7",
+            "number": null,
+            "name": "Halloumi",
+            "description": "Porsjon.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 90
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-8",
+            "number": null,
+            "name": "Mix oliven",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 70
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-9",
+            "number": null,
+            "name": "Spinat- og fetaostpai",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 48
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "meze-10",
+            "number": null,
+            "name": "Tzatziki",
+            "description": "100 g.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 45
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "salat",
+        "name": "Salat",
+        "description": "",
+        "items": [
+          {
+            "id": "salat-0",
+            "number": null,
+            "name": "Gresk salat",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 175
+              },
+              {
+                "id": "1",
+                "label": "Med halloumi",
+                "price": 185
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "tilbehor",
+        "name": "Tilbehør",
+        "description": "",
+        "items": [
+          {
+            "id": "tilbehor-0",
+            "number": null,
+            "name": "Fries",
+            "description": "Porsjon.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 50
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tilbehor-1",
+            "number": null,
+            "name": "Noisettes",
+            "description": "Porsjon.",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 58
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tilbehor-2",
+            "number": null,
+            "name": "Pitabrød",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 10
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "drikke",
+        "name": "Drikke",
+        "description": "",
+        "items": [
+          {
+            "id": "drikke-0",
+            "number": null,
+            "name": "Cola",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 35
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "drikke-1",
+            "number": null,
+            "name": "Cola Zero",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 35
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      }
+    ]
   }
 ]

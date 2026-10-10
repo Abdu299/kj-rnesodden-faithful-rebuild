@@ -114,12 +114,20 @@ export const places = [
     slug: "mama-greek-kitchen",
     seoName: "Mama Greek Kitchen Fagerstrand",
     intro:
-      "Mama Greek Kitchen er en gresk foodtruck på Fagerstrand. Menyen ligger ikke på nett ennå, så du skriver hva du vil ha, og vi ringer deg og bekrefter pris før vi bestiller. Så henter vi maten og kjører den hjem til deg. Levering på Fagerstrand koster 150 kr, og 75 til 100 kr lenger nord på Nesodden.",
+      "Mama Greek Kitchen er en gresk foodtruck på Fagerstrand med åpent hver dag fra 11 til 20. Menyen har gyros i pita og på tallerken, moussaka, spareribs, saganaki, dolmades, gresk salat og meze for to. Hele menyen står her med priser. Bestill, så henter vi maten og kjører den hjem til deg. Levering på Fagerstrand koster 150 kr, og 75 til 100 kr lenger nord på Nesodden.",
     website: "",
     faq: [
       {
-        q: "Hvordan bestiller jeg fra Mama Greek Kitchen?",
-        a: "Skriv hva du vil ha i skjemaet. Vi ringer deg, bekrefter pris og henter maten ved foodtrucken på Fagerstrand.",
+        q: "Hva koster gyros fra Mama Greek Kitchen?",
+        a: "Gyros i pita koster 171 kr med svin og 176 kr med kylling. Gyros på tallerken koster 250 kr med svin og 265 kr med kylling. Det finnes også vegetar-gyros til 180 kr.",
+      },
+      {
+        q: "Når har Mama Greek Kitchen åpent?",
+        a: "Foodtrucken på Fagerstrand har åpent hver dag fra 11 til 20.",
+      },
+      {
+        q: "Har Mama Greek Kitchen vegetarmat?",
+        a: "Ja. Blant annet vegetar-gyros, gresk salat, saganaki, bakt aubergine, greske kjempebønner og spinat- og fetaostpai.",
       },
     ],
   },

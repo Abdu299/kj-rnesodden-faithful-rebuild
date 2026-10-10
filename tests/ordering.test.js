@@ -243,7 +243,7 @@ test("a restaurant closing during checkout is checked again before sending", asy
   assert.equal(outcome.messages.length, 0);
 });
 test("unknown menu prices cannot create a priced order", async () => {
-  const outcome = await send(body({ restaurantId: "mamagreek" }));
+  const outcome = await send(body({ restaurantId: "finnes-ikke" }));
   assert.equal(outcome.response.status, 400);
   assert.equal(outcome.messages.length, 0);
 });
@@ -390,7 +390,6 @@ test("O' Sole Mio and Mama Greek use the supplied hours on every day of the week
   }
 });
 for (const [restaurantId, place, closing] of [
-  ["mamagreek", "Mama Greek Kitchen", "2026-09-30T18:00:00Z"],
 ])
   test(`${place} accepts requests while open and rejects closed requests even with an unknown address`, async () => {
     const payload = body({
