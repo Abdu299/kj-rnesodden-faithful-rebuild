@@ -130,6 +130,10 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <p className="site-credit">
+        SEO og markedsføring:{" "}
+        <a href="https://xn--onlinemarkedsfring-t4b.no/">Onlinemarkedsføring.no</a>
+      </p>
     </QueryClientProvider>
   );
 }
