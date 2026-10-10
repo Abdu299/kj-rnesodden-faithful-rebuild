@@ -1472,12 +1472,13 @@ a.restaurant-item:hover span:last-child { text-decoration: underline; }
 .menu-cover { height: 200px; border-radius: 14px; background-color: #17213b; background-position: center 45%; background-size: cover; background-repeat: no-repeat; margin-top: 4px; }
 .menu-intro .menu-logo { width: 112px; height: 86px; padding: 10px; border-radius: 14px; box-shadow: 0 4px 14px #17213b1f; }
 .has-cover .menu-intro-inner { align-items: flex-start; }
-.menu-intro.has-cover .menu-logo { width: 136px; height: 136px; margin: -68px 0 0 18px; padding: 14px; border-radius: 18px; box-shadow: 0 6px 18px #17213b33; position: relative; }
+.menu-intro.has-cover .menu-logo { width: auto; min-width: 136px; max-width: 280px; height: 136px; margin: -68px 0 0 18px; padding: 14px; border-radius: 18px; box-shadow: 0 6px 18px #17213b33; position: relative; }
 @media (max-width: 600px) {
   .menu-cover { height: 140px; border-radius: 12px; }
   .menu-intro .menu-logo { width: 80px; height: 64px; padding: 7px; }
-  .menu-intro.has-cover .menu-logo { width: 92px; height: 92px; margin: -46px 0 0 12px; padding: 9px; border-radius: 14px; }
+  .menu-intro.has-cover .menu-logo { width: auto; min-width: 92px; max-width: 180px; height: 92px; margin: -46px 0 0 12px; padding: 9px; border-radius: 14px; }
 }
 .has-cover .menu-intro-inner > div:not(.opening-hours) { padding-top: 12px; }
 
 [data-place="bistro"] .menu-cover { background-position: center 8%; }
+@media (max-width: 600px) { .has-cover .menu-intro-inner > div:not(.opening-hours) { flex-basis: 100%; padding-top: 4px; } }
