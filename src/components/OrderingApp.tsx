@@ -36,10 +36,12 @@ function Header({
   count,
   onCart,
   home = false,
+  places = false,
 }: {
   count: number;
   onCart: () => void;
   home?: boolean;
+  places?: boolean;
 }) {
   return (
     <header className={`site-header${home ? " on-hero" : ""}`}>
@@ -47,10 +49,12 @@ function Header({
         <img className="brand-logo" src="/images/kjornesodden-logo-mork.webp" alt="KjørNesodden" width="809" height="160" />
       </Link>
       <nav aria-label="Hovedmeny">
-        <Link className={home ? "current" : ""} to="/">
+        <Link className={home && !places ? "current" : ""} to="/">
           Hjem
         </Link>
-        <Link to="/restauranter">Restauranter</Link>
+        <Link className={places ? "current" : ""} to="/restauranter">
+          Restauranter
+        </Link>
         <Link to="/om-oss">Om oss</Link>
         <button
           type="button"
@@ -91,19 +95,33 @@ function Footer() {
     </footer>
   );
 }
-function Home({ now, onSelect }: { now: Date; onSelect: (id: string) => void }) {
+function Home({
+  now,
+  onSelect,
+  title,
+  intro,
+}: {
+  now: Date;
+  onSelect: (id: string) => void;
+  title?: ReactNode;
+  intro?: string;
+}) {
   return (
     <>
       <section className="home-intro">
         <div>
           <h1>
-            Bestill med
-            <br />
-            KjørNesodden!
+            {title ?? (
+              <>
+                Bestill med
+                <br />
+                KjørNesodden!
+              </>
+            )}
           </h1>
           <p>
-            Velg restaurant, legg maten i kurven, så henter vi den og kjører den hjem til deg. Du
-            betaler når varene er levert.
+            {intro ??
+              "Velg restaurant, legg maten i kurven, så henter vi den og kjører den hjem til deg. Du betaler når varene er levert."}
           </p>
         </div>
         <div className="delivery-prices">
@@ -423,7 +441,17 @@ export function OrderingApp({
   initialView = "home",
   heading,
   extra,
-}: { initialView?: string; heading?: string; extra?: ReactNode } = {}) {
+  homeTitle,
+  homeIntro,
+  active = "home",
+}: {
+  initialView?: string;
+  heading?: string;
+  extra?: ReactNode;
+  homeTitle?: ReactNode;
+  homeIntro?: string;
+  active?: "home" | "places";
+} = {}) {
   const routerNavigate = useNavigate();
   const [view, setView] = useState(initialView);
   const [now, setNow] = useState(() => new Date());
@@ -649,11 +677,11 @@ export function OrderingApp({
   return (
     <div className={`ordering-root${home ? " home-view" : ""}`}>
       <div className={home ? "home-surface" : "page-surface"}>
-        <Header home={home} count={count} onCart={() => setCartOpen(true)} />
+        <Header home={home} places={active === "places"} count={count} onCart={() => setCartOpen(true)} />
         {receipt ? (
           <ReceiptPage receipt={receipt} onReset={() => navigate("home")} />
         ) : home ? (
-          <Home now={now} onSelect={select} />
+          <Home now={now} onSelect={select} title={homeTitle} intro={homeIntro} />
         ) : restaurant?.orderingMode === "menu" ? (
           <>
             <div className="restaurant-layout">
