@@ -135,6 +135,11 @@ function PlaceInfo({ page }: { page: PlacePage }) {
             </li>
           ))}
         </ul>
+        <p>
+          <Link to="/om-oss" hash="leveringsomrader">
+            Se kart over leveringsområdene
+          </Link>
+        </p>
       </div>
       <div className="place-info-card">
         <h2>Spørsmål og svar</h2>

@@ -1,6 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { TopBar } from "../components/TopBar";
 import { SITE_IMAGE, SITE_URL } from "../lib/site";
+import { placePages } from "../lib/places";
 
 export const Route = createFileRoute("/om-oss")({
   head: () => ({
@@ -25,9 +26,6 @@ export const Route = createFileRoute("/om-oss")({
   component: OmOss,
 });
 
-const RESTAURANTS = [
-  "Skriv hvilken restaurant du vil ha mat fra, så gir vi beskjed om vi kan hente."
-];
 
 const GROCERIES = [
 
@@ -71,16 +69,25 @@ function OmOss() {
             </p>
 
             <div className="restaurant-grid">
-              {RESTAURANTS.map((restaurant) => (
-                <div className="restaurant-item" key={restaurant}>
+              {placePages.map(({ place, restaurant }) => (
+                <Link
+                  className="restaurant-item"
+                  key={place.slug}
+                  to="/restauranter/$slug"
+                  params={{ slug: place.slug }}
+                >
                   <span className="restaurant-dot" aria-hidden="true" />
-                  <span>{restaurant}</span>
-                </div>
+                  <span>{restaurant.name}</span>
+                </Link>
               ))}
             </div>
+            <p className="about-panel-copy">
+              Finner du ikke stedet du vil ha mat fra? Skriv det til oss, så gir vi beskjed om vi kan
+              hente. <Link to="/restauranter">Se alle restaurantene</Link>.
+            </p>
           </article>
 
-          <aside className="about-panel price-panel">
+          <aside className="about-panel price-panel" id="leveringsomrader">
             <span className="about-panel-label">Leveringspriser</span>
             <h2>Fast pris etter område</h2>
 
