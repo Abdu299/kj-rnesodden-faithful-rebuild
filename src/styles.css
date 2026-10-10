@@ -1486,3 +1486,156 @@ a.restaurant-item:hover span:last-child { text-decoration: underline; }
 .desktop-cart { max-height: calc(100vh - 112px); max-height: calc(100dvh - 112px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; border-radius: 13px; }
 /* Logoen i toppen er en lenke til forsiden: stor nok trykkflate på mobil */
 .site-brand { min-height: 44px; }
+
+/* ---------- Om oss: historie, steg og spørsmål ---------- */
+.about-story-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.about-press {
+  margin: 22px 0 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e3765;
+}
+.about-press a {
+  color: #c46a2a;
+}
+.about-steps {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 20px;
+}
+.about-steps li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.about-step-number {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ff9418;
+  color: #17213b;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+.about-steps h3 {
+  margin: 0 0 4px;
+  color: #1e3765;
+  font-size: 1.1rem;
+}
+.about-steps p {
+  margin: 0;
+  color: #687087;
+  line-height: 1.6;
+}
+.about-restaurants-title {
+  margin: 32px 0 0;
+  color: #1e3765;
+  font-size: 1.1rem;
+}
+.about-faq {
+  margin-top: 24px;
+}
+.about-faq details {
+  border-bottom: 1px solid rgba(24, 40, 75, 0.1);
+  padding: 14px 0;
+}
+.about-faq summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #1e3765;
+  min-height: 24px;
+}
+.about-faq p {
+  margin: 10px 0 0;
+  color: #687087;
+  line-height: 1.7;
+}
+.contact-mail {
+  margin-top: 18px;
+}
+.contact-mail a {
+  color: #c46a2a;
+}
+@media (max-width: 900px) {
+  .about-story-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.about-overview-grid {
+  align-items: start;
+}
+
+/* ---------- Omtaler fra Google ---------- */
+.reviews-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 0;
+  font-size: 0.95rem;
+  color: inherit;
+}
+.review-stars {
+  display: inline-flex;
+  gap: 2px;
+  color: #ff9418;
+}
+.reviews {
+  margin: 36px 0 28px;
+  padding: 32px;
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid rgba(24, 40, 75, 0.08);
+  box-shadow: 0 18px 50px rgba(20, 31, 58, 0.09);
+  color: #17213b;
+}
+.reviews-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 20px;
+}
+.reviews-head h2 {
+  margin: 0;
+  color: #1e3765;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+.review-card {
+  margin: 0;
+  padding: 20px;
+  border-radius: 14px;
+  background: #f5f6fa;
+}
+.review-card blockquote {
+  margin: 10px 0 12px;
+  line-height: 1.6;
+  color: #293149;
+}
+.review-card figcaption {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #687087;
+}
+@media (max-width: 900px) {
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+  .reviews {
+    padding: 22px;
+  }
+}
+.restaurant-picker > .reviews-badge {
+  margin: 4px 0 18px;
+}

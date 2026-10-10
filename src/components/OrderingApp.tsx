@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
+import { Reviews, ReviewsBadge } from "./Reviews";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
   ArrowLeft,
@@ -121,6 +122,7 @@ function Home({
         <p className="picker-intro">
           Finn din favoritt på Nesodden. Se menyen eller send oss et ønske.
         </p>
+        <ReviewsBadge />
         <div className="restaurant-cards">
           {restaurants.map((r) => (
             <Link
@@ -183,6 +185,7 @@ function Home({
             </div>
           </button>
         </div>
+        <Reviews />
       </main>
     </>
   );
