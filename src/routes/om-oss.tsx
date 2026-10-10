@@ -2,6 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "../components/SiteHeader";
 import { SITE_IMAGE, SITE_URL } from "../lib/site";
 import { placePages } from "../lib/places";
+import { Reviews } from "../components/Reviews";
 
 const TITLE = "Om KjørNesodden | Lokal matlevering på hele Nesodden";
 const DESCRIPTION =
@@ -138,6 +139,8 @@ function OmOss() {
             </ol>
           </article>
         </section>
+
+        <Reviews />
 
         <section className="about-section about-overview-grid">
           <article className="about-panel">
