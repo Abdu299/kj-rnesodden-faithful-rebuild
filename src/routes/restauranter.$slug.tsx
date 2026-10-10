@@ -48,7 +48,6 @@ export const Route = createFileRoute("/restauranter/$slug")({
           children: JSON.stringify(
             breadcrumbSchema([
               { name: "Forsiden", url: `${SITE_URL}/` },
-              { name: "Restauranter", url: `${SITE_URL}/restauranter` },
               { name: page.restaurant.name, url },
             ]),
           ),
@@ -158,7 +157,7 @@ function PlaceInfo({ page }: { page: PlacePage }) {
               {other.restaurant.name}
             </Link>
           ))}
-          <Link to="/restauranter">Se alle</Link>
+          <Link to="/" hash="restauranter">Se alle</Link>
         </div>
       </div>
     </section>

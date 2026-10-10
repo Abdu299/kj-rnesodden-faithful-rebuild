@@ -83,7 +83,7 @@ function OmOss() {
             </div>
             <p className="about-panel-copy">
               Finner du ikke stedet du vil ha mat fra? Skriv det til oss, så gir vi beskjed om vi kan
-              hente. <Link to="/restauranter">Se alle restaurantene</Link>.
+              hente. <Link to="/" hash="restauranter">Se alle restaurantene</Link>.
             </p>
           </article>
 

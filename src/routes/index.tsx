@@ -32,13 +32,13 @@ const LOCAL_BUSINESS_SCHEMA = {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "KjørNesodden – Rask levering på Nesodden" },
+      { title: "KjørNesodden | Mat levert hjem fra restauranter på Nesodden" },
       {
         name: "description",
         content:
           "KjørNesodden tilbyr rask og rimelig levering fra restauranter og lokale butikker på Nesodden. Bestill enkelt og spar tid.",
       },
-      { property: "og:title", content: "KjørNesodden – Rask levering på Nesodden" },
+      { property: "og:title", content: "KjørNesodden | Mat levert hjem fra restauranter på Nesodden" },
       {
         property: "og:description",
         content: "Rask og rimelig levering fra restauranter og butikker på Nesodden.",

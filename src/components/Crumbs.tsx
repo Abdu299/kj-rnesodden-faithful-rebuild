@@ -6,8 +6,6 @@ export function Crumbs({ name }: { name: string }) {
     <nav className="back-link app-crumbs" aria-label="Brødsmuler">
       <Link to="/">Forsiden</Link>
       <span aria-hidden="true"> › </span>
-      <Link to="/restauranter">Restauranter</Link>
-      <span aria-hidden="true"> › </span>
       <span aria-current="page">{name}</span>
     </nav>
   );

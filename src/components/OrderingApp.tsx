@@ -52,7 +52,7 @@ function Header({
         <Link className={home && !places ? "current" : ""} to="/">
           Hjem
         </Link>
-        <Link className={places ? "current" : ""} to="/restauranter">
+        <Link className={places ? "current" : ""} to="/" hash="restauranter">
           Restauranter
         </Link>
         <Link to="/om-oss">Om oss</Link>
@@ -86,7 +86,7 @@ function Footer() {
       </div>
       <div>
         <p>Du betaler når varene er levert.</p>
-        <Link to="/restauranter">Restauranter</Link>
+        <Link to="/" hash="restauranter">Restauranter</Link>
         <span> · </span>
         <Link to="/om-oss">Om oss</Link>
         <span> · </span>
@@ -135,7 +135,7 @@ function Home({
         </div>
       </section>
       <main className="restaurant-picker" id="restauranter">
-        <h2>Hvor vil du bestille fra?</h2>
+        <h2>Restauranter på Nesodden</h2>
         <p className="picker-intro">
           Finn din favoritt på Nesodden. Se menyen eller send oss et ønske.
         </p>

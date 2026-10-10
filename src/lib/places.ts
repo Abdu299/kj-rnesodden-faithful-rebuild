@@ -39,11 +39,10 @@ export function titleFor(page: PlacePage) {
 }
 
 export function descriptionFor({ restaurant }: PlacePage) {
-  const what =
-    restaurant.orderingMode === "menu"
-      ? `Se hele menyen til ${restaurant.name} med priser`
-      : `Bestill mat fra ${restaurant.name}`;
-  return `${what}. Vi henter og kjører hjem til deg på Nesodden fra ${formatKr(lowestFee())}. Du betaler ved levering.`;
+  const fee = formatKr(lowestFee());
+  return restaurant.orderingMode === "menu"
+    ? `Se hele menyen til ${restaurant.name} med priser og bestill på nett. Vi henter maten og kjører den hjem til deg på Nesodden fra ${fee}. Du betaler ved levering.`
+    : `Bestill mat fra ${restaurant.name} på nett. Vi sjekker pris med stedet, henter maten og kjører den hjem til deg på Nesodden fra ${fee}. Du betaler ved levering.`;
 }
 
 export const lowestFee = () => Math.min(...zones.map((zone) => zone.fee));

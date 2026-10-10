@@ -31,7 +31,7 @@ export function TopBar({ active }: Props) {
           Hjem
         </Link>
         <Link
-          to="/restauranter"
+          to="/" hash="restauranter"
           className={active === "places" ? "active" : ""}
           onClick={close}
         >
