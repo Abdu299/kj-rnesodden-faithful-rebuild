@@ -52,7 +52,7 @@ export function Reviews({ title = "Det kundene sier" }: { title?: string }) {
           <figure className="review-card" key={r.name}>
             <Stars />
             <blockquote>«{r.text}»</blockquote>
-            <figcaption>{r.name}, omtale på Google</figcaption>
+            <figcaption>{r.name} · omtale på Google</figcaption>
           </figure>
         ))}
       </div>
