@@ -1666,3 +1666,6 @@ a.restaurant-item:hover span:last-child { text-decoration: underline; }
 .clear-cart:disabled { opacity: 0.45; }
 .cart-head h2 { white-space: nowrap; }
 .clear-cart { padding: 6px 10px; }
+.cart-head { flex-wrap: wrap; row-gap: 8px; }
+/* Plass til lukk-krysset i kurvvinduet på mobil */
+.cart-dialog .cart-head { padding-right: 52px; }
