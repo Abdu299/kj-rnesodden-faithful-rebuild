@@ -6,15 +6,15 @@ export const GOOGLE_RATING = { score: "5,0", count: 5 };
 
 const REVIEWS = [
   {
-    name: "Arild A.",
+    name: "Arild A",
     text: "Dette var akkurat det Nesodden trengte! Bestillingen ble levert rett på døren. Rask service, god kommunikasjon og hyggelig levering.",
   },
   {
-    name: "Anne Hedvig V.",
+    name: "Anne Hedvig V",
     text: "Rask levering, hyggelig sjåfør og maten kom varm. Veldig praktisk med en lokal leveringstjeneste på Nesodden.",
   },
   {
-    name: "Sidra H.",
+    name: "Sidra H",
     text: "Fantastisk service, god mat og rask levering! Veldig fornøyd og anbefaler KjørNesodden på det varmeste.",
   },
 ];
@@ -52,7 +52,7 @@ export function Reviews({ title = "Det kundene sier" }: { title?: string }) {
           <figure className="review-card" key={r.name}>
             <Stars />
             <blockquote>«{r.text}»</blockquote>
-            <figcaption>{r.name} · omtale på Google</figcaption>
+            <figcaption>{r.name} - omtale på Google</figcaption>
           </figure>
         ))}
       </div>
