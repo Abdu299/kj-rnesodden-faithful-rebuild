@@ -38,7 +38,8 @@ export function SiteHeader({
   const cartClass = `cart-trigger${shown ? " has-items" : ""}`;
   const cartLabel = (
     <>
-      <ShoppingBag size={18} /> <span>Kurv ({shown})</span>
+      <ShoppingBag size={22} aria-hidden="true" />
+      {shown > 0 && <span className="cart-count">{shown}</span>}
     </>
   );
 

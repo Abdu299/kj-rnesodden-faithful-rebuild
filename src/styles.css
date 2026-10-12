@@ -1639,3 +1639,25 @@ a.restaurant-item:hover span:last-child { text-decoration: underline; }
 .restaurant-picker > .reviews-badge {
   margin: 4px 0 18px;
 }
+
+/* Kurv: rund oransje knapp med ikon og tall (2026-10-12) */
+.site-header .cart-trigger,
+.site-header nav > a.cart-trigger {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; min-height: 46px; padding: 0; border: 0; border-radius: 50%;
+  background: #ff4e00; color: #fff; box-shadow: 0 4px 14px rgba(255, 78, 0, 0.45);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.site-header .cart-trigger.has-items,
+.site-header nav > a.cart-trigger.has-items { background: #ff4e00; color: #fff; }
+.site-header .cart-trigger:hover,
+.site-header .cart-trigger:focus-visible { transform: translateY(-2px); box-shadow: 0 7px 20px rgba(255, 78, 0, 0.55); }
+.site-header .cart-trigger svg { width: 22px; height: 22px; }
+.cart-count {
+  position: absolute; top: -5px; right: -5px; min-width: 21px; height: 21px; padding: 0 5px;
+  border-radius: 11px; background: #17213b; color: #fff; font-size: 12px; font-weight: 800;
+  line-height: 21px; text-align: center; box-shadow: 0 0 0 2px #fff;
+}
+@media (max-width: 600px) {
+  .site-header .cart-trigger, .site-header nav > a.cart-trigger { width: 42px; height: 42px; min-height: 42px; padding: 0; }
+}
