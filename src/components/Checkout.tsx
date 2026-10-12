@@ -9,6 +9,7 @@ import {
   Minus,
   Plus,
   ShoppingBag,
+  Trash2,
 } from "lucide-react";
 import { AddressInput } from "./AddressInput";
 import {
@@ -125,12 +126,14 @@ export function CartPanel({
   restaurant,
   lines,
   onQuantity,
+  onClear,
   now,
   ...props
 }: CheckoutProps & {
   restaurant: Restaurant | null;
   lines: CartLine[];
   onQuantity: (index: number, delta: number) => void;
+  onClear: () => void;
   now: Date;
 }) {
   const [addressError, setAddressError] = useState("");
@@ -159,7 +162,17 @@ export function CartPanel({
   }
   return (
     <div className="cart-panel">
-      <h2>Din bestilling</h2>
+      <div className="cart-head">
+        <h2>Din bestilling</h2>
+        <button
+          type="button"
+          className="clear-cart"
+          onClick={onClear}
+          disabled={!lines.length || props.submitting}
+        >
+          <Trash2 size={15} aria-hidden="true" /> Tøm kurven
+        </button>
+      </div>
       {restaurant && <p className="cart-restaurant">Fra {restaurant.name}</p>}
       {!lines.length ? (
         <div className="empty-cart">

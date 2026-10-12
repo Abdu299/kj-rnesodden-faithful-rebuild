@@ -654,6 +654,10 @@ export function OrderingApp({
       lines={cart.lines}
       now={now}
       onQuantity={changeQuantity}
+      onClear={() => {
+        setCart(emptyCart);
+        setAnnouncement("Kurven er tømt.");
+      }}
     />
   );
   const selectedVariant = optionSelection?.item.variants.find(
