@@ -1640,17 +1640,17 @@ a.restaurant-item:hover span:last-child { text-decoration: underline; }
   margin: 4px 0 18px;
 }
 
-/* Kurv: bare ikon, som på Foodora, i samme oransje som logoen (#e25b02) (2026-10-12) */
+/* Kurv: bare ikon, som på Foodora, i samme oransje som «Se menyen» (#ff9418) (2026-10-12) */
 .site-header .cart-trigger,
 .site-header nav > a.cart-trigger,
 .site-header .cart-trigger.has-items,
 .site-header nav > a.cart-trigger.has-items {
   position: relative; display: inline-flex; align-items: center; justify-content: center;
   width: 44px; height: 44px; min-height: 44px; padding: 0; border: 0; border-radius: 8px;
-  background: transparent; color: #e25b02; box-shadow: none;
+  background: transparent; color: #ff9418; box-shadow: none;
 }
 .site-header .cart-trigger:hover,
-.site-header .cart-trigger:focus-visible { background: rgba(226, 91, 2, 0.16); color: #ff7a26; }
+.site-header .cart-trigger:focus-visible { background: rgba(255, 148, 24, 0.16); color: #ffb45c; }
 .site-header .cart-trigger svg { width: 26px; height: 26px; stroke-width: 2.25; }
 .cart-count {
   position: absolute; top: 2px; right: 0; min-width: 19px; height: 19px; padding: 0 5px;
@@ -1662,7 +1662,7 @@ a.restaurant-item:hover span:last-child { text-decoration: underline; }
 .cart-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .cart-head h2 { margin-bottom: 0; }
 .clear-cart { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border: 1px solid #d9d4cc; border-radius: 8px; background: #fff; color: #17213b; font-size: 13px; font-weight: 700; white-space: nowrap; }
-.clear-cart:hover:not(:disabled) { border-color: #e25b02; color: #e25b02; }
+.clear-cart:hover:not(:disabled) { border-color: #ff9418; background: #fff4e6; }
 .clear-cart:disabled { opacity: 0.45; }
 .cart-head h2 { white-space: nowrap; }
 .clear-cart { padding: 6px 10px; }
@@ -1682,6 +1682,6 @@ a.review-card:hover, a.review-card:focus-visible { border-color: #ff9418; transf
 .review-name { margin-top: auto; padding-top: 10px; font-size: 13px; font-weight: 700; color: #5a6070; }
 .reviews-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 .reviews-actions a { display: inline-flex; align-items: center; gap: 7px; padding: 9px 14px; border: 1.5px solid #d9d4cc; border-radius: 8px; background: #fff; color: #17213b; font-size: 14px; font-weight: 700; text-decoration: none; }
-.reviews-actions a:hover, .reviews-actions a:focus-visible { border-color: #e25b02; color: #e25b02; }
+.reviews-actions a:hover, .reviews-actions a:focus-visible { border-color: #ff9418; background: #fff4e6; }
 @media (max-width: 600px) { .reviews-actions a { flex: 1 1 100%; justify-content: center; } }
 
