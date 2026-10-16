@@ -17,7 +17,7 @@ const LOCAL_BUSINESS_SCHEMA = {
   priceRange: "75 til 150 kr per levering",
   areaServed: { "@type": "AdministrativeArea", name: "Nesodden kommune" },
   makesOffer: [
-    { area: "Tangen og Helvik", price: 75 },
+    { area: "Tangen og Hellvik", price: 75 },
     { area: "Bjørnemyr", price: 100 },
     { area: "Alværn, Fjordvangen og Fjellstrand", price: 100 },
     { area: "Fagerstrand", price: 150 },

@@ -9,7 +9,7 @@ const DESCRIPTION =
   "KjørNesodden henter mat fra restauranter og varer fra butikker og kjører det hjem til deg på Nesodden. Fast pris fra 75 kr, du betaler når du har fått varene.";
 
 const PRICES = [
-  { area: "Tangen / Helvik", price: "75 kr" },
+  { area: "Tangen / Hellvik", price: "75 kr" },
   { area: "Bjørnemyr", price: "100 kr" },
   { area: "Alværn / Fjordvangen / Fjellstrand", price: "100 kr" },
   { area: "Fagerstrand", price: "150 kr" },
@@ -33,7 +33,7 @@ const STEPS = [
 const FAQ = [
   {
     q: "Hva koster levering med KjørNesodden?",
-    a: "Prisen er fast og avhenger av hvor du bor: 75 kr til Tangen og Helvik, 100 kr til Bjørnemyr, Alværn, Fjordvangen og Fjellstrand, og 150 kr til Fagerstrand.",
+    a: "Prisen er fast og avhenger av hvor du bor: 75 kr til Tangen og Hellvik, 100 kr til Bjørnemyr, Alværn, Fjordvangen og Fjellstrand, og 150 kr til Fagerstrand.",
   },
   {
     q: "Når betaler jeg?",

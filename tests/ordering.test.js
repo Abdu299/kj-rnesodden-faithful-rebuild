@@ -85,7 +85,7 @@ async function send(payload, network = mockNetwork(), overrides = {}) {
   return { response, result: await response.json(), messages: network.messages };
 }
 
-test("delivery areas price Bjørnemyr separately from Tangen and Helvik", () => {
+test("delivery areas price Bjørnemyr separately from Tangen and Hellvik", () => {
   assert.equal(deliveryZone(59.8588, 10.6634).fee, 75);
   assert.equal(deliveryZone(59.8343, 10.6418).fee, 100);
   assert.equal(deliveryZone(59.8209, 10.6278).fee, 100);

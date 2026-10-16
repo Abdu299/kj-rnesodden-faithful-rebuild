@@ -45,7 +45,7 @@ Update `verifiedAt`, sources and menu entries together when prices change. Uploa
 
 The server looks up the selected address again at checkout. It derives the delivery zone from those coordinates, ignores caller-supplied coordinates and fees, rebuilds product prices from the catalog, and checks the quoted total.
 
-Delivery prices are 75 kr for Tangen/Helvik, 100 kr for Bjørnemyr and Alværn/Fjordvangen/Fjellstrand, and 150 kr for Fagerstrand. Verified addresses with postal code 1453 or postal place Bjørnemyr use the Bjørnemyr price. The remaining addresses use the nearest geographic anchors in `shared/order-rules.js`; these are business zones, not official municipal or postcode boundaries. Change the anchors if the business changes its delivery areas.
+Delivery prices are 75 kr for Tangen/Hellvik, 100 kr for Bjørnemyr and Alværn/Fjordvangen/Fjellstrand, and 150 kr for Fagerstrand. Verified addresses with postal code 1453 or postal place Bjørnemyr use the Bjørnemyr price. The remaining addresses use the nearest geographic anchors in `shared/order-rules.js`; these are business zones, not official municipal or postcode boundaries. Change the anchors if the business changes its delivery areas.
 
 ## Telegram submission
 
