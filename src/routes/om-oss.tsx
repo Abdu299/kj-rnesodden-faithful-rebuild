@@ -10,7 +10,6 @@ const DESCRIPTION =
 
 const PRICES = [
   { area: "Tangen / Hellvik", price: "75 kr" },
-  { area: "Bjørnemyr", price: "100 kr" },
   { area: "Alværn / Fjordvangen / Fjellstrand", price: "100 kr" },
   { area: "Fagerstrand", price: "150 kr" },
 ];
@@ -194,7 +193,13 @@ function OmOss() {
               ))}
             </div>
             <div className="about-map">
-              <img src="/nesodden-map.png" alt="Kart over leveringsområdene til KjørNesodden" />
+              <img
+                src="/images/nesodden-zones-clean.webp"
+                alt="Kart over leveringsområdene til KjørNesodden"
+                width="976"
+                height="1611"
+                loading="lazy"
+              />
             </div>
           </aside>
         </section>
