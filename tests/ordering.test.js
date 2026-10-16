@@ -85,11 +85,34 @@ async function send(payload, network = mockNetwork(), overrides = {}) {
   return { response, result: await response.json(), messages: network.messages };
 }
 
-test("prices match the three delivery areas in the reference", () => {
+test("delivery areas price Bjørnemyr separately from Tangen and Helvik", () => {
   assert.equal(deliveryZone(59.8588, 10.6634).fee, 75);
+  assert.equal(deliveryZone(59.8343, 10.6418).fee, 100);
   assert.equal(deliveryZone(59.8209, 10.6278).fee, 100);
   assert.equal(deliveryZone(59.7375, 10.594).fee, 150);
   assert.equal(deliveryZone(NaN, 10), null);
+});
+test("Bjørnemyr address suggestions and verified checkout both use 100 kr", async () => {
+  const record = {
+    ...addressRecord,
+    postnummer: "1453",
+    poststed: "BJØRNEMYR",
+    // The postal area wins even if the nearest anchor is across a zone border.
+    representasjonspunkt: { lat: 59.8588, lon: 10.6634 },
+  };
+  const network = mockNetwork({ records: [record] });
+  const suggestions = await searchAddresses("Bjørnemyrveien", network.fetchFn);
+  assert.equal(suggestions[0].zone.fee, 100);
+  const verified = await verifyAddress(suggestions[0], network.fetchFn);
+  assert.equal(verified.zone.fee, 100);
+  assert.equal(validateMenuOrder(body({ quotedTotal: 560 }), verified, openTime).total, 560);
+  const stalePrice = await send(body(), network);
+  assert.equal(stalePrice.response.status, 409);
+  assert.equal(network.messages.length, 0);
+  const placed = await send(body({ quotedTotal: 560 }), network);
+  assert.equal(placed.response.status, 200);
+  assert.equal(placed.result.receipt.deliveryFee, 100);
+  assert.match(network.messages[0].text, /Levering: 100 kr/);
 });
 test("opening hours use Oslo time, including winter, and close at the exact cutoff", () => {
   assert.deepEqual(osloTime(new Date("2026-09-30T13:45:00Z")), { day: 3, minute: 945 });
@@ -106,6 +129,33 @@ test("opening hours use Oslo time, including winter, and close at the exact cuto
     ).open,
     false,
   );
+});
+test("Flaskebekk Bistro is closed for its holiday and reopens on 7 November", async () => {
+  const bistro = catalog.find((r) => r.id === "bistro");
+  const during = new Date("2026-10-16T16:00:00Z");
+  const lastDay = new Date("2026-11-06T16:00:00Z");
+  const returned = new Date("2026-11-07T13:00:00Z");
+  assert.equal(openingStatus(bistro, during).open, false);
+  assert.match(openingStatus(bistro, lastDay).text, /Feriestengt.*7\. november/);
+  assert.equal(openingStatus(bistro, returned).open, true);
+  const item = bistro.categories[0].items[0];
+  const blockedMenu = await send(body({
+    restaurantId: "bistro",
+    items: [{ itemId: item.id, variantId: item.variants[0].id, optionIds: [], quantity: 1 }],
+    quotedTotal: undefined,
+  }), mockNetwork(), { now: () => during });
+  assert.equal(blockedMenu.response.status, 409);
+  assert.match(blockedMenu.result.error, /Feriestengt/);
+  assert.equal(blockedMenu.messages.length, 0);
+  const blockedRequest = await send(body({
+    kind: "request",
+    restaurantId: undefined,
+    type: "Restaurant",
+    place: "Flaskebekk Bistro",
+    description: "Mat fra Bistro",
+  }), mockNetwork(), { now: () => during });
+  assert.equal(blockedRequest.response.status, 409);
+  assert.equal(blockedRequest.messages.length, 0);
 });
 test("only numbered, geocoded addresses in Nesodden can be selected", () => {
   assert.equal(normalizeAddress({ ...addressRecord, kommunenummer: "0301" }), null);

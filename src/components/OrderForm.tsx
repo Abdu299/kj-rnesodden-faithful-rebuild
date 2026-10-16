@@ -7,7 +7,6 @@ const PLACES: Record<string, string[]> = {
     "Tony’s Sushi Og Thai Restaurant",
     "O' Sole Mio",
     "Pizzabakeren Nesodden",
-    "Nye Flaskebekk Bistro",
     "Jafs Nesodden",
     "Mama Greek Kitchen",
     "Annen restaurant – skriv hvilken i beskrivelsen",

@@ -1,6 +1,7 @@
 export const NESODDEN_MUNICIPALITY = "3212";
 export const zones = [
-  { id: "tangen", name: "Tangen / Bjørnemyr / Helvik", fee: 75 },
+  { id: "tangen", name: "Tangen / Helvik", fee: 75 },
+  { id: "bjornemyr", name: "Bjørnemyr", fee: 100 },
   { id: "alvaern", name: "Alværn / Fjordvangen / Fjellstrand", fee: 100 },
   { id: "fagerstrand", name: "Fagerstrand", fee: 150 },
 ];
@@ -13,7 +14,8 @@ const anchors = [
   [59.8614, 10.6718, "tangen"],
   [59.8507, 10.6777, "tangen"],
   [59.857, 10.6608, "tangen"],
-  [59.8343, 10.6418, "tangen"],
+  [59.8343, 10.6418, "bjornemyr"],
+  [59.8274, 10.6355, "bjornemyr"],
   [59.8445, 10.6912, "tangen"],
   [59.8416, 10.6738, "tangen"],
   [59.8209, 10.6278, "alvaern"],
@@ -32,8 +34,15 @@ const anchors = [
   [59.7116, 10.6244, "fagerstrand"],
 ];
 
-export function deliveryZone(latitude, longitude) {
+export function deliveryZone(latitude, longitude, postalCode, postalPlace) {
   if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return null;
+  // Use the address register's postal area when available, so all Bjørnemyr
+  // search results keep the same price even near a geographical zone boundary.
+  if (
+    String(postalCode) === "1453" ||
+    String(postalPlace).toLocaleUpperCase("nb-NO") === "BJØRNEMYR"
+  )
+    return zones.find((zone) => zone.id === "bjornemyr");
   let closest = null;
   let distance = Infinity;
   for (const [lat, lon, zone] of anchors) {
@@ -65,7 +74,25 @@ export function osloTime(date = new Date()) {
     minute: Number(get("hour")) * 60 + Number(get("minute")),
   };
 }
+function osloDate(date) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Oslo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
+}
 export function openingStatus(restaurant, date = new Date()) {
+  if (
+    restaurant.holiday &&
+    osloDate(date) >= restaurant.holiday.from &&
+    osloDate(date) < restaurant.holiday.until
+  ) {
+    const reopen = new Intl.DateTimeFormat("nb-NO", { day: "numeric", month: "long" }).format(
+      new Date(`${restaurant.holiday.until}T12:00:00Z`),
+    );
+    return { open: false, known: true, text: `Feriestengt · åpner ${reopen}` };
+  }
   if (!restaurant.hours)
     return { open: false, known: false, text: "Meny og åpningstider må bekreftes" };
   const { day, minute } = osloTime(date);

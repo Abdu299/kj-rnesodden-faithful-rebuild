@@ -11,7 +11,7 @@ export function normalizeAddress(raw) {
   if (String(raw.kommunenummer) !== NESODDEN_MUNICIPALITY || !raw.nummer) return null;
   const latitude = raw.representasjonspunkt?.lat;
   const longitude = raw.representasjonspunkt?.lon;
-  const zone = deliveryZone(latitude, longitude);
+  const zone = deliveryZone(latitude, longitude, raw.postnummer, raw.poststed);
   if (!zone) return null;
   const streetAddress = raw.adressetekstutenadressetilleggsnavn || raw.adressetekst;
   if (!streetAddress || !raw.postnummer || !raw.poststed || !raw.adressekode) return null;

@@ -255,7 +255,7 @@ export function CartPanel({
             <CustomerFields {...props} />
             {!status?.open && (
               <p className="field-error" role="status">
-                Restauranten er stengt. Du kan sende når den åpner igjen.
+                Restauranten er stengt. {status?.text}.
               </p>
             )}
             <SubmitFoot
@@ -407,7 +407,7 @@ export function RequestForm({
           <CustomerFields {...props} />
           {closed && (
             <p className="field-error" role="status">
-              Restauranten er stengt. Du kan sende når den åpner igjen.
+              Restauranten er stengt. {status?.text}.
             </p>
           )}
           <SubmitFoot

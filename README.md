@@ -20,7 +20,7 @@ See [Telegram and Vercel setup](TELEGRAM-VERCEL-SETUP.md) for server credentials
 
 ## Menus and ordering hours
 
-All prices, variants, images, allergens, sources and weekly hours are in `shared/catalog.json`. Hours are minutes after midnight, in Sunday-through-Saturday order. They are interpreted in **Europe/Oslo**, regardless of the visitor's device time zone. Opening time is inclusive; closing time is exclusive. The UI disables ordering outside these hours, and the server checks again immediately before sending.
+All prices, variants, images, allergens, sources and weekly hours are in `shared/catalog.json`. Hours are minutes after midnight, in Sunday-through-Saturday order. They are interpreted in **Europe/Oslo**, regardless of the visitor's device time zone. Opening time is inclusive; closing time is exclusive. A `holiday` date range closes a restaurant temporarily, with `until` as the first date it can reopen. The UI disables ordering outside these hours, and the server checks again immediately before sending.
 
 Sources checked on 30 September 2026:
 
@@ -45,7 +45,7 @@ Update `verifiedAt`, sources and menu entries together when prices change. Uploa
 
 The server looks up the selected address again at checkout. It derives the delivery zone from those coordinates, ignores caller-supplied coordinates and fees, rebuilds product prices from the catalog, and checks the quoted total.
 
-Delivery prices are 75 kr for Tangen/Bjørnemyr/Helvik, 100 kr for Alværn/Fjordvangen/Fjellstrand, and 150 kr for Fagerstrand. The nearest geographic anchors in `shared/order-rules.js` reproduce the example site's business zones; they are not official municipal or postcode boundaries. Change those anchors if the business changes its delivery areas.
+Delivery prices are 75 kr for Tangen/Helvik, 100 kr for Bjørnemyr and Alværn/Fjordvangen/Fjellstrand, and 150 kr for Fagerstrand. Verified addresses with postal code 1453 or postal place Bjørnemyr use the Bjørnemyr price. The remaining addresses use the nearest geographic anchors in `shared/order-rules.js`; these are business zones, not official municipal or postcode boundaries. Change the anchors if the business changes its delivery areas.
 
 ## Telegram submission
 

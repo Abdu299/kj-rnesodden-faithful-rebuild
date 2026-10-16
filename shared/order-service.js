@@ -80,8 +80,6 @@ export function validateMenuOrder(body, address, now = new Date()) {
 function validateRequest(body, address, now, legacy = false) {
   const restaurant = body.restaurantId ? catalog.find((r) => r.id === body.restaurantId) : null;
   if (body.restaurantId && !restaurant) throw new OrderError("Ukjent restaurant.");
-  if (restaurant?.orderingMode === "menu" && !legacy)
-    throw new OrderError("Bruk restaurantens meny for å bestille.");
   const type = textField(body.type, "Type", 80);
   if (
     !["Dagligvarer", "McDonald's / Burger King", "Restaurant", "Annet", "Restauranter"].includes(
@@ -105,7 +103,11 @@ function validateRequest(body, address, now, legacy = false) {
     knownPlaces.push(restaurant);
   if (knownPlaces.length) {
     const closed = knownPlaces.find((place) => place.hours && !openingStatus(place, now).open);
-    if (closed) throw new OrderError(`${closed.name} tar ikke imot bestillinger nå.`, 409);
+    if (closed)
+      throw new OrderError(
+        `${closed.name} tar ikke imot bestillinger nå. ${openingStatus(closed, now).text}.`,
+        409,
+      );
     if (!legacy && knownPlaces.some((place) => place.orderingMode === "menu"))
       throw new OrderError("Bruk restaurantens meny for å bestille.");
   }

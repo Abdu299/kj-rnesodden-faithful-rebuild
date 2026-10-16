@@ -5856,6 +5856,10 @@
     "image": "/images/bistro-cover.webp",
     "logo": "/images/bistro-logo.webp",
     "banner": "",
+    "holiday": {
+      "from": "2026-10-16",
+      "until": "2026-11-07"
+    },
     "hours": [
       [
         840,

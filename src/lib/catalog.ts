@@ -26,6 +26,7 @@ export type Restaurant = {
   logo: string;
   banner: string;
   hours: ([number, number] | null)[] | null;
+  holiday?: { from: string; until: string };
   orderingMode: "menu" | "request";
   note: string;
   sources: { label: string; url: string }[];

@@ -10,7 +10,7 @@ export const places = [
     slug: "signalen",
     seoName: "Signalen Nesodden",
     intro:
-      "Signalen Sjøbad ligger ved sjøen i Tangenveien 3 på Nesoddtangen og lager napolitansk pizza. Takeaway-menyen har sju pizzaer og drikke, og alle pizzaene kan lages glutenvennlige. Bestill her, så henter vi pizzaen og kjører den hjem til deg. Bor du på Tangen, Bjørnemyr eller Helvik, koster leveringen 75 kr.",
+      "Signalen Sjøbad ligger ved sjøen i Tangenveien 3 på Nesoddtangen og lager napolitansk pizza. Takeaway-menyen har sju pizzaer og drikke, og alle pizzaene kan lages glutenvennlige. Bestill her, så henter vi pizzaen og kjører den hjem til deg. Levering koster 75 kr til Tangen og Helvik, og 100 kr til Bjørnemyr.",
     website: "",
     faq: [
       {
@@ -92,7 +92,7 @@ export const places = [
     slug: "o-sole-mio",
     seoName: "O' Sole Mio Nesodden",
     intro:
-      "O' Sole Mio ligger i Tangenveien 129 på Nesoddtangen og lager ekte napolitansk pizza. Menyen har 16 klassiske pizzaer med tomatsaus, seks hvite pizzaer uten tomatsaus, hjemmelaget tiramisù og italiensk brus. Husets egen pizza, O' Sole Mio, har skorpe fylt med fersk ricotta. Hele menyen står her med priser. Bestill, så henter vi pizzaen og kjører den hjem til deg. Bor du på Tangen, Bjørnemyr eller Helvik, koster leveringen 75 kr.",
+      "O' Sole Mio ligger i Tangenveien 129 på Nesoddtangen og lager ekte napolitansk pizza. Menyen har 16 klassiske pizzaer med tomatsaus, seks hvite pizzaer uten tomatsaus, hjemmelaget tiramisù og italiensk brus. Husets egen pizza, O' Sole Mio, har skorpe fylt med fersk ricotta. Hele menyen står her med priser. Bestill, så henter vi pizzaen og kjører den hjem til deg. Levering koster 75 kr til Tangen og Helvik, og 100 kr til Bjørnemyr.",
     website: "",
     faq: [
       {

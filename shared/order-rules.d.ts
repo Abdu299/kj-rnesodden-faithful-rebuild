@@ -5,9 +5,14 @@ export function formatTime(minutes: number): string;
 export function deliveryZone(
   latitude: number,
   longitude: number,
+  postalCode?: string,
+  postalPlace?: string,
 ): { id: string; name: string; fee: number } | null;
 export function osloTime(date?: Date): { day: number; minute: number };
 export function openingStatus(
-  restaurant: { hours: ([number, number] | null)[] | null },
+  restaurant: {
+    hours: ([number, number] | null)[] | null;
+    holiday?: { from: string; until: string };
+  },
   date?: Date,
 ): { open: boolean; known: boolean; text: string };
