@@ -532,6 +532,16 @@ test("missing credentials, malformed bodies, invalid phones and foreign origins 
   );
   assert.equal(options.status, 204);
   assert.equal(options.headers.get("Access-Control-Allow-Origin"), "https://example.com");
+
+  const localOptions = await orderHandler(
+    new Request("https://example.com/api/send", {
+      method: "OPTIONS",
+      headers: { Origin: "http://localhost:8081" },
+    }),
+    { env: {} },
+  );
+  assert.equal(localOptions.status, 204);
+  assert.equal(localOptions.headers.get("Access-Control-Allow-Origin"), "http://localhost:8081");
   assert.equal(network.messages.length, 0);
 });
 test("all recognized restaurants in a legacy multi-place inquiry must be open", async () => {
