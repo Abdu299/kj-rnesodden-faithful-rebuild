@@ -184,7 +184,8 @@ function corsHeaders(request, env) {
       .map((value) => value.trim())
       .filter(Boolean),
   ];
-  if (!allowed.includes(origin))
+  const localDevelopmentOrigin = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+  if (!allowed.includes(origin) && !localDevelopmentOrigin)
     throw new OrderError("Denne nettsiden har ikke tilgang til bestillingsendepunktet.", 403);
   return {
     "Access-Control-Allow-Origin": origin,
