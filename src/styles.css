@@ -1701,4 +1701,6 @@ a.review-card:hover, a.review-card:focus-visible { border-color: #ff9418; transf
 @media (hover: hover) and (pointer: fine) { .reviews-track { cursor: grab; } }
 .reviews-track.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
 .reviews-track.is-dragging a.review-card { pointer-events: none; }
-.reviews-track a.review-card { -webkit-user-drag: none; }
+.reviews-track a.review-card { -webkit-user-drag: none; }/* Responsiv sjekk 2026-10-23: «Om oss» på én linje i toppen, og omtalemerket bryter pent på smal skjerm */
+.site-header nav > a { white-space: nowrap; }
+@media (max-width: 420px) { .reviews-head-side .reviews-badge { flex-wrap: wrap; row-gap: 2px; } }
