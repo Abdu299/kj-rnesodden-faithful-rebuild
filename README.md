@@ -22,11 +22,11 @@ See [Telegram and Vercel setup](TELEGRAM-VERCEL-SETUP.md) for server credentials
 
 All prices, variants, images, allergens, sources and weekly hours are in `shared/catalog.json`. Hours are minutes after midnight, in Sunday-through-Saturday order. They are interpreted in **Europe/Oslo**, regardless of the visitor's device time zone. Opening time is inclusive; closing time is exclusive. A `holiday` date range closes a restaurant temporarily, with `until` as the first date it can reopen. The UI disables ordering outside these hours, and the server checks again immediately before sending.
 
-Sources checked on 30 September 2026:
+Sources checked on 30 September 2026 unless a later update is listed:
 
 | Restaurant            | Menu source                                                                                    | Ordering hours                                                   |
 | --------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| Signalen Sjøbad       | Supplied KjørNesodden PDF for pizza, prices and takeaway hours; OrderX for drinks and toppings | Special takeaway hours from the supplied PDF                     |
+| Signalen Sjøbad       | Restaurant email, 23 October 2026: pizza, pasta and meat dishes, prices and allergens; existing OrderX drinks and toppings | Monday closed per email; remaining takeaway hours unchanged |
 | Tonys Sushi og Thai   | Restaurant's official menu                                                                     | Official daily hours                                             |
 | JAFS Nesodden         | Official July 2026 takeaway PDF                                                                | Official restaurant hours                                        |
 | Pizzabakeren Nesodden | Official menu PDF                                                                              | Reference site's takeaway cutoff, before the restaurant closes   |

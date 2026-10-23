@@ -3,7 +3,7 @@
     "id": "signalen",
     "name": "Signalen Sjøbad",
     "shortName": "Signalen",
-    "cuisine": "Napolitansk pizza ved sjøen",
+    "cuisine": "Napolitansk pizza, pasta og kjøttretter",
     "address": "Tangenveien 3, Nesoddtangen",
     "phone": "400 29 533",
     "image": "/images/si-kort.webp",
@@ -14,10 +14,7 @@
         765,
         1185
       ],
-      [
-        945,
-        1185
-      ],
+      null,
       [
         945,
         1185
@@ -40,18 +37,18 @@
       ]
     ],
     "orderingMode": "menu",
-    "note": "Takeaway-meny og bestillingstider med KjørNesodden. Alle pizzaene kan serveres glutenvennlig (+40 kr). Glutenvennlig er ikke det samme som fri for spor av gluten.",
+    "note": "Takeaway-meny og bestillingstider med KjørNesodden. Stengt på mandager. Alle pizzaene kan serveres glutenvennlig (+40 kr). Glutenvennlig er ikke det samme som fri for spor av gluten.",
     "sources": [
       {
-        "label": "Takeaway-meny og drikke",
-        "url": "https://orderx.eu/BL9HYVBP"
+        "label": "Signalen Sjøbad · meny og mandagsstengt bekreftet per e-post 23.10.2026",
+        "url": "https://www.signal1.no/"
       },
       {
-        "label": "Takeaway med KjørNesodden (PDF)",
-        "url": "/menus/signalen.pdf"
+        "label": "Drikke og øvrige pizzatilvalg (OrderX)",
+        "url": "https://orderx.eu/BL9HYVBP"
       }
     ],
-    "verifiedAt": "2026-09-30",
+    "verifiedAt": "2026-10-23",
     "categories": [
       {
         "id": "pizza",
@@ -64,7 +61,7 @@
             "name": "Margherita",
             "description": "Tomatsaus, mozzarella og basilikum.",
             "allergens": [
-              "Hvetemel",
+              "Hvete/gluten",
               "Melk"
             ],
             "variants": [
@@ -149,10 +146,10 @@
           {
             "id": "pizza-1",
             "number": null,
-            "name": "Quattro formaggi",
-            "description": "Gorgonzola, pecorino, mozzarella og parmigiano.",
+            "name": "Quattro Formaggi",
+            "description": "Gorgonzola, pecorino, mozzarella og parmesan.",
             "allergens": [
-              "Hvetemel",
+              "Hvete/gluten",
               "Melk"
             ],
             "variants": [
@@ -240,7 +237,7 @@
             "name": "N’duja e Friarelli",
             "description": "Tomatsaus, n’duja-pølse, friarelli og mozzarella.",
             "allergens": [
-              "Hvetemel",
+              "Hvete/gluten",
               "Melk"
             ],
             "variants": [
@@ -325,10 +322,10 @@
           {
             "id": "pizza-3",
             "number": null,
-            "name": "Parmigiana",
+            "name": "Pizza Parmigiana",
             "description": "Tomatsaus, mozzarella, aubergine, parmesan og pesto med pinjekjerner.",
             "allergens": [
-              "Hvetemel",
+              "Hvete/gluten",
               "Melk",
               "Egg"
             ],
@@ -417,7 +414,7 @@
             "name": "Vesuvio Piccante",
             "description": "Tomatsaus, mozzarella, salami piccante, grønn marinert pepper og fersk chili.",
             "allergens": [
-              "Hvetemel",
+              "Hvete/gluten",
               "Melk"
             ],
             "variants": [
@@ -505,7 +502,7 @@
             "name": "Prosciutto di Parma",
             "description": "Tomatsaus, mozzarella, ruccola, parmaskinke, parmesan og pinjekjerner.",
             "allergens": [
-              "Hvetemel",
+              "Hvete/gluten",
               "Melk",
               "Egg",
               "Nøtter"
@@ -590,14 +587,13 @@
             ]
           },
           {
-            "id": "pizza-6",
+            "id": "pizza-zucca-e-guanciale",
             "number": null,
-            "name": "Pizza Carbonara",
-            "description": "Carbonarasaus, mozzarella, parmigiano, persille og guanciale.",
+            "name": "Pizza Zucca e Guanciale",
+            "description": "Mozzarella, gresskar, guanciale, pecorino og fersk chili.",
             "allergens": [
-              "Hvetemel",
-              "Melk",
-              "Egg"
+              "Hvete/gluten",
+              "Melk"
             ],
             "variants": [
               {
@@ -677,6 +673,166 @@
                 "price": 0
               }
             ]
+          },
+          {
+            "id": "pizza-ai-funghi",
+            "number": null,
+            "name": "Pizza ai Funghi",
+            "description": "Skogsopp, mozzarella og persille.",
+            "allergens": [
+              "Hvete/gluten",
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 240
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": [
+              {
+                "id": "glutenfriendly",
+                "label": "Glutenvennlig bunn",
+                "price": 40
+              },
+              {
+                "id": "mozzarella",
+                "label": "Ekstra mozzarella",
+                "price": 25
+              },
+              {
+                "id": "cotto",
+                "label": "Ekstra kokt skinke",
+                "price": 25
+              },
+              {
+                "id": "salame",
+                "label": "Ekstra salami",
+                "price": 25
+              },
+              {
+                "id": "burrata",
+                "label": "Burrata",
+                "price": 72
+              },
+              {
+                "id": "parma",
+                "label": "Ekstra parmaskinke",
+                "price": 25
+              },
+              {
+                "id": "parmesan",
+                "label": "Ekstra parmesan",
+                "price": 25
+              },
+              {
+                "id": "ruccola",
+                "label": "Ekstra ruccola",
+                "price": 15
+              },
+              {
+                "id": "aubergin",
+                "label": "Ekstra aubergine",
+                "price": 15
+              },
+              {
+                "id": "nduja",
+                "label": "Ekstra n’duja",
+                "price": 30
+              },
+              {
+                "id": "pine",
+                "label": "Ekstra pinjekjerner",
+                "price": 15
+              },
+              {
+                "id": "gorgonzola",
+                "label": "Gorgonzola",
+                "price": 25
+              },
+              {
+                "id": "cut",
+                "label": "Skjær pizzaen",
+                "price": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "pasta-og-kjottretter",
+        "name": "Pasta og kjøttretter",
+        "description": "",
+        "items": [
+          {
+            "id": "pappardelle-al-ragu",
+            "number": null,
+            "name": "Pappardelle al Ragù",
+            "description": "Pappardelle med langtidskokt ragù av oksehale.",
+            "allergens": [
+              "Hvete/gluten",
+              "Egg",
+              "Selleri"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 275
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "peposo-con-polenta",
+            "number": null,
+            "name": "Peposo con Polenta",
+            "description": "Toskansk langtidskokt oksekjøtt i rødvin og sort pepper, servert med parmesanpolenta.",
+            "allergens": [
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 325
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tagliata-di-manzo",
+            "number": null,
+            "name": "Tagliata di Manzo",
+            "description": "Skiver av grillet ytrefilet med ruccola, parmesan og rosmarinpoteter.",
+            "allergens": [
+              "Melk"
+            ],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 395
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
           }
         ]
       },
