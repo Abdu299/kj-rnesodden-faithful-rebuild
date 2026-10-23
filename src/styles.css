@@ -1685,3 +1685,22 @@ a.review-card:hover, a.review-card:focus-visible { border-color: #ff9418; transf
 .reviews-actions a:hover, .reviews-actions a:focus-visible { border-color: #ff9418; background: #fff4e6; }
 @media (max-width: 600px) { .reviews-actions a { flex: 1 1 100%; justify-content: center; } }
 
+
+/* Omtaler som karusell: bla sidelengs med piler, sveip eller styreflate (2026-10-22) */
+.reviews-head-side { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; }
+.reviews-head-side .reviews-badge { margin: 0; }
+.reviews-nav { display: flex; gap: 8px; }
+.reviews-nav button { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid #d9d4cc; background: #fff; color: #17213b; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
+.reviews-nav button:hover:not(:disabled), .reviews-nav button:focus-visible { border-color: #ff9418; background: #fff4e6; }
+.reviews-nav button:disabled { opacity: 0.35; cursor: default; }
+.reviews-track { list-style: none; margin: 18px 0 0; padding: 4px 2px 14px; display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 36px) / 3); gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: #d9d4cc transparent; }
+.reviews-track > li { scroll-snap-align: start; display: flex; min-width: 0; }
+.reviews-track > li > .review-card { flex: 1; }
+@media (max-width: 900px) { .reviews-track { grid-auto-columns: calc((100% - 18px) / 2); } }
+@media (max-width: 600px) { .reviews-track { grid-auto-columns: 86%; } .reviews-nav { display: none; } }/* Dra med musa (2026-10-23) */
+@media (hover: hover) and (pointer: fine) { .reviews-track { cursor: grab; } }
+.reviews-track.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.reviews-track.is-dragging a.review-card { pointer-events: none; }
+.reviews-track a.review-card { -webkit-user-drag: none; }/* Responsiv sjekk 2026-10-23: «Om oss» på én linje i toppen, og omtalemerket bryter pent på smal skjerm */
+.site-header nav > a { white-space: nowrap; }
+@media (max-width: 420px) { .reviews-head-side .reviews-badge { flex-wrap: wrap; row-gap: 2px; } }
