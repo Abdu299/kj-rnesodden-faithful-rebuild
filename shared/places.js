@@ -10,8 +10,8 @@ export const places = [
     slug: "signalen",
     seoName: "Signalen Nesodden",
     intro:
-      "Signalen Sjøbad ligger ved sjøen i Tangenveien 3 på Nesoddtangen og lager napolitansk pizza. Takeaway-menyen har sju pizzaer og drikke, og alle pizzaene kan lages glutenvennlige. Bestill her, så henter vi pizzaen og kjører den hjem til deg. Levering koster 75 kr til Tangen og Hellvik, og 100 kr til Bjørnemyr.",
-    website: "",
+      "Signalen Sjøbad ligger ved sjøen i Tangenveien 3 på Nesoddtangen og lager napolitansk pizza, pasta og kjøttretter. Takeaway-menyen har åtte pizzaer, tre pasta- og kjøttretter og drikke, og alle pizzaene kan lages glutenvennlige. Restauranten holder stengt på mandager. Bestill her, så henter vi maten og kjører den hjem til deg. Levering koster 75 kr til Tangen og Hellvik, og 100 kr til Bjørnemyr.",
+    website: "https://www.signal1.no/",
     faq: [
       {
         q: "Kan pizzaen fra Signalen lages glutenvennlig?",
