@@ -117,6 +117,64 @@ export function Reviews({ title = "Det kundene sier" }: { title?: string }) {
     };
   }, []);
 
+  // Dra raden med musa på PC. Touch og styreflate bruker vanlig scroll.
+  const dragged = useRef(false);
+  useEffect(() => {
+    const el = track.current;
+    if (!el) return;
+    let down = false;
+    let startX = 0;
+    let startLeft = 0;
+    const onDown = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      down = true;
+      dragged.current = false;
+      startX = e.clientX;
+      startLeft = el.scrollLeft;
+    };
+    const onMove = (e: PointerEvent) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (!dragged.current && Math.abs(dx) > 5) {
+        dragged.current = true;
+        el.classList.add("is-dragging");
+        el.setPointerCapture(e.pointerId);
+      }
+      if (dragged.current) el.scrollLeft = startLeft - dx;
+    };
+    const onUp = (e: PointerEvent) => {
+      if (!down) return;
+      down = false;
+      if (el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
+      if (!dragged.current) return;
+      const card = el.querySelector("li");
+      const width = card ? card.getBoundingClientRect().width + 18 : el.clientWidth;
+      el.scrollTo({ left: Math.round(el.scrollLeft / width) * width, behavior: "smooth" });
+      window.setTimeout(() => {
+        el.classList.remove("is-dragging");
+        dragged.current = false;
+      }, 350);
+    };
+    // Et drag skal ikke åpne omtalen på Google når musa slippes over et kort.
+    const onClick = (e: MouseEvent) => {
+      if (!dragged.current) return;
+      e.preventDefault();
+      e.stopPropagation();
+      dragged.current = false;
+    };
+    el.addEventListener("pointerdown", onDown);
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerup", onUp);
+    el.addEventListener("pointercancel", onUp);
+    el.addEventListener("click", onClick, true);
+    return () => {
+      el.removeEventListener("pointerdown", onDown);
+      el.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointerup", onUp);
+      el.removeEventListener("pointercancel", onUp);
+      el.removeEventListener("click", onClick, true);
+    };
+  }, []);
   const step = (dir: 1 | -1) => {
     const el = track.current;
     if (!el) return;
@@ -151,6 +209,7 @@ export function Reviews({ title = "Det kundene sier" }: { title?: string }) {
                 href={s.url}
                 target="_blank"
                 rel="noopener"
+                draggable={false}
                 aria-label={`Les omtalen fra ${r.name} på ${s.label}`}
               >
                 <span className="review-card-top">

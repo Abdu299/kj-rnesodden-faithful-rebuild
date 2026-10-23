@@ -1697,4 +1697,8 @@ a.review-card:hover, a.review-card:focus-visible { border-color: #ff9418; transf
 .reviews-track > li { scroll-snap-align: start; display: flex; min-width: 0; }
 .reviews-track > li > .review-card { flex: 1; }
 @media (max-width: 900px) { .reviews-track { grid-auto-columns: calc((100% - 18px) / 2); } }
-@media (max-width: 600px) { .reviews-track { grid-auto-columns: 86%; } .reviews-nav { display: none; } }
+@media (max-width: 600px) { .reviews-track { grid-auto-columns: 86%; } .reviews-nav { display: none; } }/* Dra med musa (2026-10-23) */
+@media (hover: hover) and (pointer: fine) { .reviews-track { cursor: grab; } }
+.reviews-track.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.reviews-track.is-dragging a.review-card { pointer-events: none; }
+.reviews-track a.review-card { -webkit-user-drag: none; }
