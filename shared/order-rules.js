@@ -2,7 +2,7 @@ export const NESODDEN_MUNICIPALITY = "3212";
 export const zones = [
   { id: "tangen", name: "Tangen / Hellvik", fee: 75 },
   { id: "bjornemyr", name: "Bjørnemyr", fee: 100 },
-  { id: "alvaern", name: "Alværn / Fjordvangen / Fjellstrand", fee: 100 },
+  { id: "alvaern", name: "Alværn / Fjordvangen / Fjellstrand", fee: 150 },
   { id: "fagerstrand", name: "Fagerstrand", fee: 150 },
 ];
 
@@ -36,13 +36,6 @@ const anchors = [
 
 export function deliveryZone(latitude, longitude, postalCode, postalPlace) {
   if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return null;
-  // Use the address register's postal area when available, so all Bjørnemyr
-  // search results keep the same price even near a geographical zone boundary.
-  if (
-    String(postalCode) === "1453" ||
-    String(postalPlace).toLocaleUpperCase("nb-NO") === "BJØRNEMYR"
-  )
-    return zones.find((zone) => zone.id === "bjornemyr");
   let closest = null;
   let distance = Infinity;
   for (const [lat, lon, zone] of anchors) {
@@ -54,6 +47,15 @@ export function deliveryZone(latitude, longitude, postalCode, postalPlace) {
       closest = zone;
     }
   }
+  // Postal areas can cross delivery-zone boundaries. The southern 150 kr
+  // zones must keep their price even if the address has a Bjørnemyr postcode.
+  if (
+    closest !== "alvaern" &&
+    closest !== "fagerstrand" &&
+    (String(postalCode) === "1453" ||
+      String(postalPlace).toLocaleUpperCase("nb-NO") === "BJØRNEMYR")
+  )
+    return zones.find((zone) => zone.id === "bjornemyr");
   return zones.find((zone) => zone.id === closest) ?? null;
 }
 

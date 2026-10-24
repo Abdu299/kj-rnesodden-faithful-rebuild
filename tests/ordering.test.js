@@ -88,7 +88,7 @@ async function send(payload, network = mockNetwork(), overrides = {}) {
 test("delivery areas price Bjørnemyr separately from Tangen and Hellvik", () => {
   assert.equal(deliveryZone(59.8588, 10.6634).fee, 75);
   assert.equal(deliveryZone(59.8343, 10.6418).fee, 100);
-  assert.equal(deliveryZone(59.8209, 10.6278).fee, 100);
+  assert.equal(deliveryZone(59.8209, 10.6278).fee, 150);
   assert.equal(deliveryZone(59.7375, 10.594).fee, 150);
   assert.equal(deliveryZone(NaN, 10), null);
 });
@@ -113,6 +113,42 @@ test("Bjørnemyr address suggestions and verified checkout both use 100 kr", asy
   assert.equal(placed.response.status, 200);
   assert.equal(placed.result.receipt.deliveryFee, 100);
   assert.match(network.messages[0].text, /Levering: 100 kr/);
+});
+test("southern addresses cost 150 kr in suggestions, checkout and receipts despite a Bjørnemyr postal area", async () => {
+  const locations = [
+    [59.8209, 10.6278],
+    [59.8292, 10.6952],
+    [59.8331, 10.6941],
+    [59.7952, 10.6083],
+    [59.8064, 10.6256],
+    [59.814, 10.6768],
+    [59.7912, 10.7054],
+    [59.7773, 10.6907],
+    [59.7779, 10.7059],
+    [59.7375, 10.594],
+  ];
+  for (const [lat, lon] of locations) {
+    const record = {
+      ...addressRecord,
+      postnummer: "1453",
+      poststed: "BJØRNEMYR",
+      representasjonspunkt: { lat, lon },
+    };
+    const network = mockNetwork({ records: [record] });
+    const [suggestion] = await searchAddresses("Testveien", network.fetchFn);
+    assert.equal(suggestion.zone.fee, 150);
+    const verified = await verifyAddress(suggestion, network.fetchFn);
+    assert.equal(verified.zone.fee, 150);
+    // A stale 100 kr quote must be rejected before any order is sent.
+    const stale = await send(body({ quotedTotal: 560 }), network);
+    assert.equal(stale.response.status, 409);
+    assert.equal(network.messages.length, 0);
+    const placed = await send(body({ quotedTotal: 610 }), network);
+    assert.equal(placed.response.status, 200);
+    assert.equal(placed.result.receipt.deliveryFee, 150);
+    assert.equal(placed.result.receipt.total, 610);
+    assert.match(network.messages[0].text, /Levering: 150 kr/);
+  }
 });
 test("opening hours use Oslo time, including winter, and close at the exact cutoff", () => {
   assert.deepEqual(osloTime(new Date("2026-09-30T13:45:00Z")), { day: 3, minute: 945 });
