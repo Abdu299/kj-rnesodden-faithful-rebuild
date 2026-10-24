@@ -19,8 +19,8 @@ const LOCAL_BUSINESS_SCHEMA = {
   makesOffer: [
     { area: "Tangen og Hellvik", price: 75 },
     { area: "Bjørnemyr", price: 100 },
-    { area: "Alværn, Fjordvangen og Fjellstrand", price: 150 },
-    { area: "Fagerstrand", price: 150 },
+    { area: "Alværn, Fjordvangen og Fjellstrand", price: 100 },
+    { area: "Svestad, Blylaget og Fagerstrand", price: 150 },
   ].map(({ area, price }) => ({
     "@type": "Offer",
     name: `Levering til ${area}`,

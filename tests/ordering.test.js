@@ -88,7 +88,7 @@ async function send(payload, network = mockNetwork(), overrides = {}) {
 test("delivery areas price Bjørnemyr separately from Tangen and Hellvik", () => {
   assert.equal(deliveryZone(59.8588, 10.6634).fee, 75);
   assert.equal(deliveryZone(59.8343, 10.6418).fee, 100);
-  assert.equal(deliveryZone(59.8209, 10.6278).fee, 150);
+  assert.equal(deliveryZone(59.8209, 10.6278).fee, 100);
   assert.equal(deliveryZone(59.7375, 10.594).fee, 150);
   assert.equal(deliveryZone(NaN, 10), null);
 });
@@ -114,41 +114,62 @@ test("Bjørnemyr address suggestions and verified checkout both use 100 kr", asy
   assert.equal(placed.result.receipt.deliveryFee, 100);
   assert.match(network.messages[0].text, /Levering: 100 kr/);
 });
-test("southern addresses cost 150 kr in suggestions, checkout and receipts despite a Bjørnemyr postal area", async () => {
-  const locations = [
-    [59.8209, 10.6278],
-    [59.8292, 10.6952],
-    [59.8331, 10.6941],
-    [59.7952, 10.6083],
+// Representative place points from Kartverket's place-name API, checked
+// 24 October 2026. Delivery boundaries are the owner's business rule.
+for (const [fee, locations] of [
+  [100, [
+    [59.82093, 10.62778], // Alværn
+    [59.8343, 10.6418], // Bjørnemyr
+    [59.7952, 10.60834], // Fjellstrand centre, north of the drawn boundary
+    [59.82924, 10.69524], // Fjordvangen
     [59.8064, 10.6256],
     [59.814, 10.6768],
-    [59.7912, 10.7054],
-    [59.7773, 10.6907],
-    [59.7779, 10.7059],
-    [59.7375, 10.594],
-  ];
-  for (const [lat, lon] of locations) {
-    const record = {
-      ...addressRecord,
-      postnummer: "1453",
-      poststed: "BJØRNEMYR",
-      representasjonspunkt: { lat, lon },
-    };
-    const network = mockNetwork({ records: [record] });
-    const [suggestion] = await searchAddresses("Testveien", network.fetchFn);
-    assert.equal(suggestion.zone.fee, 150);
-    const verified = await verifyAddress(suggestion, network.fetchFn);
-    assert.equal(verified.zone.fee, 150);
-    // A stale 100 kr quote must be rejected before any order is sent.
-    const stale = await send(body({ quotedTotal: 560 }), network);
-    assert.equal(stale.response.status, 409);
-    assert.equal(network.messages.length, 0);
-    const placed = await send(body({ quotedTotal: 610 }), network);
-    assert.equal(placed.response.status, 200);
-    assert.equal(placed.result.receipt.deliveryFee, 150);
-    assert.equal(placed.result.receipt.total, 610);
-    assert.match(network.messages[0].text, /Levering: 150 kr/);
-  }
+  ]],
+  [150, [
+    [59.77514, 10.59449], // Svestad grend
+    [59.7648, 10.63744], // Svestad gard
+    [59.77791, 10.70588], // Blylaget
+    [59.73746, 10.59404], // Fagerstrand
+    [59.783, 10.64], // Interior between the old sparse anchors
+    [59.7912, 10.7054], // Eastern part of the marked area
+  ]],
+]) {
+  test(`corrected ${fee} kr area uses the same price in suggestions, checkout and receipt`, async () => {
+    for (const [lat, lon] of locations) {
+      for (const [postnummer, poststed] of [["1453", "BJØRNEMYR"], ["1458", "FJELLSTRAND"]]) {
+        assert.equal(deliveryZone(lat, lon).fee, fee);
+        const record = {
+          ...addressRecord,
+          postnummer,
+          poststed,
+          representasjonspunkt: { lat, lon },
+        };
+        const network = mockNetwork({ records: [record] });
+        const [suggestion] = await searchAddresses("Testveien", network.fetchFn);
+        assert.equal(suggestion.zone.fee, fee);
+        const verified = await verifyAddress(suggestion, network.fetchFn);
+        assert.equal(verified.zone.fee, fee);
+        const staleTotal = 460 + (fee === 100 ? 150 : 100);
+        const stale = await send(body({ quotedTotal: staleTotal }), network);
+        assert.equal(stale.response.status, 409);
+        assert.equal(network.messages.length, 0);
+        const placed = await send(body({ quotedTotal: 460 + fee }), network);
+        assert.equal(placed.response.status, 200);
+        assert.equal(placed.result.receipt.deliveryFee, fee);
+        assert.equal(placed.result.receipt.total, 460 + fee);
+        assert.match(network.messages[0].text, new RegExp(`Levering: ${fee} kr`));
+      }
+    }
+  });
+}
+test("drawn area's northern edge separates Fjellstrand from the 150 kr area", () => {
+  // The western edge is below Fjellstrand centre. Same postcode on both sides.
+  assert.equal(deliveryZone(59.7921, 10.60834, "1458", "FJELLSTRAND").fee, 100);
+  assert.equal(deliveryZone(59.7919, 10.60834, "1458", "FJELLSTRAND").fee, 150);
+  assert.equal(deliveryZone(59.792, 10.60834, "1458", "FJELLSTRAND").fee, 150);
+  // The northern boundary curves towards the east as in the owner's sketch.
+  assert.equal(deliveryZone(59.803, 10.71, "1453", "BJØRNEMYR").fee, 100);
+  assert.equal(deliveryZone(59.801, 10.71, "1453", "BJØRNEMYR").fee, 150);
 });
 test("opening hours use Oslo time, including winter, and close at the exact cutoff", () => {
   assert.deepEqual(osloTime(new Date("2026-09-30T13:45:00Z")), { day: 3, minute: 945 });

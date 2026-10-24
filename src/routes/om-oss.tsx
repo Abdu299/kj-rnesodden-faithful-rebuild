@@ -10,8 +10,8 @@ const DESCRIPTION =
 
 const PRICES = [
   { area: "Tangen / Hellvik", price: "75 kr" },
-  { area: "Alværn / Fjordvangen / Fjellstrand", price: "150 kr" },
-  { area: "Fagerstrand", price: "150 kr" },
+  { area: "Alværn / Fjordvangen / Fjellstrand", price: "100 kr" },
+  { area: "Svestad / Blylaget / Fagerstrand", price: "150 kr" },
 ];
 
 const STEPS = [
@@ -32,7 +32,7 @@ const STEPS = [
 const FAQ = [
   {
     q: "Hva koster levering med KjørNesodden?",
-    a: "Prisen er fast og avhenger av hvor du bor: 75 kr til Tangen og Hellvik, 100 kr til Bjørnemyr og 150 kr til Alværn, Fjordvangen, Fjellstrand og Fagerstrand.",
+    a: "Prisen er fast og avhenger av hvor du bor: 75 kr til Tangen og Hellvik, 100 kr til Bjørnemyr, Alværn, Fjordvangen og Fjellstrand, og 150 kr i området Svestad, Blylaget og Fagerstrand.",
   },
   {
     q: "Når betaler jeg?",

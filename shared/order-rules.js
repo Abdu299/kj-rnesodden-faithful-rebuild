@@ -2,8 +2,8 @@ export const NESODDEN_MUNICIPALITY = "3212";
 export const zones = [
   { id: "tangen", name: "Tangen / Hellvik", fee: 75 },
   { id: "bjornemyr", name: "Bjørnemyr", fee: 100 },
-  { id: "alvaern", name: "Alværn / Fjordvangen / Fjellstrand", fee: 150 },
-  { id: "fagerstrand", name: "Fagerstrand", fee: 150 },
+  { id: "alvaern", name: "Alværn / Fjordvangen / Fjellstrand", fee: 100 },
+  { id: "fagerstrand", name: "Svestad / Blylaget / Fagerstrand", fee: 150 },
 ];
 
 // Same geographical delivery-area anchors as the requested reference site.
@@ -34,8 +34,49 @@ const anchors = [
   [59.7116, 10.6244, "fagerstrand"],
 ];
 
+// Business delivery area interpreted from the owner's 24 October 2026 sketch.
+// The northern edge runs south of Fjellstrand centre and curves north towards
+// the east coast. Alværn, Fjellstrand centre and Fjordvangen remain 100 kr.
+// These are approximate hand-drawn business boundaries, not postal boundaries.
+// Points are [latitude, longitude]; postcode must never override this area.
+const marked150Area = [
+  [59.792, 10.575],
+  [59.792, 10.63],
+  [59.793, 10.66],
+  [59.800, 10.70],
+  [59.806, 10.725],
+  [59.778, 10.731],
+  [59.750, 10.713],
+  [59.747, 10.68],
+  [59.732, 10.65],
+  [59.733, 10.625],
+  [59.722, 10.59],
+  [59.730, 10.57],
+];
+
+function insideMarked150Area(latitude, longitude) {
+  let inside = false;
+  for (let i = 0, j = marked150Area.length - 1; i < marked150Area.length; j = i++) {
+    const [ay, ax] = marked150Area[j];
+    const [by, bx] = marked150Area[i];
+    const cross = (longitude - ax) * (by - ay) - (latitude - ay) * (bx - ax);
+    if (
+      Math.abs(cross) < 1e-12 &&
+      longitude >= Math.min(ax, bx) && longitude <= Math.max(ax, bx) &&
+      latitude >= Math.min(ay, by) && latitude <= Math.max(ay, by)
+    ) return true;
+    if (
+      (ay > latitude) !== (by > latitude) &&
+      longitude < ax + ((latitude - ay) * (bx - ax)) / (by - ay)
+    ) inside = !inside;
+  }
+  return inside;
+}
+
 export function deliveryZone(latitude, longitude, postalCode, postalPlace) {
   if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return null;
+  if (insideMarked150Area(latitude, longitude))
+    return zones.find((zone) => zone.id === "fagerstrand");
   let closest = null;
   let distance = Infinity;
   for (const [lat, lon, zone] of anchors) {
@@ -47,10 +88,9 @@ export function deliveryZone(latitude, longitude, postalCode, postalPlace) {
       closest = zone;
     }
   }
-  // Postal areas can cross delivery-zone boundaries. The southern 150 kr
-  // zones must keep their price even if the address has a Bjørnemyr postcode.
+  // Outside the marked area, keep the established Bjørnemyr postal rule.
+  // Existing Fagerstrand anchors also retain their 150 kr delivery price.
   if (
-    closest !== "alvaern" &&
     closest !== "fagerstrand" &&
     (String(postalCode) === "1453" ||
       String(postalPlace).toLocaleUpperCase("nb-NO") === "BJØRNEMYR")

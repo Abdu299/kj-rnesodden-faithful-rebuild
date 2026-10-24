@@ -45,7 +45,8 @@ Update `verifiedAt`, sources and menu entries together when prices change. Uploa
 
 The server looks up the selected address again at checkout. It derives the delivery zone from those coordinates, ignores caller-supplied coordinates and fees, rebuilds product prices from the catalog, and checks the quoted total.
 
-Delivery prices are 75 kr for Tangen/Hellvik, 100 kr for Bjørnemyr, and 150 kr for Alværn/Fjordvangen/Fjellstrand and Fagerstrand. Addresses in the southern 150 kr zones keep that price even when their postal code is 1453 or postal place is Bjørnemyr. Outside those zones, verified Bjørnemyr postal addresses use the Bjørnemyr price. Delivery zones use the nearest geographic anchors in `shared/order-rules.js`; these are business zones, not official municipal or postcode boundaries. Change the anchors if the business changes its delivery areas.
+Delivery prices are 75 kr for Tangen/Hellvik, 100 kr for Bjørnemyr and Alværn/Fjordvangen/Fjellstrand, and 150 kr for the marked Svestad/Blylaget/Fagerstrand area. `marked150Area` in `shared/order-rules.js` is a geographic polygon interpreted from the owner's 24 October 2026 sketch. Its northern edge is south of Fjellstrand centre and curves north towards the east coast. It is an approximation of the hand-drawn business boundary, not an official place or postcode boundary. Polygon membership takes priority over postcode, so an address inside the marked area costs 150 kr even with a Bjørnemyr or Fjellstrand postal address. Outside the polygon, existing geographic anchors and the Bjørnemyr postal rule determine the fee. Existing Fagerstrand anchors retain their 150 kr price. Both address suggestions and server-side address verification use this shared rule. Update the polygon if the owner provides a more precise street boundary.
+
 
 ## Telegram submission
 
