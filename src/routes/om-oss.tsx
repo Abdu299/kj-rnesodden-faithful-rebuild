@@ -3,16 +3,14 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SITE_IMAGE, SITE_URL } from "../lib/site";
 import { placePages } from "../lib/places";
 import { Reviews } from "../components/Reviews";
+import { zones } from "../../shared/order-rules.js";
+import { formatKr } from "../lib/catalog";
 
 const TITLE = "Om KjørNesodden | Lokal matlevering på hele Nesodden";
 const DESCRIPTION =
   "KjørNesodden henter mat fra restauranter og varer fra butikker og kjører det hjem til deg på Nesodden. Fast pris fra 75 kr, du betaler når du har fått varene.";
 
-const PRICES = [
-  { area: "Tangen / Hellvik", price: "75 kr" },
-  { area: "Alværn / Fjordvangen / Fjellstrand", price: "100 kr" },
-  { area: "Svestad / Blylaget / Fagerstrand", price: "150 kr" },
-];
+const PRICES = zones.map((zone) => ({ area: zone.name, price: formatKr(zone.fee) }));
 
 const STEPS = [
   {
@@ -32,7 +30,7 @@ const STEPS = [
 const FAQ = [
   {
     q: "Hva koster levering med KjørNesodden?",
-    a: "Prisen er fast og avhenger av hvor du bor: 75 kr til Tangen og Hellvik, 100 kr til Bjørnemyr, Alværn, Fjordvangen og Fjellstrand, og 150 kr i området Svestad, Blylaget og Fagerstrand.",
+    a: `Prisen er fast og avhenger av hvor du bor: ${PRICES.map((item) => `${item.area}: ${item.price}`).join(", ")}. Velg adressen din fra adresseforslagene for å se leveringsprisen.`,
   },
   {
     q: "Når betaler jeg?",
@@ -191,15 +189,6 @@ function OmOss() {
                   <strong>{item.price}</strong>
                 </div>
               ))}
-            </div>
-            <div className="about-map">
-              <img
-                src="/images/nesodden-zones-clean.webp"
-                alt="Kart over leveringsområdene til KjørNesodden"
-                width="976"
-                height="1611"
-                loading="lazy"
-              />
             </div>
           </aside>
         </section>

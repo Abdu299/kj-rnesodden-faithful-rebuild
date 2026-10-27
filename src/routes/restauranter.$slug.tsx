@@ -147,7 +147,7 @@ function PlaceInfo({ page }: { page: PlacePage }) {
         </ul>
         <p>
           <Link to="/om-oss" hash="leveringsomrader">
-            Se kart over leveringsområdene
+            Se leveringsområder og priser
           </Link>
         </p>
       </div>

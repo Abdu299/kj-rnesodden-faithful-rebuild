@@ -10,7 +10,7 @@ export const places = [
     slug: "signalen",
     seoName: "Signalen Nesodden",
     intro:
-      "Signalen Sjøbad ligger ved sjøen i Tangenveien 3 på Nesoddtangen og lager napolitansk pizza, pasta og kjøttretter. Takeaway-menyen har åtte pizzaer, tre pasta- og kjøttretter og drikke, og alle pizzaene kan lages glutenvennlige. Restauranten holder stengt på mandager. Bestill her, så henter vi maten og kjører den hjem til deg. Levering koster 75 kr til Tangen og Hellvik, og 100 kr til Bjørnemyr.",
+      "Signalen Sjøbad ligger ved sjøen i Tangenveien 3 på Nesoddtangen og lager napolitansk pizza, pasta og kjøttretter. Takeaway-menyen har åtte pizzaer, tre pasta- og kjøttretter og drikke, og alle pizzaene kan lages glutenvennlige. Restauranten holder stengt på mandager. Bestill her, så henter vi maten og kjører den hjem til deg. Levering koster 75 kr til Tangen og 100 kr til Hellvik, Varden og Bjørnemyr.",
     website: "https://www.signal1.no/",
     faq: [
       {
@@ -92,7 +92,7 @@ export const places = [
     slug: "o-sole-mio",
     seoName: "O' Sole Mio Nesodden",
     intro:
-      "O' Sole Mio ligger i Tangenveien 129 på Nesoddtangen og lager ekte napolitansk pizza. Menyen har 16 klassiske pizzaer med tomatsaus, seks hvite pizzaer uten tomatsaus, hjemmelaget tiramisù og italiensk brus. Husets egen pizza, O' Sole Mio, har skorpe fylt med fersk ricotta. Hele menyen står her med priser. Bestill, så henter vi pizzaen og kjører den hjem til deg. Levering koster 75 kr til Tangen og Hellvik, og 100 kr til Bjørnemyr.",
+      "O' Sole Mio ligger i Tangenveien 129 på Nesoddtangen og lager ekte napolitansk pizza. Menyen har 16 klassiske pizzaer med tomatsaus, seks hvite pizzaer uten tomatsaus, hjemmelaget tiramisù og italiensk brus. Husets egen pizza, O' Sole Mio, har skorpe fylt med fersk ricotta. Hele menyen står her med priser. Bestill, så henter vi pizzaen og kjører den hjem til deg. Levering koster 75 kr til Tangen og 100 kr til Hellvik, Varden og Bjørnemyr.",
     website: "",
     faq: [
       {
@@ -118,7 +118,7 @@ export const places = [
     slug: "mama-greek-kitchen",
     seoName: "Mama Greek Kitchen Fagerstrand",
     intro:
-      "Mama Greek Kitchen er en gresk foodtruck på Fagerstrand med åpent hver dag fra 11 til 20. Menyen har gyros i pita og på tallerken, moussaka, spareribs, saganaki, dolmades, gresk salat og meze for to. Hele menyen står her med priser. Bestill, så henter vi maten og kjører den hjem til deg. Levering koster 150 kr i området Svestad, Blylaget og Fagerstrand, 100 kr til Bjørnemyr, Alværn, Fjordvangen og Fjellstrand og 75 kr til Tangen og Hellvik.",
+      "Mama Greek Kitchen er en gresk foodtruck på Fagerstrand med åpent hver dag fra 11 til 20. Menyen har gyros i pita og på tallerken, moussaka, spareribs, saganaki, dolmades, gresk salat og meze for to. Hele menyen står her med priser. Bestill, så henter vi maten og kjører den hjem til deg. Levering koster 175 kr til Fagerstrand, 150 kr til Svestad og Blylaget, 100 kr til Hellvik, Varden, Bjørnemyr, Alværn, Fjordvangen og Fjellstrand og 75 kr til Tangen.",
     website: "",
     faq: [
       {

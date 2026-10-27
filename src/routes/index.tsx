@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { OrderingApp } from "../components/OrderingApp";
 import { SITE_IMAGE, SITE_URL } from "../lib/site";
+import { zones } from "../../shared/order-rules.js";
 
 const LOCAL_BUSINESS_SCHEMA = {
   "@context": "https://schema.org",
@@ -14,17 +15,12 @@ const LOCAL_BUSINESS_SCHEMA = {
   logo: `${SITE_URL}/images/kjornesodden-logo-kvadrat.png`,
   telephone: "+4793461991",
   email: "kjrnesodden@gmail.com",
-  priceRange: "75 til 150 kr per levering",
+  priceRange: `${Math.min(...zones.map((zone) => zone.fee))} til ${Math.max(...zones.map((zone) => zone.fee))} kr per levering`,
   areaServed: { "@type": "AdministrativeArea", name: "Nesodden kommune" },
-  makesOffer: [
-    { area: "Tangen og Hellvik", price: 75 },
-    { area: "Bjørnemyr", price: 100 },
-    { area: "Alværn, Fjordvangen og Fjellstrand", price: 100 },
-    { area: "Svestad, Blylaget og Fagerstrand", price: 150 },
-  ].map(({ area, price }) => ({
+  makesOffer: zones.map(({ name, fee }) => ({
     "@type": "Offer",
-    name: `Levering til ${area}`,
-    price,
+    name: `Levering til ${name}`,
+    price: fee,
     priceCurrency: "NOK",
   })),
 };

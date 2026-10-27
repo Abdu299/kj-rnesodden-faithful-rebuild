@@ -85,11 +85,13 @@ async function send(payload, network = mockNetwork(), overrides = {}) {
   return { response, result: await response.json(), messages: network.messages };
 }
 
-test("delivery areas price Bjørnemyr separately from Tangen and Hellvik", () => {
+test("delivery areas separate Tangen, Hellvik, Varden and Fagerstrand", () => {
   assert.equal(deliveryZone(59.8588, 10.6634).fee, 75);
+  assert.equal(deliveryZone(59.84449, 10.69118).fee, 100);
+  assert.equal(deliveryZone(59.839352, 10.645170).fee, 100);
   assert.equal(deliveryZone(59.8343, 10.6418).fee, 100);
   assert.equal(deliveryZone(59.8209, 10.6278).fee, 100);
-  assert.equal(deliveryZone(59.7375, 10.594).fee, 150);
+  assert.equal(deliveryZone(59.7375, 10.594).fee, 175);
   assert.equal(deliveryZone(NaN, 10), null);
 });
 test("Bjørnemyr address suggestions and verified checkout both use 100 kr", async () => {
@@ -114,6 +116,59 @@ test("Bjørnemyr address suggestions and verified checkout both use 100 kr", asy
   assert.equal(placed.result.receipt.deliveryFee, 100);
   assert.match(network.messages[0].text, /Levering: 100 kr/);
 });
+// Real address points from Kartverket's Geonorge address API, 27 October 2026.
+// Include Varden addresses labelled NESODDTANGEN, so postal text cannot hide
+// a regression to Tangen's 75 kr fee. Tests never submit real orders.
+for (const [street, code, number, postcode, place, lat, lon, fee, previousFee] of [
+  ["Hellvikalleen", 1790, 1, "1459", "NESODDEN", 59.844819, 10.690703, 100, 75],
+  ["Hellvikalleen", 1790, 15, "1459", "NESODDEN", 59.846971, 10.690313, 100, 75],
+  ["Hellvikveien", 1800, 101, "1459", "NESODDEN", 59.837405, 10.688936, 100, 75],
+  ["Vardeveien", 3209, 10, "1452", "NESODDTANGEN", 59.853815, 10.652775, 100, 75],
+  ["Vardeveien", 3209, 104, "1452", "NESODDTANGEN", 59.845802, 10.651148, 100, 75],
+  ["Håkonskastet", 1075, 5, "1453", "BJØRNEMYR", 59.839352, 10.645170, 100, 75],
+  ["Myklerudveien", 2261, 124, "1454", "FAGERSTRAND", 59.745974, 10.608878, 175, 150],
+  ["Svestadveien", 2930, 10, "1458", "FJELLSTRAND", 59.776261, 10.594114, 150, 175],
+  ["Blylagveien", 1220, 103, "1459", "NESODDEN", 59.777430, 10.703360, 150, 175],
+]) {
+  test(`${street} ${number} uses ${fee} kr in address lookup, orders and inquiries`, async () => {
+    const record = {
+      ...addressRecord,
+      adressekode: code,
+      nummer: number,
+      adressetekst: `${street} ${number}`,
+      postnummer: postcode,
+      poststed: place,
+      representasjonspunkt: { lat, lon },
+    };
+    const network = mockNetwork({ records: [record] });
+    const [suggestion] = await searchAddresses(street, network.fetchFn);
+    assert.equal(suggestion.zone.fee, fee);
+    // Saved/caller-supplied prices are recalculated from authoritative data.
+    const verified = await verifyAddress({ ...suggestion, zone: { fee: previousFee } }, network.fetchFn);
+    assert.equal(verified.zone.fee, fee);
+    const selection = { id: suggestion.id, streetAddress: suggestion.streetAddress };
+    const stale = await send(body({ address: selection, quotedTotal: 460 + previousFee }), network);
+    assert.equal(stale.response.status, 409);
+    assert.equal(network.messages.length, 0);
+    const placed = await send(body({ address: selection, quotedTotal: 460 + fee }), network);
+    assert.equal(placed.response.status, 200);
+    assert.equal(placed.result.receipt.deliveryFee, fee);
+    assert.equal(placed.result.receipt.total, 460 + fee);
+    assert.match(network.messages[0].text, new RegExp(`Levering: ${fee} kr`));
+    const inquiry = await send(body({
+      kind: "request",
+      restaurantId: undefined,
+      type: "Dagligvarer",
+      place: "Kiwi Tangen",
+      description: "Melk",
+      address: selection,
+      quotedTotal: undefined,
+    }), network);
+    assert.equal(inquiry.response.status, 200);
+    assert.equal(inquiry.result.receipt.deliveryFee, fee);
+    assert.match(network.messages[1].text, new RegExp(`Levering: ${fee} kr`));
+  });
+}
 // Representative place points from Kartverket's place-name API, checked
 // 24 October 2026. Delivery boundaries are the owner's business rule.
 for (const [fee, locations] of [
@@ -129,9 +184,15 @@ for (const [fee, locations] of [
     [59.77514, 10.59449], // Svestad grend
     [59.7648, 10.63744], // Svestad gard
     [59.77791, 10.70588], // Blylaget
-    [59.73746, 10.59404], // Fagerstrand
     [59.783, 10.64], // Interior between the old sparse anchors
     [59.7912, 10.7054], // Eastern part of the marked area
+  ]],
+  [175, [
+    [59.73746, 10.59404], // Fagerstrand
+    [59.743, 10.6127],
+    [59.7505, 10.6082],
+    [59.7604, 10.5842],
+    [59.7116, 10.6244],
   ]],
 ]) {
   test(`corrected ${fee} kr area uses the same price in suggestions, checkout and receipt`, async () => {
@@ -250,7 +311,7 @@ test("checkout re-fetches the address and ignores client supplied delivery fee a
     { ...address, zone: { fee: 0 }, latitude: 0, longitude: 0 },
     network.fetchFn,
   );
-  assert.equal(result.zone.fee, 150);
+  assert.equal(result.zone.fee, 175);
   await assert.rejects(() => verifyAddress({ ...address, id: "0301:1234:12:" }, network.fetchFn));
   await assert.rejects(() => verifyAddress({ ...address, id: "3212:9999:12:" }, network.fetchFn));
 });

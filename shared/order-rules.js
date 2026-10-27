@@ -1,9 +1,11 @@
 export const NESODDEN_MUNICIPALITY = "3212";
 export const zones = [
-  { id: "tangen", name: "Tangen / Hellvik", fee: 75 },
+  { id: "tangen", name: "Tangen", fee: 75 },
+  { id: "hellvik", name: "Hellvik / Varden", fee: 100 },
   { id: "bjornemyr", name: "Bjørnemyr", fee: 100 },
   { id: "alvaern", name: "Alværn / Fjordvangen / Fjellstrand", fee: 100 },
-  { id: "fagerstrand", name: "Svestad / Blylaget / Fagerstrand", fee: 150 },
+  { id: "svestad", name: "Svestad / Blylaget", fee: 150 },
+  { id: "fagerstrand", name: "Fagerstrand", fee: 175 },
 ];
 
 // Same geographical delivery-area anchors as the requested reference site.
@@ -12,12 +14,16 @@ const anchors = [
   [59.8588, 10.6634, "tangen"],
   [59.8604, 10.6542, "tangen"],
   [59.8614, 10.6718, "tangen"],
-  [59.8507, 10.6777, "tangen"],
+  [59.8507, 10.6777, "hellvik"],
   [59.857, 10.6608, "tangen"],
   [59.8343, 10.6418, "bjornemyr"],
   [59.8274, 10.6355, "bjornemyr"],
-  [59.8445, 10.6912, "tangen"],
-  [59.8416, 10.6738, "tangen"],
+  [59.8445, 10.6912, "hellvik"],
+  [59.8416, 10.6738, "hellvik"],
+  // Varden, including Vardeveien's Nesoddtangen postal addresses.
+  [59.853815, 10.652775, "hellvik"],
+  [59.845802, 10.651148, "hellvik"],
+  [59.839352, 10.645170, "hellvik"],
   [59.8209, 10.6278, "alvaern"],
   [59.8292, 10.6952, "alvaern"],
   [59.8331, 10.6941, "alvaern"],
@@ -27,6 +33,10 @@ const anchors = [
   [59.7912, 10.7054, "alvaern"],
   [59.7773, 10.6907, "alvaern"],
   [59.7779, 10.7059, "alvaern"],
+  // Keep Svestad and Blylaget separate from the new Fagerstrand price.
+  [59.77514, 10.59449, "svestad"],
+  [59.7648, 10.63744, "svestad"],
+  [59.77791, 10.70588, "svestad"],
   [59.7375, 10.594, "fagerstrand"],
   [59.743, 10.6127, "fagerstrand"],
   [59.7505, 10.6082, "fagerstrand"],
@@ -38,6 +48,7 @@ const anchors = [
 // The northern edge runs south of Fjellstrand centre and curves north towards
 // the east coast. Alværn, Fjellstrand centre and Fjordvangen remain 100 kr.
 // These are approximate hand-drawn business boundaries, not postal boundaries.
+// Fagerstrand is now priced separately at 175 kr within this southern area.
 // Points are [latitude, longitude]; postcode must never override this area.
 const marked150Area = [
   [59.792, 10.575],
@@ -75,8 +86,6 @@ function insideMarked150Area(latitude, longitude) {
 
 export function deliveryZone(latitude, longitude, postalCode, postalPlace) {
   if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return null;
-  if (insideMarked150Area(latitude, longitude))
-    return zones.find((zone) => zone.id === "fagerstrand");
   let closest = null;
   let distance = Infinity;
   for (const [lat, lon, zone] of anchors) {
@@ -88,10 +97,14 @@ export function deliveryZone(latitude, longitude, postalCode, postalPlace) {
       closest = zone;
     }
   }
+  // Fagerstrand's geographic area takes priority over the old 150 kr polygon
+  // and postal labels. Svestad and Blylaget retain their existing 150 kr fee.
+  if (closest === "fagerstrand")
+    return zones.find((zone) => zone.id === "fagerstrand");
+  if (insideMarked150Area(latitude, longitude))
+    return zones.find((zone) => zone.id === "svestad");
   // Outside the marked area, keep the established Bjørnemyr postal rule.
-  // Existing Fagerstrand anchors also retain their 150 kr delivery price.
   if (
-    closest !== "fagerstrand" &&
     (String(postalCode) === "1453" ||
       String(postalPlace).toLocaleUpperCase("nb-NO") === "BJØRNEMYR")
   )
