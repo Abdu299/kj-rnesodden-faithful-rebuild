@@ -126,6 +126,13 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
         <script
+          // ?ikke-tell=1 slår av Umami-telling i denne nettleseren (egne besøk). ?ikke-tell=0 slår den på igjen.
+          dangerouslySetInnerHTML={{
+            __html:
+              'try{var m=location.search.match(/[?&]ikke-tell=([01])/);if(m){m[1]==="1"?localStorage.setItem("umami.disabled","1"):localStorage.removeItem("umami.disabled")}}catch(e){}',
+          }}
+        />
+        <script
           defer
           src="/k/s.js"
           data-website-id={UMAMI_WEBSITE_ID}
