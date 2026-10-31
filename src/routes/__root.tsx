@@ -15,6 +15,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SITE_IMAGE } from "../lib/site";
 import { Credit } from "../components/Credit";
 import { SiteHeader } from "../components/SiteHeader";
+import { UmamiPhoneClicks } from "../components/UmamiPhoneClicks";
+import { UMAMI_WEBSITE_ID } from "../lib/umami";
 import { Analytics } from "@vercel/analytics/react";
 
 function NotFoundComponent() {
@@ -123,6 +125,12 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="nb">
       <head>
         <HeadContent />
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id={UMAMI_WEBSITE_ID}
+          data-domains="www.kjornesodden.no,kjornesodden.no"
+        ></script>
       </head>
       <body>
         {children}
@@ -142,6 +150,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <UmamiPhoneClicks />
       {!hasFooter && <Credit />}
     </QueryClientProvider>
   );
