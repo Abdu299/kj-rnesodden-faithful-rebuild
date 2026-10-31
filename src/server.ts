@@ -76,6 +76,22 @@ function clientIp(request: Request): string {
   return forwarded || request.headers.get("x-real-ip") || "";
 }
 
+// Umami Cloud ligger bak Cloudflare og ser ellers Vercels IP. Feltet payload.ip gir Umami
+// besøkendes egen IP, så hver besøkende telles for seg og stedet blir riktig.
+function withClientIp(body: string, ip: string): string {
+  if (!ip) return body;
+  try {
+    const data = JSON.parse(body) as { payload?: Record<string, unknown> };
+    if (data && typeof data.payload === "object" && data.payload && !data.payload.ip) {
+      data.payload.ip = ip;
+      return JSON.stringify(data);
+    }
+  } catch {
+    // Ikke JSON: send uendret.
+  }
+  return body;
+}
+
 async function statsProxy(request: Request): Promise<Response | undefined> {
   const url = new URL(request.url);
   if (url.pathname === "/k/s.js" && request.method === "GET") {
@@ -97,7 +113,8 @@ async function statsProxy(request: Request): Promise<Response | undefined> {
     if (ip) headers["x-forwarded-for"] = ip;
     const cache = request.headers.get("x-umami-cache");
     if (cache) headers["x-umami-cache"] = cache;
-    const upstream = await fetch(STATS_SEND, { method: "POST", headers, body: await request.text() });
+    const body = await request.text();
+    const upstream = await fetch(STATS_SEND, { method: "POST", headers, body: withClientIp(body, ip) });
     return new Response(await upstream.text(), {
       status: upstream.status,
       headers: { "content-type": upstream.headers.get("content-type") ?? "application/json" },
