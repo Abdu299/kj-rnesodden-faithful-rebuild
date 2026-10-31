@@ -1,4 +1,5 @@
-import { useId, useState, type FormEvent } from "react";
+import { useEffect, useId, useState, type FormEvent } from "react";
+import { track } from "../lib/umami";
 import { Link } from "@tanstack/react-router";
 import { Crumbs } from "./Crumbs";
 import {
@@ -439,6 +440,16 @@ export function RequestForm({
   );
 }
 export function ReceiptPage({ receipt, onReset }: { receipt: Receipt; onReset: () => void }) {
+  useEffect(() => {
+    track(
+      receipt.kind === "menu" ? "Bestilling sendt" : "Forespørsel sendt",
+      {
+        restaurant: receipt.restaurantName,
+        ...(receipt.total !== null ? { belop: receipt.total } : {}),
+      },
+      receipt.reference,
+    );
+  }, [receipt]);
   return (
     <main className="receipt-page">
       <CheckCircle2 size={54} className="receipt-check" />
