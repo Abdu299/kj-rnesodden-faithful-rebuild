@@ -65,10 +65,58 @@ function duplicateHostRedirect(request: Request): Response | undefined {
   });
 }
 
+// Umami-telling via egen adresse, så annonseblokkere ikke stopper den (docs.umami.is/docs/bypass-ad-blockers).
+// /k/s.js er skriptet, /k/api/send tar imot tellingen og sender den videre med besøkendes IP,
+// ellers ville alle besøkende sett ut som én.
+const STATS_SCRIPT = "https://cloud.umami.is/script.js";
+const STATS_SEND = "https://gateway.umami.is/api/send";
+
+function clientIp(request: Request): string {
+  const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  return forwarded || request.headers.get("x-real-ip") || "";
+}
+
+async function statsProxy(request: Request): Promise<Response | undefined> {
+  const url = new URL(request.url);
+  if (url.pathname === "/k/s.js" && request.method === "GET") {
+    const upstream = await fetch(STATS_SCRIPT);
+    return new Response(await upstream.text(), {
+      status: upstream.status,
+      headers: {
+        "content-type": "application/javascript; charset=utf-8",
+        "cache-control": "public, max-age=3600",
+      },
+    });
+  }
+  if (url.pathname === "/k/api/send" && request.method === "POST") {
+    const headers: Record<string, string> = {
+      "content-type": "application/json",
+      "user-agent": request.headers.get("user-agent") ?? "",
+    };
+    const ip = clientIp(request);
+    if (ip) headers["x-forwarded-for"] = ip;
+    const cache = request.headers.get("x-umami-cache");
+    if (cache) headers["x-umami-cache"] = cache;
+    const upstream = await fetch(STATS_SEND, { method: "POST", headers, body: await request.text() });
+    return new Response(await upstream.text(), {
+      status: upstream.status,
+      headers: { "content-type": upstream.headers.get("content-type") ?? "application/json" },
+    });
+  }
+  return undefined;
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     const redirect = duplicateHostRedirect(request);
     if (redirect) return redirect;
+    try {
+      const stats = await statsProxy(request);
+      if (stats) return stats;
+    } catch (error) {
+      console.error(error);
+      return new Response(null, { status: 204 });
+    }
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);

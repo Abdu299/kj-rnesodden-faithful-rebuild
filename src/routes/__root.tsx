@@ -127,8 +127,9 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
         <script
           defer
-          src="https://cloud.umami.is/script.js"
+          src="/k/s.js"
           data-website-id={UMAMI_WEBSITE_ID}
+          data-host-url="/k"
           data-domains="www.kjornesodden.no,kjornesodden.no"
         ></script>
       </head>
