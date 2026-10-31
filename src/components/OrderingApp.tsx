@@ -471,7 +471,10 @@ export function OrderingApp({
       // Gamle lenker som /#tonys sendes videre til restaurantens egen side.
       const legacy = restaurantById(hash) ? placeById(hash) : undefined;
       if (legacy) {
-        window.location.replace(`/restauranter/${legacy.slug}`);
+        // Merket gjør at Umami viser hvor mange som kommer via gamle lenker (Arkans QR-plakater, eldre innlegg).
+        window.location.replace(
+          `/restauranter/${legacy.slug}?utm_source=gammel-lenke&utm_medium=qr-eller-innlegg&utm_campaign=${hash}`,
+        );
         return;
       }
       setView(hash === "annet" ? hash : "home");
