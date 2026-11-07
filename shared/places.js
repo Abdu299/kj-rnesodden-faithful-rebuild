@@ -9,8 +9,9 @@ export const places = [
     id: "signalen",
     slug: "signalen",
     seoName: "Signalen Nesodden",
+    dish: "Pizza",
     intro:
-      "Signalen Sjøbad ligger ved sjøen i Tangenveien 3 på Nesoddtangen og lager napolitansk pizza, pasta og kjøttretter. Takeaway-menyen har åtte pizzaer, tre pasta- og kjøttretter og drikke, og alle pizzaene kan lages glutenvennlige. Restauranten holder stengt på mandager. Bestill her, så henter vi maten og kjører den hjem til deg. Levering koster 75 kr til Tangen og 100 kr til Hellvik, Varden og Bjørnemyr.",
+      "Bestill pizza fra Signalen Sjøbad på nett og få den kjørt hjem på Nesodden. Signalen ligger ved sjøen i Tangenveien 3 på Nesoddtangen og lager napolitansk pizza, pasta og kjøttretter. Takeaway-menyen har åtte pizzaer, tre pasta- og kjøttretter og drikke, og alle pizzaene kan lages glutenvennlige. Restauranten holder stengt på mandager. Levering koster 75 kr til Tangen og 100 kr til Hellvik, Varden og Bjørnemyr, og du betaler når maten kommer.",
     website: "https://www.signal1.no/",
     faq: [
       {
@@ -23,8 +24,9 @@ export const places = [
     id: "tonys",
     slug: "tonys-sushi",
     seoName: "Tonys Sushi Nesodden",
+    dish: "Sushi og thaimat",
     intro:
-      "Tonys Sushi og Thai holder til på Flaskebekk senter i Kapellveien 84. Menyen har både sushi, sashimi og ferdige sett, og thairetter som thaisalat og varme hovedretter. Du kan blande sushi og thai i samme bestilling. Vi henter maten hos Tonys og kjører den hjem til deg, og du betaler når den er levert.",
+      "Bestill sushi og thaimat fra Tonys på nett og få det kjørt hjem på Nesodden. Tonys Sushi og Thai holder til på Flaskebekk senter i Kapellveien 84. Menyen har både sushi, sashimi og ferdige sett, og thairetter som thaisalat og varme hovedretter. Du kan blande sushi og thai i samme bestilling, og du betaler når maten er levert.",
     website: "https://tonyssushi.no",
     faq: [
       {
@@ -37,8 +39,9 @@ export const places = [
     id: "jafs",
     slug: "jafs",
     seoName: "JAFS Nesodden",
+    dish: "Burger og kebab",
     intro:
-      "JAFS Nesodden ligger i Kapellveien 2 på Nesoddtangen og lager burger, kebab og fish & chips. Her finner du hele ta med-menyen med priser, fra enkle burgere til menyer med pommes frites og mineralvann. Bestill, så henter vi maten og kjører den hjem til deg på Nesodden.",
+      "Bestill burger, kebab og fish & chips fra JAFS på nett og få maten kjørt hjem på Nesodden. JAFS Nesodden ligger i Kapellveien 2 på Nesoddtangen. Her finner du hele ta med-menyen med priser, fra enkle burgere til menyer med pommes frites og mineralvann.",
     website: "",
     faq: [
       {
@@ -55,8 +58,9 @@ export const places = [
     id: "jonathan",
     slug: "jonathan-sushi",
     seoName: "Jonathan Sushi Nesodden",
+    dish: "Sushi",
     intro:
-      "Jonathan Sushi ligger i Vestveien 51 på Nesoddtangen og lager sushi, bao og varme retter. Menyen har uramaki, nigiri, sashimi, futomaki og familiepakker, med samme priser som i restaurantens egen nettbutikk. Bestill her, så henter vi maten og kjører den hjem til deg.",
+      "Bestill sushi fra Jonathan Sushi på nett og få den kjørt hjem på Nesodden. Jonathan Sushi ligger i Vestveien 51 på Nesoddtangen og lager sushi, bao og varme retter. Menyen har uramaki, nigiri, sashimi, futomaki og familiepakker, med samme priser som i restaurantens egen nettbutikk.",
     website: "",
     faq: [
       {
@@ -73,8 +77,9 @@ export const places = [
     id: "bistro",
     slug: "flaskebekk-bistro",
     seoName: "Flaskebekk Bistro Nesodden",
+    dish: "Kinesisk mat og dim sum",
     intro:
-      "Flaskebekk Bistro ligger i Kapellveien 84 og lager kinesisk mat, dim sum og middag. Takeaway-menyen er stor: kinesiske retter, kombinasjonsretter, kokkens anbefalinger, norske retter og egen barnemeny. Hele menyen står her med priser. Bestill, så henter vi maten og kjører den hjem til deg.",
+      "Bestill kinesisk mat og dim sum fra Flaskebekk Bistro på nett og få maten kjørt hjem på Nesodden. Flaskebekk Bistro ligger i Kapellveien 84. Takeaway-menyen er stor: kinesiske retter, kombinasjonsretter, kokkens anbefalinger, norske retter og egen barnemeny, med priser på alt.",
     website: "",
     faq: [
       {
@@ -91,8 +96,9 @@ export const places = [
     id: "osolemio",
     slug: "o-sole-mio",
     seoName: "O' Sole Mio Nesodden",
+    dish: "Pizza",
     intro:
-      "O' Sole Mio ligger i Tangenveien 129 på Nesoddtangen og lager ekte napolitansk pizza. Menyen har 16 klassiske pizzaer med tomatsaus, seks hvite pizzaer uten tomatsaus, hjemmelaget tiramisù og italiensk brus. Husets egen pizza, O' Sole Mio, har skorpe fylt med fersk ricotta. Hele menyen står her med priser. Bestill, så henter vi pizzaen og kjører den hjem til deg. Levering koster 75 kr til Tangen og 100 kr til Hellvik, Varden og Bjørnemyr.",
+      "Bestill pizza fra O' Sole Mio på nett og få den kjørt hjem på Nesodden. O' Sole Mio ligger i Tangenveien 129 på Nesoddtangen og lager ekte napolitansk pizza. Menyen har 16 klassiske pizzaer med tomatsaus, seks hvite pizzaer uten tomatsaus, hjemmelaget tiramisù og italiensk brus. Husets egen pizza, O' Sole Mio, har skorpe fylt med fersk ricotta. Levering koster 75 kr til Tangen og 100 kr til Hellvik, Varden og Bjørnemyr, og du betaler når pizzaen kommer.",
     website: "",
     faq: [
       {
@@ -117,8 +123,9 @@ export const places = [
     id: "mamagreek",
     slug: "mama-greek-kitchen",
     seoName: "Mama Greek Kitchen Fagerstrand",
+    dish: "Gresk mat",
     intro:
-      "Mama Greek Kitchen er en gresk foodtruck på Fagerstrand med åpent hver dag fra 11 til 20. Menyen har gyros i pita og på tallerken, moussaka, spareribs, saganaki, dolmades, gresk salat og meze for to. Hele menyen står her med priser. Bestill, så henter vi maten og kjører den hjem til deg. Levering koster 175 kr til Fagerstrand, 150 kr til Svestad og Blylaget, 100 kr til Hellvik, Varden, Bjørnemyr, Alværn, Fjordvangen og Fjellstrand og 75 kr til Tangen.",
+      "Bestill gresk mat fra Mama Greek Kitchen på nett og få den kjørt hjem på Nesodden. Mama Greek Kitchen er en gresk foodtruck på Fagerstrand med åpent hver dag fra 11 til 20. Menyen har gyros i pita og på tallerken, moussaka, spareribs, saganaki, dolmades, gresk salat og meze for to. Levering koster 175 kr til Fagerstrand, 150 kr til Svestad og Blylaget, 100 kr til Hellvik, Varden, Bjørnemyr, Alværn, Fjordvangen og Fjellstrand og 75 kr til Tangen.",
     website: "",
     faq: [
       {

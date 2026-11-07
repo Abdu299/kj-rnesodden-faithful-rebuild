@@ -33,6 +33,8 @@ test("page texts are filled in and have no dashes used as punctuation", () => {
   for (const place of places) {
     assert.ok(place.seoName.length > 3, place.id);
     assert.ok(place.intro.length > 60, place.id);
+    assert.ok(place.dish && place.dish.length > 2, place.id);
+    assert.ok(place.intro.startsWith("Bestill "), place.id);
     assert.equal(/[–—]/.test(place.intro + place.seoName), false, place.id);
   }
 });

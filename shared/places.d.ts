@@ -3,6 +3,7 @@ export type Place = {
   id: string;
   slug: string;
   seoName: string;
+  dish: string;
   intro: string;
   website: string;
   faq: PlaceFaq[];

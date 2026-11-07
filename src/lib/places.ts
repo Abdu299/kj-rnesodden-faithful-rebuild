@@ -38,10 +38,11 @@ export function titleFor(page: PlacePage) {
   return `${page.place.seoName} | ${what} | KjørNesodden`;
 }
 
-export function descriptionFor({ restaurant }: PlacePage) {
+// Navn og mat først: det er det folk søker på, og da bruker Google oftere vår tekst i treffet.
+export function descriptionFor({ place, restaurant }: PlacePage) {
   const fee = formatKr(lowestFee());
   return restaurant.orderingMode === "menu"
-    ? `Se hele menyen til ${restaurant.name} med priser og bestill på nett. Vi henter maten og kjører den hjem til deg på Nesodden fra ${fee}. Du betaler ved levering.`
+    ? `${place.seoName}: ${place.dish.toLowerCase()} levert hjem. Se meny og priser og bestill på nett. Levering fra ${fee}, du betaler når maten kommer.`
     : `Bestill mat fra ${restaurant.name} på nett. Vi sjekker pris med stedet, henter maten og kjører den hjem til deg på Nesodden fra ${fee}. Du betaler ved levering.`;
 }
 
