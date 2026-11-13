@@ -38,7 +38,7 @@ function body(overrides = {}) {
     fullName: "Test Kunde",
     phone: "400 00 000",
     note: "Ring på døren",
-    quotedTotal: 535,
+    quotedTotal: 560,
     ...overrides,
   };
 }
@@ -86,7 +86,7 @@ async function send(payload, network = mockNetwork(), overrides = {}) {
 }
 
 test("delivery areas separate Tangen, Hellvik, Varden and Fagerstrand", () => {
-  assert.equal(deliveryZone(59.8588, 10.6634).fee, 75);
+  assert.equal(deliveryZone(59.8588, 10.6634).fee, 100);
   assert.equal(deliveryZone(59.84449, 10.69118).fee, 100);
   assert.equal(deliveryZone(59.839352, 10.645170).fee, 100);
   assert.equal(deliveryZone(59.8343, 10.6418).fee, 100);
@@ -108,7 +108,7 @@ test("Bjørnemyr address suggestions and verified checkout both use 100 kr", asy
   const verified = await verifyAddress(suggestions[0], network.fetchFn);
   assert.equal(verified.zone.fee, 100);
   assert.equal(validateMenuOrder(body({ quotedTotal: 560 }), verified, openTime).total, 560);
-  const stalePrice = await send(body(), network);
+  const stalePrice = await send(body({ quotedTotal: 535 }), network);
   assert.equal(stalePrice.response.status, 409);
   assert.equal(network.messages.length, 0);
   const placed = await send(body({ quotedTotal: 560 }), network);
@@ -116,10 +116,12 @@ test("Bjørnemyr address suggestions and verified checkout both use 100 kr", asy
   assert.equal(placed.result.receipt.deliveryFee, 100);
   assert.match(network.messages[0].text, /Levering: 100 kr/);
 });
-// Real address points from Kartverket's Geonorge address API, 27 October 2026.
+// The first row is a synthetic Tangen fixture; remaining rows are real
+// address points from Kartverket's Geonorge address API, 27 October 2026.
 // Include Varden addresses labelled NESODDTANGEN, so postal text cannot hide
-// a regression to Tangen's 75 kr fee. Tests never submit real orders.
+// a regression to the former 75 kr fee. Tests never submit real orders.
 for (const [street, code, number, postcode, place, lat, lon, fee, previousFee] of [
+  ["Testveien", 1234, 12, "1450", "NESODDTANGEN", 59.8588, 10.6634, 100, 75],
   ["Hellvikalleen", 1790, 1, "1459", "NESODDEN", 59.844819, 10.690703, 100, 75],
   ["Hellvikalleen", 1790, 15, "1459", "NESODDEN", 59.846971, 10.690313, 100, 75],
   ["Hellvikveien", 1800, 101, "1459", "NESODDEN", 59.837405, 10.688936, 100, 75],
@@ -328,12 +330,12 @@ test("address provider failures return a useful 503 response", async () => {
 test("server prices include chosen toppings and quantity, never caller supplied prices", () => {
   const option = signalen.categories[0].items[0].options.find((o) => o.id === "glutenfriendly");
   assert.ok(option);
-  const payload = body({ quotedTotal: 615 });
+  const payload = body({ quotedTotal: 640 });
   payload.items[0].optionIds = [option.id];
   payload.items[0].unitPrice = 1;
   const order = validateMenuOrder(payload, address, openTime);
   assert.equal(order.subtotal, 540);
-  assert.equal(order.total, 615);
+  assert.equal(order.total, 640);
   assert.throws(
     () => validateMenuOrder({ ...payload, quotedTotal: 1 }, address, openTime),
     /Prisen er endret/,
@@ -419,11 +421,11 @@ test("a successful receipt and Telegram message contain the same canonical total
   const outcome = await send(body());
   assert.equal(outcome.response.status, 200);
   assert.equal(outcome.result.success, true);
-  assert.equal(outcome.result.receipt.total, 535);
+  assert.equal(outcome.result.receipt.total, 560);
   assert.equal(outcome.messages.length, 1);
   assert.equal(outcome.messages[0].chat_id, "test-chat");
   assert.match(outcome.messages[0].text, /2 × Margherita/);
-  assert.match(outcome.messages[0].text, /TOTALT: 535 kr/);
+  assert.match(outcome.messages[0].text, /TOTALT: 560 kr/);
   assert.match(outcome.messages[0].text, /Testveien 12/);
 });
 test("a typed address submits with canonical goods prices and unconfirmed delivery", async () => {
@@ -500,7 +502,7 @@ test("Noe annet sends an inquiry with a known delivery fee and unconfirmed goods
     }),
   );
   assert.equal(outcome.result.receipt.total, null);
-  assert.equal(outcome.result.receipt.deliveryFee, 75);
+  assert.equal(outcome.result.receipt.deliveryFee, 100);
   assert.match(outcome.messages[0].text, /endelig total må bekreftes/);
 });
 test("Noe annet can submit a typed address without a selected suggestion", async () => {

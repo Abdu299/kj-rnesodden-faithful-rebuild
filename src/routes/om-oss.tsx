@@ -8,10 +8,10 @@ import { formatKr } from "../lib/catalog";
 
 const TITLE = "Om KjørNesodden | Lokal matlevering på hele Nesodden";
 const DESCRIPTION =
-  "KjørNesodden henter mat fra restauranter og varer fra butikker og kjører det hjem til deg på Nesodden. Fast pris fra 75 kr, du betaler når du har fått varene.";
+  "KjørNesodden henter mat fra restauranter og varer fra butikker og kjører det hjem til deg på Nesodden. Fast pris fra 100 kr, du betaler når du har fått varene.";
 
 const PRICES = [
-  { area: "Tangen", price: "75 kr" },
+  { area: "Tangen", price: "100 kr" },
   { area: "Alværn / Fjordvangen", price: "100 kr" },
   { area: "Fjellstrand", price: "125 kr" },
   { area: "Fagerstrand", price: "175 kr" },

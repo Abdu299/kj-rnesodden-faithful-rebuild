@@ -1,6 +1,6 @@
 export const NESODDEN_MUNICIPALITY = "3212";
 export const zones = [
-  { id: "tangen", name: "Tangen", fee: 75 },
+  { id: "tangen", name: "Tangen", fee: 100 },
   { id: "hellvik", name: "Hellvik / Varden", fee: 100 },
   { id: "bjornemyr", name: "Bjørnemyr", fee: 100 },
   { id: "alvaern", name: "Alværn / Fjordvangen / Fjellstrand", fee: 100 },

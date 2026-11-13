@@ -46,7 +46,7 @@ test("Vercel GET adapter preserves the query and serves only Nesodden addresses"
     assert.equal(res.statusCode, 200);
     assert.equal(res.body.addresses.length, 1);
     assert.equal(res.body.addresses[0].municipality, "3212");
-    assert.equal(res.body.addresses[0].zone.fee, 75);
+    assert.equal(res.body.addresses[0].zone.fee, 100);
     assert.equal(res.headers["cache-control"], "public, max-age=300");
     assert.match(res.headers["content-type"], /application\/json/);
   } finally {
