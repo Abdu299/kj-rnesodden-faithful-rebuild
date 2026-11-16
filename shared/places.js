@@ -142,6 +142,29 @@ export const places = [
       },
     ],
   },
+  {
+    id: "fagerstrand",
+    slug: "fagerstrand-grill",
+    seoName: "Fagerstrand Grill Nesodden",
+    dish: "Pizza, burger og kebab",
+    intro:
+      "Bestill pizza, burger og kebab fra Fagerstrand Grill på nett og få maten kjørt hjem på Nesodden. Fagerstrand Grill er gatekjøkkenet i Myklerudveien 5 på Fagerstrand. Menyen har ni pizzaer, burgere fra 100 til 320 gram, kebab i tre størrelser og egen barnemeny. Det er åpent mandag til onsdag fra 14 til 21 og torsdag til søndag fra 11 til 21. Levering koster 250 kr til Fagerstrand, 150 kr til Fjellstrand, Svestad og Blylaget, 100 kr til Hellvik, Varden, Bjørnemyr, Alværn og Fjordvangen og 100 kr til Tangen.",
+    website: "https://fagerstrandgrill.no",
+    faq: [
+      {
+        q: "Når har Fagerstrand Grill åpent?",
+        a: "Mandag til onsdag fra 14 til 21, og torsdag til søndag fra 11 til 21.",
+      },
+      {
+        q: "Hvilke størrelser finnes burgerne i?",
+        a: "Burgerne finnes i 100, 160, 200 og 320 gram. En hamburger koster fra 110 kr.",
+      },
+      {
+        q: "Har Fagerstrand Grill barnemeny?",
+        a: "Ja. Hamburger, fiskemiddag eller nuggets med pommes frites koster 140 kr.",
+      },
+    ],
+  },
 ];
 
 export const placeBySlug = (slug) => places.find((place) => place.slug === slug);

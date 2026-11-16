@@ -9780,5 +9780,1048 @@
         ]
       }
     ]
+  },
+  {
+    "id": "fagerstrand",
+    "name": "Fagerstrand Grill",
+    "shortName": "Fagerstrand Grill",
+    "cuisine": "Pizza, burger og kebab",
+    "address": "Myklerudveien 5, Fagerstrand",
+    "phone": "45 90 21 45",
+    "image": "/images/fg-kort.webp",
+    "logo": "/images/fg-logo.webp",
+    "banner": "/images/fg-banner.webp",
+    "hours": [
+      [
+        660,
+        1260
+      ],
+      [
+        840,
+        1260
+      ],
+      [
+        840,
+        1260
+      ],
+      [
+        840,
+        1260
+      ],
+      [
+        660,
+        1260
+      ],
+      [
+        660,
+        1260
+      ],
+      [
+        660,
+        1260
+      ]
+    ],
+    "orderingMode": "menu",
+    "note": "Priser fra Fagerstrand Grills egen meny, november 2026. Burger og kebab finnes i flere størrelser. Allergener står ikke på menyen, spør restauranten.",
+    "sources": [
+      {
+        "label": "Fagerstrand Grill, nettside med meny og åpningstider",
+        "url": "https://fagerstrandgrill.no/"
+      },
+      {
+        "label": "Fagerstrand Grill på Google Maps",
+        "url": "https://www.google.com/maps?cid=11104242740390400696"
+      }
+    ],
+    "verifiedAt": "2026-11-16",
+    "categories": [
+      {
+        "id": "pizza",
+        "name": "Pizza",
+        "description": "",
+        "items": [
+          {
+            "id": "pizza-0",
+            "number": 1,
+            "name": "Biffpizza",
+            "description": "Rødløk, mais, paprika, champignon og ost",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 305
+              }
+            ],
+            "image": "/images/fg-pizza.webp",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "pizza-1",
+            "number": 2,
+            "name": "Kyllingpizza",
+            "description": "Rødløk, mais, paprika, champignon, oliven og ost",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 299
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "pizza-2",
+            "number": 3,
+            "name": "Kebabpizza",
+            "description": "Mais, paprika, jalapeño og ost",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 285
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "pizza-3",
+            "number": 4,
+            "name": "Dönerpizza",
+            "description": "Rødløk, mais, paprika, jalapeño, oliven og ost",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 310
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "pizza-4",
+            "number": 5,
+            "name": "Pepperonipizza",
+            "description": "Rødløk, mais, paprika, champignon og ost",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 284
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "pizza-5",
+            "number": 6,
+            "name": "Skinke og bacon",
+            "description": "Rødløk, paprika og ost",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 295
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "pizza-6",
+            "number": 7,
+            "name": "Vegetar",
+            "description": "Rødløk, mais, paprika, champignon, oliven, jalapeño og ost",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 255
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "pizza-7",
+            "number": 8,
+            "name": "Mozzarella",
+            "description": "Ost",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 199
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "pizza-8",
+            "number": 9,
+            "name": "Velg selv",
+            "description": "Velg seks ingredienser",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 355
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "burger",
+        "name": "Burger",
+        "description": "",
+        "items": [
+          {
+            "id": "burger-0",
+            "number": 10,
+            "name": "Hamburger",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "100 g",
+                "price": 110
+              },
+              {
+                "id": "1",
+                "label": "160 g",
+                "price": 135
+              },
+              {
+                "id": "2",
+                "label": "200 g",
+                "price": 155
+              },
+              {
+                "id": "3",
+                "label": "320 g",
+                "price": 200
+              }
+            ],
+            "image": "/images/fg-hamburger.webp",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "burger-1",
+            "number": 11,
+            "name": "Cheeseburger",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "100 g",
+                "price": 120
+              },
+              {
+                "id": "1",
+                "label": "160 g",
+                "price": 145
+              },
+              {
+                "id": "2",
+                "label": "200 g",
+                "price": 165
+              },
+              {
+                "id": "3",
+                "label": "320 g",
+                "price": 210
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "burger-2",
+            "number": 12,
+            "name": "Chili cheeseburger",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "100 g",
+                "price": 125
+              },
+              {
+                "id": "1",
+                "label": "160 g",
+                "price": 150
+              },
+              {
+                "id": "2",
+                "label": "200 g",
+                "price": 170
+              },
+              {
+                "id": "3",
+                "label": "320 g",
+                "price": 215
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "burger-3",
+            "number": 13,
+            "name": "Barbecueburger",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "100 g",
+                "price": 125
+              },
+              {
+                "id": "1",
+                "label": "160 g",
+                "price": 150
+              },
+              {
+                "id": "2",
+                "label": "200 g",
+                "price": 170
+              },
+              {
+                "id": "3",
+                "label": "320 g",
+                "price": 215
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "burger-4",
+            "number": 14,
+            "name": "Meksikansk burger",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "100 g",
+                "price": 125
+              },
+              {
+                "id": "1",
+                "label": "160 g",
+                "price": 150
+              },
+              {
+                "id": "2",
+                "label": "200 g",
+                "price": 170
+              },
+              {
+                "id": "3",
+                "label": "320 g",
+                "price": 215
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "burger-5",
+            "number": 15,
+            "name": "Hawaii cheeseburger",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "100 g",
+                "price": 125
+              },
+              {
+                "id": "1",
+                "label": "160 g",
+                "price": 150
+              },
+              {
+                "id": "2",
+                "label": "200 g",
+                "price": 170
+              },
+              {
+                "id": "3",
+                "label": "320 g",
+                "price": 215
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "burger-6",
+            "number": 16,
+            "name": "Løvstekburger",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 135
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "burger-7",
+            "number": 17,
+            "name": "Vegetarburger",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 125
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "burger-8",
+            "number": 18,
+            "name": "Kyllingburger",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 130
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "burger-9",
+            "number": 19,
+            "name": "Fiskemiddag",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 180
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "kebab",
+        "name": "Kebab",
+        "description": "",
+        "items": [
+          {
+            "id": "kebab-0",
+            "number": 20,
+            "name": "Kebab i pita eller rull",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Liten",
+                "price": 120
+              },
+              {
+                "id": "1",
+                "label": "Medium",
+                "price": 130
+              },
+              {
+                "id": "2",
+                "label": "Stor",
+                "price": 140
+              }
+            ],
+            "image": "/images/fg-kebab.webp",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "kebab-1",
+            "number": 21,
+            "name": "Kyllingkebab i pita eller rull",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Liten",
+                "price": 135
+              },
+              {
+                "id": "1",
+                "label": "Medium",
+                "price": 150
+              },
+              {
+                "id": "2",
+                "label": "Stor",
+                "price": 165
+              }
+            ],
+            "image": "/images/fg-kylling.webp",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "kebab-2",
+            "number": 22,
+            "name": "Biffkebab i pita eller rull",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Liten",
+                "price": 150
+              },
+              {
+                "id": "1",
+                "label": "Medium",
+                "price": 180
+              },
+              {
+                "id": "2",
+                "label": "Stor",
+                "price": 210
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "kebab-3",
+            "number": 23,
+            "name": "Dönerkebab",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Liten",
+                "price": 145
+              },
+              {
+                "id": "1",
+                "label": "Medium",
+                "price": 160
+              },
+              {
+                "id": "2",
+                "label": "Stor",
+                "price": 175
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "kebab-4",
+            "number": 24,
+            "name": "Falafel i pita eller rull",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 110
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "kebab-5",
+            "number": 25,
+            "name": "Løvstek",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 135
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "pommesfrites",
+        "name": "Pommes frites",
+        "description": "",
+        "items": [
+          {
+            "id": "pommesfrites-0",
+            "number": 26,
+            "name": "Pommes frites",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "Liten",
+                "price": 80
+              },
+              {
+                "id": "1",
+                "label": "Stor",
+                "price": 100
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "barnemeny",
+        "name": "Barnemeny",
+        "description": "",
+        "items": [
+          {
+            "id": "barnemeny-0",
+            "number": 27,
+            "name": "Hamburger med pommes frites",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 140
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "barnemeny-1",
+            "number": 28,
+            "name": "Fiskemiddag med pommes frites",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 140
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "barnemeny-2",
+            "number": 29,
+            "name": "Nuggets med pommes frites",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 140
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "tillegg",
+        "name": "Tillegg",
+        "description": "",
+        "items": [
+          {
+            "id": "tillegg-0",
+            "number": 30,
+            "name": "Som tallerkenrett",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 60
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tillegg-1",
+            "number": 31,
+            "name": "Ekstra ost på burger",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 25
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tillegg-2",
+            "number": 32,
+            "name": "Bacon",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 43
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tillegg-3",
+            "number": 33,
+            "name": "Ekstra kjøtt på pizza",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 65
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tillegg-4",
+            "number": 34,
+            "name": "Ekstra ost på pizza",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 65
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tillegg-5",
+            "number": 35,
+            "name": "Ananas",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 65
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tillegg-6",
+            "number": 36,
+            "name": "Hvitløksdressing",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 40
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tillegg-7",
+            "number": 37,
+            "name": "Sterk dressing",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 40
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "tillegg-8",
+            "number": 38,
+            "name": "Medium dressing",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 40
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      },
+      {
+        "id": "drikke",
+        "name": "Drikke",
+        "description": "",
+        "items": [
+          {
+            "id": "drikke-0",
+            "number": 39,
+            "name": "Brus",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "0,5 l",
+                "price": 53
+              },
+              {
+                "id": "1",
+                "label": "1,5 l",
+                "price": 85
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "drikke-1",
+            "number": 40,
+            "name": "Kuli",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 35
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "drikke-2",
+            "number": 41,
+            "name": "Monster",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 59
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          },
+          {
+            "id": "drikke-3",
+            "number": 42,
+            "name": "Iskaffe",
+            "description": "",
+            "allergens": [],
+            "variants": [
+              {
+                "id": "0",
+                "label": "",
+                "price": 50
+              }
+            ],
+            "image": "",
+            "tag": "",
+            "isNew": false,
+            "subheading": "",
+            "options": []
+          }
+        ]
+      }
+    ]
   }
 ]
