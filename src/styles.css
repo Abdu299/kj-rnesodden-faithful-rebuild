@@ -987,10 +987,10 @@
 .restaurant-logo { position: absolute; left: 12px; bottom: -12px; background: white; padding: 7px; box-shadow: 0 3px 12px #17213b22; border-radius: 10px; height: 44px; max-width: 120px; }
 .restaurant-logo img { height: 100%; max-width: 100%; object-fit: contain; }
 .restaurant-card-body { flex: 1; display: flex; flex-direction: column; padding: 22px 14px 14px; width: 100%; }
-.restaurant-card h3 { font-size: 16px; font-weight: 800; line-height: 1.35; margin: 0 0 5px; }
+.restaurant-card h3 { font-size: 19px; font-weight: 800; color: #12151c; letter-spacing: -0.01em; line-height: 1.25; margin: 0 0 6px; }
 .restaurant-card p { color: #5a6070; font-size: 12px; line-height: 1.5; margin: 0 0 6px; }
 .restaurant-card p span { font-size: 11.5px; }
-.opening-status { display: inline-flex; gap: 4px; align-items: flex-start; font-size: 12px; font-weight: 700; line-height: 1.5; }
+.opening-status { display: inline-flex; gap: 4px; align-items: flex-start; font-size: 12px; font-weight: 600; line-height: 1.5; }
 .is-open { color: #1f6b4a; }
 .is-closed { color: #8a4b1a; }
 .card-cta { display: flex; align-items: center; justify-content: center; gap: 8px; background: #ff9418; color: #1b1206; border-radius: 8px; padding: 11px 8px; margin-top: auto; font-size: 13px; font-weight: 800; min-height: 43px; }
@@ -1195,7 +1195,7 @@
   .restaurant-photo { height: 115px; }
   .restaurant-logo { height: 36px; max-width: 95px; left: 8px; bottom: -9px; padding: 5px; }
   .restaurant-card-body { padding: 18px 10px 10px; }
-  .restaurant-card h3 { font-size: 13px; }
+  .restaurant-card h3 { font-size: 15.5px; }
   .restaurant-card p, .restaurant-card p span { font-size: 10.5px; }
   .opening-status { font-size: 10.5px; }
   .card-cta { font-size: 11px; padding: 10px 4px; gap: 4px; min-height: 42px; margin-top: auto; }
@@ -1251,7 +1251,7 @@
 @media (max-width: 359px) {
   .restaurant-cards { grid-template-columns: 1fr; }
   .restaurant-photo { height: 160px; }
-  .restaurant-card h3 { font-size: 17px; }
+  .restaurant-card h3 { font-size: 19px; }
   .restaurant-card p, .restaurant-card p span, .opening-status { font-size: 12px; }
   .other-card { flex-direction: column; }
   .other-card .restaurant-photo { width: 100%; height: 130px; }
