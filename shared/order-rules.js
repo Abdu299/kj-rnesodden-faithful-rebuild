@@ -3,9 +3,10 @@ export const zones = [
   { id: "tangen", name: "Tangen", fee: 100 },
   { id: "hellvik", name: "Hellvik / Varden", fee: 100 },
   { id: "bjornemyr", name: "Bjørnemyr", fee: 100 },
-  { id: "alvaern", name: "Alværn / Fjordvangen / Fjellstrand", fee: 100 },
+  { id: "alvaern", name: "Alværn / Fjordvangen", fee: 100 },
+  { id: "fjellstrand", name: "Fjellstrand", fee: 150 },
   { id: "svestad", name: "Svestad / Blylaget", fee: 150 },
-  { id: "fagerstrand", name: "Fagerstrand", fee: 175 },
+  { id: "fagerstrand", name: "Fagerstrand", fee: 250 },
 ];
 
 // Same geographical delivery-area anchors as the requested reference site.
@@ -27,7 +28,7 @@ const anchors = [
   [59.8209, 10.6278, "alvaern"],
   [59.8292, 10.6952, "alvaern"],
   [59.8331, 10.6941, "alvaern"],
-  [59.7952, 10.6083, "alvaern"],
+  [59.7952, 10.6083, "fjellstrand"],
   [59.8064, 10.6256, "alvaern"],
   [59.814, 10.6768, "alvaern"],
   [59.7912, 10.7054, "alvaern"],
@@ -46,9 +47,9 @@ const anchors = [
 
 // Business delivery area interpreted from the owner's 24 October 2026 sketch.
 // The northern edge runs south of Fjellstrand centre and curves north towards
-// the east coast. Alværn, Fjellstrand centre and Fjordvangen remain 100 kr.
+// the east coast. Alværn and Fjordvangen remain 100 kr; Fjellstrand is 150 kr.
 // These are approximate hand-drawn business boundaries, not postal boundaries.
-// Fagerstrand is now priced separately at 175 kr within this southern area.
+// Fagerstrand is now priced separately at 250 kr within this southern area.
 // Points are [latitude, longitude]; postcode must never override this area.
 const marked150Area = [
   [59.792, 10.575],
@@ -103,6 +104,8 @@ export function deliveryZone(latitude, longitude, postalCode, postalPlace) {
     return zones.find((zone) => zone.id === "fagerstrand");
   if (insideMarked150Area(latitude, longitude))
     return zones.find((zone) => zone.id === "svestad");
+  if (closest === "fjellstrand")
+    return zones.find((zone) => zone.id === "fjellstrand");
   // Outside the marked area, keep the established Bjørnemyr postal rule.
   if (
     (String(postalCode) === "1453" ||

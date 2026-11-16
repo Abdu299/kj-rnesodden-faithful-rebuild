@@ -91,7 +91,7 @@ test("delivery areas separate Tangen, Hellvik, Varden and Fagerstrand", () => {
   assert.equal(deliveryZone(59.839352, 10.645170).fee, 100);
   assert.equal(deliveryZone(59.8343, 10.6418).fee, 100);
   assert.equal(deliveryZone(59.8209, 10.6278).fee, 100);
-  assert.equal(deliveryZone(59.7375, 10.594).fee, 175);
+  assert.equal(deliveryZone(59.7375, 10.594).fee, 250);
   assert.equal(deliveryZone(NaN, 10), null);
 });
 test("Bjørnemyr address suggestions and verified checkout both use 100 kr", async () => {
@@ -121,6 +121,7 @@ test("Bjørnemyr address suggestions and verified checkout both use 100 kr", asy
 // Include Varden addresses labelled NESODDTANGEN, so postal text cannot hide
 // a regression to the former 75 kr fee. Tests never submit real orders.
 for (const [street, code, number, postcode, place, lat, lon, fee, previousFee] of [
+  ["Fjellstrand testadresse", 1235, 1, "1458", "FJELLSTRAND", 59.7952, 10.60834, 150, 100],
   ["Testveien", 1234, 12, "1450", "NESODDTANGEN", 59.8588, 10.6634, 100, 75],
   ["Hellvikalleen", 1790, 1, "1459", "NESODDEN", 59.844819, 10.690703, 100, 75],
   ["Hellvikalleen", 1790, 15, "1459", "NESODDEN", 59.846971, 10.690313, 100, 75],
@@ -128,7 +129,7 @@ for (const [street, code, number, postcode, place, lat, lon, fee, previousFee] o
   ["Vardeveien", 3209, 10, "1452", "NESODDTANGEN", 59.853815, 10.652775, 100, 75],
   ["Vardeveien", 3209, 104, "1452", "NESODDTANGEN", 59.845802, 10.651148, 100, 75],
   ["Håkonskastet", 1075, 5, "1453", "BJØRNEMYR", 59.839352, 10.645170, 100, 75],
-  ["Myklerudveien", 2261, 124, "1454", "FAGERSTRAND", 59.745974, 10.608878, 175, 150],
+  ["Myklerudveien", 2261, 124, "1454", "FAGERSTRAND", 59.745974, 10.608878, 250, 175],
   ["Svestadveien", 2930, 10, "1458", "FJELLSTRAND", 59.776261, 10.594114, 150, 175],
   ["Blylagveien", 1220, 103, "1459", "NESODDEN", 59.777430, 10.703360, 150, 175],
 ]) {
@@ -177,19 +178,19 @@ for (const [fee, locations] of [
   [100, [
     [59.82093, 10.62778], // Alværn
     [59.8343, 10.6418], // Bjørnemyr
-    [59.7952, 10.60834], // Fjellstrand centre, north of the drawn boundary
     [59.82924, 10.69524], // Fjordvangen
     [59.8064, 10.6256],
     [59.814, 10.6768],
   ]],
   [150, [
+    [59.7952, 10.60834], // Fjellstrand centre
     [59.77514, 10.59449], // Svestad grend
     [59.7648, 10.63744], // Svestad gard
     [59.77791, 10.70588], // Blylaget
     [59.783, 10.64], // Interior between the old sparse anchors
     [59.7912, 10.7054], // Eastern part of the marked area
   ]],
-  [175, [
+  [250, [
     [59.73746, 10.59404], // Fagerstrand
     [59.743, 10.6127],
     [59.7505, 10.6082],
@@ -225,9 +226,9 @@ for (const [fee, locations] of [
     }
   });
 }
-test("drawn area's northern edge separates Fjellstrand from the 150 kr area", () => {
+test("drawn area's northern edge keeps Fjellstrand and Svestad at 150 kr", () => {
   // The western edge is below Fjellstrand centre. Same postcode on both sides.
-  assert.equal(deliveryZone(59.7921, 10.60834, "1458", "FJELLSTRAND").fee, 100);
+  assert.equal(deliveryZone(59.7921, 10.60834, "1458", "FJELLSTRAND").fee, 150);
   assert.equal(deliveryZone(59.7919, 10.60834, "1458", "FJELLSTRAND").fee, 150);
   assert.equal(deliveryZone(59.792, 10.60834, "1458", "FJELLSTRAND").fee, 150);
   // The northern boundary curves towards the east as in the owner's sketch.
@@ -313,7 +314,7 @@ test("checkout re-fetches the address and ignores client supplied delivery fee a
     { ...address, zone: { fee: 0 }, latitude: 0, longitude: 0 },
     network.fetchFn,
   );
-  assert.equal(result.zone.fee, 175);
+  assert.equal(result.zone.fee, 250);
   await assert.rejects(() => verifyAddress({ ...address, id: "0301:1234:12:" }, network.fetchFn));
   await assert.rejects(() => verifyAddress({ ...address, id: "3212:9999:12:" }, network.fetchFn));
 });
