@@ -109,7 +109,7 @@ function Home({
         </div>
         <div className="delivery-prices">
           <h2>Fast leveringspris</h2>
-          {zones.map((zone) => (
+          {zones.filter((zone) => ["tangen", "alvaern", "fjellstrand", "fagerstrand"].includes(zone.id)).map((zone) => (
             <div key={zone.name}>
               <span>{zone.name}</span>
               <b>{formatKr(zone.fee)}</b>
