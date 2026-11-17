@@ -445,6 +445,8 @@ export function ReceiptPage({ receipt, onReset }: { receipt: Receipt; onReset: (
       receipt.kind === "menu" ? "Bestilling sendt" : "Forespørsel sendt",
       {
         restaurant: receipt.restaurantName,
+        ...(receipt.subtotal !== null ? { varer: receipt.subtotal } : {}),
+        ...(receipt.deliveryFee !== null ? { frakt: receipt.deliveryFee } : {}),
         ...(receipt.total !== null ? { belop: receipt.total } : {}),
       },
       receipt.reference,
