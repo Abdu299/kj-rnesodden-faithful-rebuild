@@ -9788,9 +9788,9 @@
     "cuisine": "Pizza, burger og kebab",
     "address": "Myklerudveien 5, Fagerstrand",
     "phone": "45 90 21 45",
-    "image": "/images/fg-kort.webp",
+    "image": "/images/fg-kort-2.webp",
     "logo": "/images/fg-logo.webp",
-    "banner": "/images/fg-banner.webp",
+    "banner": "/images/fg-banner-2.webp",
     "hours": [
       [
         660,
@@ -9853,7 +9853,7 @@
                 "price": 305
               }
             ],
-            "image": "/images/fg-pizza.webp",
+            "image": "",
             "tag": "",
             "isNew": false,
             "subheading": "",
@@ -10046,7 +10046,7 @@
                 "price": 200
               }
             ],
-            "image": "/images/fg-hamburger.webp",
+            "image": "",
             "tag": "",
             "isNew": false,
             "subheading": "",
@@ -10328,7 +10328,7 @@
                 "price": 140
               }
             ],
-            "image": "/images/fg-kebab.webp",
+            "image": "",
             "tag": "",
             "isNew": false,
             "subheading": "",
@@ -10357,7 +10357,7 @@
                 "price": 165
               }
             ],
-            "image": "/images/fg-kylling.webp",
+            "image": "",
             "tag": "",
             "isNew": false,
             "subheading": "",
