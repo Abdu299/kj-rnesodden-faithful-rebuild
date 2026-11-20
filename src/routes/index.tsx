@@ -9,7 +9,7 @@ const LOCAL_BUSINESS_SCHEMA = {
   "@id": `${SITE_URL}/#bedrift`,
   name: "KjørNesodden",
   description:
-    "Lokal levering på Nesodden fra restauranter, hurtigmat og dagligvarebutikker. Fast pris etter område, betaling ved levering.",
+    "Lokal levering på Nesodden fra restauranter, hurtigmat og dagligvarebutikker. Pris ut fra hentested og leveringsadresse, betaling ved levering.",
   url: SITE_URL,
   image: SITE_IMAGE,
   logo: `${SITE_URL}/images/kjornesodden-logo-kvadrat.png`,
@@ -17,12 +17,6 @@ const LOCAL_BUSINESS_SCHEMA = {
   email: "kjrnesodden@gmail.com",
   priceRange: `${Math.min(...zones.map((zone) => zone.fee))} til ${Math.max(...zones.map((zone) => zone.fee))} kr per levering`,
   areaServed: { "@type": "AdministrativeArea", name: "Nesodden kommune" },
-  makesOffer: zones.map(({ name, fee }) => ({
-    "@type": "Offer",
-    name: `Levering til ${name}`,
-    price: fee,
-    priceCurrency: "NOK",
-  })),
 };
 
 

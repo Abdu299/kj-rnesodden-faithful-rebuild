@@ -1,6 +1,6 @@
 import catalog from "./catalog.json" with { type: "json" };
 import { OrderError, verifyAddress, searchAddresses } from "./address-service.js";
-import { openingStatus } from "./order-rules.js";
+import { openingStatus, deliveryFeeForRestaurants, deliveryFeeForPlace, pickupRestaurantIds } from "./order-rules.js";
 
 const inFlight = new Map();
 const recent = new Map();
@@ -59,7 +59,7 @@ export function validateMenuOrder(body, address, now = new Date()) {
     };
   });
   const subtotal = lines.reduce((sum, line) => sum + line.lineTotal, 0);
-  const deliveryFee = address.zone?.fee ?? null;
+  const deliveryFee = deliveryFeeForRestaurants([restaurant.id], address.zone?.id);
   const total = deliveryFee === null ? null : subtotal + deliveryFee;
   if (total !== null && body.quotedTotal !== undefined && body.quotedTotal !== total)
     throw new OrderError(
@@ -88,17 +88,8 @@ function validateRequest(body, address, now, legacy = false) {
   )
     throw new OrderError("Velg en gyldig bestillingstype.");
   const place = restaurant?.name ?? textField(body.place, "Sted", 180);
-  const fold = (value) =>
-    value
-      .toLocaleLowerCase("nb-NO")
-      .replace(/[’']/g, "")
-      .normalize("NFKD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .trim();
-  const normalizedPlace = ` ${fold(place).replace(/[(),;\/–—-]/g, " ")} `;
-  const knownPlaces = catalog.filter((r) =>
-    [r.name, r.shortName].some((name) => normalizedPlace.includes(` ${fold(name)} `)),
-  );
+  const knownIds = pickupRestaurantIds(place, catalog);
+  const knownPlaces = catalog.filter((r) => knownIds.includes(r.id));
   if (restaurant && !knownPlaces.some((place) => place.id === restaurant.id))
     knownPlaces.push(restaurant);
   if (knownPlaces.length) {
@@ -112,6 +103,8 @@ function validateRequest(body, address, now, legacy = false) {
       throw new OrderError("Bruk restaurantens meny for å bestille.");
   }
   const description = textField(body.description, "Hva du vil kjøpe", 1800);
+  // Other free-text pickup locations require confirmation before quoting.
+  const deliveryFee = deliveryFeeForPlace(place, catalog, address.zone?.id);
   return {
     kind: "request",
     restaurantId: restaurant?.id ?? knownPlaces[0]?.id ?? null,
@@ -122,7 +115,7 @@ function validateRequest(body, address, now, legacy = false) {
     address,
     lines: [],
     subtotal: null,
-    deliveryFee: address.zone?.fee ?? null,
+    deliveryFee,
     total: null,
   };
 }

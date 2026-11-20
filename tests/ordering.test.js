@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import catalog from "../shared/catalog.json" with { type: "json" };
-import { deliveryZone, openingStatus, osloTime } from "../shared/order-rules.js";
+import { deliveryZone, deliveryFeeForRoute, deliveryFeeForRestaurants, openingStatus, osloTime } from "../shared/order-rules.js";
 import {
   addressHandler,
   normalizeAddress,
@@ -93,6 +93,35 @@ test("delivery areas separate Tangen, Hellvik, Varden and Fagerstrand", () => {
   assert.equal(deliveryZone(59.8209, 10.6278).fee, 100);
   assert.equal(deliveryZone(59.7375, 10.594).fee, 250);
   assert.equal(deliveryZone(NaN, 10), null);
+});
+test("pickup and destination determine delivery, with the two special Fagerstrand routes", () => {
+  assert.equal(deliveryFeeForRoute("fagerstrand", "fagerstrand"), 100);
+  assert.equal(deliveryFeeForRoute("fjellstrand", "fagerstrand"), 150);
+  assert.equal(deliveryFeeForRoute("fagerstrand", "fjellstrand"), 250);
+  assert.equal(deliveryFeeForRoute("tangen", "fagerstrand"), 250);
+  assert.equal(deliveryFeeForRoute("fjellstrand", "tangen"), 150);
+  assert.equal(deliveryFeeForRoute("svestad", "fagerstrand"), 250);
+  assert.equal(deliveryFeeForRoute(null, "fagerstrand"), null);
+  assert.equal(deliveryFeeForRestaurants(["signalen", "mamagreek", "signalen"], "tangen"), 250);
+  assert.equal(deliveryFeeForRestaurants(["mamagreek", "fagerstrand"], "fagerstrand"), 100);
+  assert.equal(deliveryFeeForRestaurants(["signalen", "unknown"], "tangen"), null);
+});
+test("server calculates Fagerstrand pickup and rejects stale destination-only quotes", async () => {
+  const record = { ...addressRecord, postnummer: "1454", poststed: "FAGERSTRAND",
+    representasjonspunkt: { lat: 59.7375, lon: 10.594 } };
+  const restaurant = catalog.find((item) => item.id === "mamagreek");
+  const item = restaurant.categories[0].items[0];
+  const price = item.variants[0].price;
+  const payload = body({ restaurantId: restaurant.id,
+    items: [{ itemId: item.id, variantId: item.variants[0].id, optionIds: [], quantity: 1 }],
+    quotedTotal: price + 100 });
+  const network = mockNetwork({ records: [record] });
+  const stale = await send({ ...payload, quotedTotal: price + 250 }, network);
+  assert.equal(stale.response.status, 409);
+  const placed = await send(payload, network);
+  assert.equal(placed.response.status, 200);
+  assert.equal(placed.result.receipt.deliveryFee, 100);
+  assert.match(network.messages[0].text, /Levering: 100 kr/);
 });
 test("Bjørnemyr address suggestions and verified checkout both use 100 kr", async () => {
   const record = {

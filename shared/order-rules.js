@@ -9,6 +9,45 @@ export const zones = [
   { id: "fagerstrand", name: "Fagerstrand", fee: 250 },
 ];
 
+// Restaurant pickup areas. Keep this explicit so an unknown pickup never gets
+// silently priced as a nearby restaurant.
+export const restaurantPickupAreas = {
+  signalen: "tangen", tonys: "tangen", jafs: "tangen",
+  jonathan: "tangen", bistro: "tangen", osolemio: "tangen",
+  mamagreek: "fagerstrand", fagerstrand: "fagerstrand",
+};
+
+export function deliveryFeeForRoute(pickupAreaId, destinationAreaId) {
+  const pickup = zones.find((zone) => zone.id === pickupAreaId);
+  const destination = zones.find((zone) => zone.id === destinationAreaId);
+  if (!pickup || !destination) return null;
+  if (pickup.id === "fagerstrand" && destination.id === "fagerstrand") return 100;
+  if (pickup.id === "fjellstrand" && destination.id === "fagerstrand") return 150;
+  return Math.max(pickup.fee, destination.fee);
+}
+
+export function deliveryFeeForRestaurants(restaurantIds, destinationAreaId) {
+  if (!restaurantIds?.length) return null;
+  const fees = [...new Set(restaurantIds)].map((id) =>
+    deliveryFeeForRoute(restaurantPickupAreas[id], destinationAreaId));
+  return fees.every((fee) => fee !== null) ? Math.max(...fees) : null;
+}
+
+export function pickupRestaurantIds(place, restaurants) {
+  const fold = (value) => value.toLocaleLowerCase("nb-NO").replace(/[’']/g, "")
+    .normalize("NFKD").replace(/[\u0300-\u036f]/g, "").trim();
+  const normalized = ` ${fold(place).replace(/[(),;\/–—-]/g, " ")} `;
+  return restaurants.filter((restaurant) =>
+    [restaurant.name, restaurant.shortName].some((name) => normalized.includes(` ${fold(name)} `)))
+    .map((restaurant) => restaurant.id);
+}
+
+export function deliveryFeeForPlace(place, restaurants, destinationAreaId) {
+  const ids = pickupRestaurantIds(place, restaurants);
+  return ids.length ? deliveryFeeForRestaurants(ids, destinationAreaId)
+    : /^kiwi tangen$/i.test(place.trim()) ? deliveryFeeForRoute("tangen", destinationAreaId) : null;
+}
+
 // Same geographical delivery-area anchors as the requested reference site.
 // These are business pricing areas, not official postal-code boundaries.
 const anchors = [

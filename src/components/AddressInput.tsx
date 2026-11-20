@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { CheckCircle2, LoaderCircle, MapPin } from "lucide-react";
 import type { Address } from "../lib/catalog";
 import { formatKr } from "../lib/catalog";
+import { deliveryFeeForRestaurants, deliveryFeeForRoute } from "../../shared/order-rules.js";
 
 type Props = {
   value: Address | null;
@@ -10,8 +11,10 @@ type Props = {
   onChange: (address: Address | null) => void;
   error?: string;
   disabled?: boolean;
+  restaurantIds?: string[];
+  pickupAreaId?: string;
 };
-export function AddressInput({ value, query, onQuery, onChange, error, disabled }: Props) {
+export function AddressInput({ value, query, onQuery, onChange, error, disabled, restaurantIds = [], pickupAreaId }: Props) {
   const id = useId();
   const [suggestions, setSuggestions] = useState<Address[]>([]);
   const [loading, setLoading] = useState(false);
@@ -19,6 +22,9 @@ export function AddressInput({ value, query, onQuery, onChange, error, disabled 
   const [expanded, setExpanded] = useState(false);
   const [active, setActive] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+  const deliveryFee = (zoneId: string) => pickupAreaId
+    ? deliveryFeeForRoute(pickupAreaId, zoneId)
+    : deliveryFeeForRestaurants(restaurantIds, zoneId);
   useEffect(() => {
     setSuggestions([]);
     setActive(-1);
@@ -139,7 +145,7 @@ export function AddressInput({ value, query, onQuery, onChange, error, disabled 
                   {address.postalCode} {address.postalPlace}
                 </small>
               </span>
-              <b>{formatKr(address.zone.fee)}</b>
+              <b>{deliveryFee(address.zone.id) === null ? "Pris bekreftes" : formatKr(deliveryFee(address.zone.id)!)}</b>
             </button>
           ))}
         </div>
@@ -151,7 +157,7 @@ export function AddressInput({ value, query, onQuery, onChange, error, disabled 
       >
         {value ? (
           <>
-            <CheckCircle2 size={16} /> Levering: {formatKr(value.zone.fee)} · {value.zone.name}
+            <CheckCircle2 size={16} /> {deliveryFee(value.zone.id) !== null ? `Levering: ${formatKr(deliveryFee(value.zone.id)!)} · ${value.zone.name}` : `${value.zone.name} · Leveringspris bekreftes med deg`}
           </>
         ) : (
           "Velg et forslag for leveringspris på Nesodden, eller skriv hele adressen. Du kan sende uansett, så bekrefter vi leveringsprisen med deg."

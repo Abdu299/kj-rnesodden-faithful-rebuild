@@ -20,8 +20,9 @@ import {
   type CartLine,
   type Receipt,
   type Restaurant,
+  restaurants,
 } from "../lib/catalog";
-import { dayNames, formatTime, openingStatus } from "../../shared/order-rules.js";
+import { dayNames, formatTime, openingStatus, deliveryFeeForRestaurants, deliveryFeeForPlace, pickupRestaurantIds } from "../../shared/order-rules.js";
 
 export type Customer = { fullName: string; phone: string; note: string };
 export type CheckoutProps = {
@@ -142,6 +143,8 @@ export function CartPanel({
   const subtotal = restaurant
     ? lines.reduce((sum, line) => sum + (describeLine(restaurant, line)?.lineTotal ?? 0), 0)
     : 0;
+  const deliveryFee = props.address && restaurant
+    ? deliveryFeeForRestaurants([restaurant.id], props.address.zone.id) : null;
   function submit(e: FormEvent) {
     e.preventDefault();
     if (!props.addressText.trim()) {
@@ -157,7 +160,7 @@ export function CartPanel({
         ? { id: props.address.id, streetAddress: props.address.streetAddress }
         : undefined,
       addressText: props.addressText.trim(),
-      quotedTotal: props.address ? subtotal + props.address.zone.fee : undefined,
+      quotedTotal: deliveryFee !== null ? subtotal + deliveryFee : undefined,
       ...props.customer,
     });
   }
@@ -226,6 +229,7 @@ export function CartPanel({
           </div>
           <form onSubmit={submit} className="checkout-form">
             <AddressInput
+              restaurantIds={restaurant ? [restaurant.id] : []}
               value={props.address}
               query={props.addressText}
               onQuery={(text) => {
@@ -246,11 +250,11 @@ export function CartPanel({
               </div>
               <div>
                 <span>Levering</span>
-                <span>{props.address ? formatKr(props.address.zone.fee) : "Fra adressen"}</span>
+                <span>{deliveryFee !== null ? formatKr(deliveryFee) : "Bekreftes med deg"}</span>
               </div>
               <div className="grand-total">
-                <span>{props.address ? "Totalt" : "Varer før levering"}</span>
-                <b>{formatKr(subtotal + (props.address?.zone.fee ?? 0))}</b>
+                <span>{deliveryFee !== null ? "Totalt" : "Varer før levering"}</span>
+                <b>{formatKr(subtotal + (deliveryFee ?? 0))}</b>
               </div>
             </div>
             <CustomerFields {...props} />
@@ -263,7 +267,7 @@ export function CartPanel({
               submitting={props.submitting}
               submitError={props.submitError}
               disabled={!status?.open}
-              label={`Send bestilling${props.address ? ` · ${formatKr(subtotal + props.address.zone.fee)}` : ""}`}
+              label={`Send bestilling${deliveryFee !== null ? ` · ${formatKr(subtotal + deliveryFee)}` : ""}`}
             />
           </form>
         </>
@@ -284,6 +288,9 @@ export function RequestForm({
   const id = useId();
   const status = restaurant ? openingStatus(restaurant, now) : null;
   const closed = !!restaurant?.hours && !status?.open;
+  const pickupIds = restaurant ? [restaurant.id] : pickupRestaurantIds(place, restaurants);
+  const pickupAreaId = !pickupIds.length && /^kiwi tangen$/i.test(place.trim()) ? "tangen" : undefined;
+  const deliveryFee = props.address ? deliveryFeeForPlace(place, restaurants, props.address.zone.id) : null;
   function submit(e: FormEvent) {
     e.preventDefault();
     if (closed) return;
@@ -382,6 +389,8 @@ export function RequestForm({
             onChange={(e) => setDescription(e.target.value)}
           />
           <AddressInput
+            restaurantIds={pickupIds}
+            pickupAreaId={pickupAreaId}
             value={props.address}
             query={props.addressText}
             onQuery={(text) => {
@@ -398,7 +407,7 @@ export function RequestForm({
           <div className="order-totals">
             <div>
               <span>Levering</span>
-              <b>{props.address ? formatKr(props.address.zone.fee) : "Fra adressen"}</b>
+              <b>{deliveryFee !== null ? formatKr(deliveryFee) : "Bekreftes med deg"}</b>
             </div>
             <div>
               <span>Varer og endelig total</span>

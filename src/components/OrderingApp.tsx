@@ -24,7 +24,7 @@ import {
   type Receipt,
   type Restaurant,
 } from "../lib/catalog";
-import { dayNames, formatTime, openingStatus, zones } from "../../shared/order-rules.js";
+import { dayNames, formatTime, openingStatus, zones, deliveryFeeForRestaurants } from "../../shared/order-rules.js";
 import { CartPanel, RequestForm, ReceiptPage } from "./Checkout";
 import { placeById } from "../../shared/places.js";
 import { Crumbs } from "./Crumbs";
@@ -108,13 +108,14 @@ function Home({
           </p>
         </div>
         <div className="delivery-prices">
-          <h2>Fast leveringspris</h2>
+          <h2>Områdesatser for levering</h2>
           {zones.filter((zone) => ["tangen", "alvaern", "fjellstrand", "fagerstrand"].includes(zone.id)).map((zone) => (
             <div key={zone.name}>
               <span>{zone.name}</span>
               <b>{formatKr(zone.fee)}</b>
             </div>
           ))}
+          <p>Prisen beregnes ut fra både hentested og leveringsadresse. Fagerstrand til Fagerstrand: 100 kr. Fjellstrand til Fagerstrand: 150 kr.</p>
         </div>
       </section>
       <main className="restaurant-picker" id="restauranter">
@@ -524,6 +525,8 @@ export function OrderingApp({
         0,
       )
     : 0;
+  const cartDeliveryFee = address && cartRestaurant
+    ? deliveryFeeForRestaurants([cartRestaurant.id], address.zone.id) : null;
   const home = view === "home" && !receipt;
   function navigate(id: string) {
     setOptionSelection(null);
@@ -715,8 +718,8 @@ export function OrderingApp({
             <ShoppingBag size={19} /> Se bestilling ({count})
           </span>
           <b>
-            {formatKr(subtotal + (address?.zone.fee ?? 0))}
-            {!address && <small> + levering</small>}
+            {formatKr(subtotal + (cartDeliveryFee ?? 0))}
+            {cartDeliveryFee === null && <small> + levering</small>}
           </b>
         </button>
       )}

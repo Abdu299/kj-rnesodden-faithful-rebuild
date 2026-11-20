@@ -32,7 +32,7 @@ const STEPS = [
 const FAQ = [
   {
     q: "Hva koster levering med KjørNesodden?",
-    a: `Prisen er fast og avhenger av hvor du bor: ${PRICES.map((item) => `${item.area}: ${item.price}`).join(", ")}. Velg adressen din fra adresseforslagene for å se leveringsprisen.`,
+    a: `Områdesatser: ${PRICES.map((item) => `${item.area}: ${item.price}`).join(", ")}. Leveringsprisen er den høyeste satsen for hentested og leveringsadresse. Fagerstrand til Fagerstrand koster 100 kr, og Fjellstrand til Fagerstrand koster 150 kr. Velg restaurant og adresse for å se prisen.`,
   },
   {
     q: "Når betaler jeg?",
@@ -90,7 +90,7 @@ function OmOss() {
           <h1>Nesoddens egen budtjeneste</h1>
           <p>
             Vi henter mat fra restaurantene og varer fra butikkene, og kjører det hjem til deg.
-            Fast pris etter hvor du bor, og du betaler først når du har fått det.
+            Leveringsprisen beregnes fra hentested og leveringsadresse. Du betaler først når du har fått varene.
           </p>
         </div>
       </section>
@@ -183,7 +183,7 @@ function OmOss() {
 
           <aside className="about-panel price-panel" id="leveringsomrader">
             <span className="about-panel-label">Leveringspriser</span>
-            <h2>Fast pris etter område</h2>
+            <h2>Områdesatser</h2>
             <div className="about-price-list">
               {PRICES.map((item) => (
                 <div className="about-price-row" key={item.area}>
@@ -192,6 +192,7 @@ function OmOss() {
                 </div>
               ))}
             </div>
+            <p>Høyeste sats for hentested og leveringsadresse brukes. Fagerstrand til Fagerstrand: 100 kr. Fjellstrand til Fagerstrand: 150 kr.</p>
           </aside>
         </section>
 

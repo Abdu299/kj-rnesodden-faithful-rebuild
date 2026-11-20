@@ -15,7 +15,7 @@ import {
   type PlacePage,
 } from "../lib/places";
 import { SITE_URL } from "../lib/site";
-import { zones } from "../../shared/order-rules.js";
+import { zones, deliveryFeeForRestaurants } from "../../shared/order-rules.js";
 
 // Restaurantens egen side er selve bestillingssiden.
 // Kunden fra Google lander rett på menyen med «Legg i kurven».
@@ -141,7 +141,7 @@ function PlaceInfo({ page }: { page: PlacePage }) {
           {zones.map((zone) => (
             <li key={zone.id}>
               <span>{zone.name}</span>
-              <b>{formatKr(zone.fee)}</b>
+              <b>{formatKr(deliveryFeeForRestaurants([restaurant.id], zone.id) ?? zone.fee)}</b>
             </li>
           ))}
         </ul>
