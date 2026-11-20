@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { Reviews, ReviewsBadge } from "./Reviews";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
@@ -442,6 +442,7 @@ export function OrderingApp({
   active?: "home" | "places";
 } = {}) {
   const routerNavigate = useNavigate();
+  const location = useLocation();
   const [view, setView] = useState(initialView);
   const [now, setNow] = useState(() => new Date());
   const [cart, setCart] = useState<Cart>(emptyCart);
@@ -478,9 +479,14 @@ export function OrderingApp({
       setView(hash === "annet" ? hash : "home");
       setSubmitError("");
       setReceipt(null);
+      if (hash === "restauranter")
+        requestAnimationFrame(() => document.getElementById("restauranter")?.scrollIntoView());
     }
     readHash();
     window.addEventListener("hashchange", readHash);
+    return () => window.removeEventListener("hashchange", readHash);
+  }, [initialView, location.hash]);
+  useEffect(() => {
     const timer = window.setInterval(() => setNow(new Date()), 15000);
     try {
       const saved: Cart = JSON.parse(localStorage.getItem("kn-cart-v1") || "null");
@@ -504,7 +510,6 @@ export function OrderingApp({
     }
     setRestored(true);
     return () => {
-      window.removeEventListener("hashchange", readHash);
       window.clearInterval(timer);
     };
   }, []);
