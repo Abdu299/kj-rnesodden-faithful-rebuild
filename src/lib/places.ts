@@ -1,6 +1,6 @@
 // Felles hjelpere for stedssidene (/restauranter og /restauranter/<slug>).
 import { places, placeById, placeBySlug, placePath, type Place } from "../../shared/places.js";
-import { dayNames, formatTime, zones } from "../../shared/order-rules.js";
+import { dayNames, formatTime, zones, deliveryFeeForRestaurants } from "../../shared/order-rules.js";
 import { formatKr, restaurantById, restaurants, type Restaurant } from "./catalog";
 import { SITE_IMAGE, SITE_URL } from "./site";
 
@@ -79,7 +79,7 @@ export function openingRows(restaurant: Restaurant) {
 }
 
 export function faqFor({ place, restaurant }: PlacePage) {
-  const prices = zones.map((zone) => `${zone.name} ${formatKr(zone.fee)}`).join(", ");
+  const prices = zones.map((zone) => `${zone.name} ${formatKr(deliveryFeeForRestaurants([restaurant.id], zone.id) ?? zone.fee)}`).join(", ");
   const hours = openingRows(restaurant)
     .map((row) => `${row.day} ${row.text.toLowerCase()}`)
     .join(", ");
@@ -95,7 +95,7 @@ export function faqFor({ place, restaurant }: PlacePage) {
     },
     {
       q: "Hva koster levering?",
-      a: `Fast pris etter område: ${prices}. Maten betaler du til restaurantens egne priser.`,
+      a: `Prisen beregnes fra ${restaurant.name} til leveringsområdet: ${prices}. Maten betaler du til restaurantens egne priser.`,
     },
     { q: "Hvordan betaler jeg?", a: "Du betaler når maten er levert." },
   ];
