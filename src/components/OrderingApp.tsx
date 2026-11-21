@@ -115,7 +115,6 @@ function Home({
               <b>{formatKr(zone.fee)}</b>
             </div>
           ))}
-          <p>Prisen beregnes ut fra både hentested og leveringsadresse. Fagerstrand til Fagerstrand: 100 kr. Fjellstrand til Fagerstrand: 150 kr.</p>
         </div>
       </section>
       <main className="restaurant-picker" id="restauranter">
