@@ -120,29 +120,6 @@ export const places = [
     ],
   },
   {
-    id: "mamagreek",
-    slug: "mama-greek-kitchen",
-    seoName: "Mama Greek Kitchen Fagerstrand",
-    dish: "Gresk mat",
-    intro:
-      "Bestill gresk mat fra Mama Greek Kitchen på nett og få den kjørt hjem på Nesodden. Mama Greek Kitchen er en gresk foodtruck på Fagerstrand med åpent hver dag fra 11 til 20. Menyen har gyros i pita og på tallerken, moussaka, spareribs, saganaki, dolmades, gresk salat og meze for to. Levering koster 250 kr til Fagerstrand, 150 kr til Fjellstrand, Svestad og Blylaget, 100 kr til Hellvik, Varden, Bjørnemyr, Alværn og Fjordvangen og 100 kr til Tangen.",
-    website: "",
-    faq: [
-      {
-        q: "Hva koster gyros fra Mama Greek Kitchen?",
-        a: "Gyros i pita koster 171 kr med svin og 176 kr med kylling. Gyros på tallerken koster 250 kr med svin og 265 kr med kylling. Det finnes også vegetar-gyros til 180 kr.",
-      },
-      {
-        q: "Når har Mama Greek Kitchen åpent?",
-        a: "Foodtrucken på Fagerstrand har åpent hver dag fra 11 til 20.",
-      },
-      {
-        q: "Har Mama Greek Kitchen vegetarmat?",
-        a: "Ja. Blant annet vegetar-gyros, gresk salat, saganaki, bakt aubergine, greske kjempebønner og spinat- og fetaostpai.",
-      },
-    ],
-  },
-  {
     id: "fagerstrand",
     slug: "fagerstrand-grill",
     seoName: "Fagerstrand Grill Nesodden",
