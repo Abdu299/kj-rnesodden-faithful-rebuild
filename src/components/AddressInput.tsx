@@ -3,6 +3,7 @@ import { CheckCircle2, LoaderCircle, MapPin } from "lucide-react";
 import type { Address } from "../lib/catalog";
 import { formatKr } from "../lib/catalog";
 import { deliveryFeeForRestaurants, deliveryFeeForRoute } from "../../shared/order-rules.js";
+import { matchTypedAddress } from "../../shared/address-match.js";
 
 type Props = {
   value: Address | null;
@@ -21,6 +22,7 @@ export function AddressInput({ value, query, onQuery, onChange, error, disabled,
   const [lookupError, setLookupError] = useState("");
   const [expanded, setExpanded] = useState(false);
   const [active, setActive] = useState(-1);
+  const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const deliveryFee = (zoneId: string) => pickupAreaId
     ? deliveryFeeForRoute(pickupAreaId, zoneId)
@@ -55,6 +57,18 @@ export function AddressInput({ value, query, onQuery, onChange, error, disabled,
       controller.abort();
     };
   }, [query, value]);
+  // When the customer typed the whole address and moved on without tapping a
+  // suggestion, pick the suggestion for them so the delivery price shows. Only
+  // an exact, single match counts, and never while they are still typing.
+  useEffect(() => {
+    if (value || focused || !suggestions.length) return;
+    const match = matchTypedAddress(query, suggestions);
+    if (!match) return;
+    onChange(match);
+    onQuery(match.label);
+    setSuggestions([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [suggestions, focused, value, query]);
   function select(address: Address) {
     onChange(address);
     onQuery(address.label);
@@ -86,8 +100,14 @@ export function AddressInput({ value, query, onQuery, onChange, error, disabled,
           aria-invalid={!!error}
           aria-describedby={`${id}-info`}
           aria-activedescendant={open && active >= 0 ? `${id}-option-${active}` : undefined}
-          onFocus={() => setExpanded(true)}
-          onBlur={() => setExpanded(false)}
+          onFocus={() => {
+            setExpanded(true);
+            setFocused(true);
+          }}
+          onBlur={() => {
+            setExpanded(false);
+            setFocused(false);
+          }}
           onChange={(event) => {
             onQuery(event.target.value);
             onChange(null);

@@ -1,6 +1,7 @@
 import catalog from "./catalog.json" with { type: "json" };
 import { OrderError, verifyAddress, searchAddresses } from "./address-service.js";
 import { openingStatus, deliveryFeeForRestaurants, deliveryFeeForPlace, pickupRestaurantIds } from "./order-rules.js";
+import { resolveTypedAddress } from "./address-match.js";
 
 const inFlight = new Map();
 const recent = new Map();
@@ -9,6 +10,26 @@ function textField(value, name, max, required = true) {
   if (typeof value !== "string" || value.length > max || (required && !value.trim()))
     throw new OrderError(`Kontroller feltet «${name}».`);
   return value.trim();
+}
+// Looks up an address the customer typed by hand, so the order still gets a
+// delivery area and price. It never blocks an order: a slow or failing lookup,
+// or anything but one unambiguous match, leaves the price for confirmation.
+async function lookupTypedAddress(addressText, fetchFn) {
+  const street = addressText.split(",")[0].trim();
+  let timer;
+  const slow = new Promise((resolve) => {
+    timer = setTimeout(() => resolve([]), 4000);
+  });
+  const search = searchAddresses(street, fetchFn);
+  search.catch(() => {});
+  try {
+    return resolveTypedAddress(addressText, await Promise.race([search, slow]));
+  } catch (error) {
+    if (!(error instanceof OrderError)) throw error;
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
 }
 export function validateCustomer(body) {
   const fullName = textField(body.fullName, "Navn", 120);
@@ -244,18 +265,12 @@ export async function orderHandler(request, dependencies = {}) {
         verified: false,
         zone: null,
       };
-      if (legacy && !body.address) {
-        try {
-          const street = addressText.split(",")[0].trim().toLocaleLowerCase("nb-NO");
-          const matches = await searchAddresses(street, fetchFn);
-          address =
-            matches.find(
-              (candidate) => candidate.streetAddress.toLocaleLowerCase("nb-NO") === street,
-            ) ?? address;
-        } catch (error) {
-          if (!(error instanceof OrderError)) throw error;
-        }
-      } else if (body.address) {
+      if (!body.address) {
+        // Typed by hand, on the website or in the app. Keep the customer's own
+        // words in the message when they wrote more than the address itself.
+        const found = await lookupTypedAddress(addressText, fetchFn);
+        if (found) address = found.exact ? found.address : { ...found.address, label: addressText };
+      } else {
         try {
           address = await verifyAddress(body.address, fetchFn);
         } catch (error) {

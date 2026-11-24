@@ -10,6 +10,7 @@ import {
   verifyAddress,
 } from "../shared/address-service.js";
 import { orderHandler, validateMenuOrder } from "../shared/order-service.js";
+import { matchTypedAddress, resolveTypedAddress } from "../shared/address-match.js";
 
 const signalen = catalog.find((restaurant) => restaurant.id === "signalen");
 const openTime = new Date("2026-09-30T16:00:00Z"); // Wednesday, 18:00 in Oslo.
@@ -727,4 +728,130 @@ test("every menu has unique IDs, finite prices and existing local image files", 
         assert.ok(existsSync(new URL(`../public${item.image}`, import.meta.url)), item.image);
     }
   }
+});
+
+// Addresses typed by hand, without tapping a suggestion.
+const lettered = normalizeAddress({
+  ...addressRecord,
+  adressekode: 1235,
+  bokstav: "B",
+  adressetekst: "Testveien 12B",
+});
+test("a typed address only matches one exact suggestion", () => {
+  const list = [address, lettered];
+  assert.equal(matchTypedAddress("Testveien 12", list), address);
+  assert.equal(matchTypedAddress("  testveien   12 ", list), address);
+  assert.equal(matchTypedAddress("Testveien 12, 1450 Nesoddtangen", list), address);
+  assert.equal(matchTypedAddress("Testveien 12 1450", list), address);
+  assert.equal(matchTypedAddress("Testveien 12, Nesodden", list), address);
+  assert.equal(matchTypedAddress("Testveien 12 B", list), lettered);
+  assert.equal(matchTypedAddress("testveien 12b, 1450 NESODDTANGEN", list), lettered);
+  for (const text of [
+    "Testveien 1",
+    "Testveien 120",
+    "Testveien",
+    "Testveien 12 C",
+    "Testveien 12, 1454 Fagerstrand",
+    "Testveien 12, leilighet 3",
+    "Te",
+    "",
+  ])
+    assert.equal(matchTypedAddress(text, list), null, text);
+  assert.equal(matchTypedAddress("Testveien 12", [address, { ...address, id: "x" }]), null);
+  assert.equal(matchTypedAddress("Testveien 12", []), null);
+});
+test("extra words after a comma keep the match, a different postcode cancels it", () => {
+  assert.deepEqual(resolveTypedAddress("Testveien 12", [address]), { address, exact: true });
+  assert.deepEqual(resolveTypedAddress("Testveien 12, leilighet 3, ring på", [address]), {
+    address,
+    exact: false,
+  });
+  assert.equal(resolveTypedAddress("Testveien 12, 1454 Fagerstrand", [address]), null);
+  assert.equal(resolveTypedAddress("Testveien 12 leilighet 3", [address]), null);
+  assert.equal(resolveTypedAddress("Ukjentveien 12, Nesodden", [address]), null);
+});
+test("a typed address that is found gets delivery price and total from the server", async () => {
+  const outcome = await send(
+    body({ address: undefined, addressText: "testveien 12", quotedTotal: undefined }),
+  );
+  assert.equal(outcome.response.status, 200);
+  assert.equal(outcome.result.receipt.address.label, "Testveien 12, 1450 NESODDTANGEN");
+  assert.equal(outcome.result.receipt.address.zone.id, "tangen");
+  assert.equal(outcome.result.receipt.deliveryFee, 100);
+  assert.equal(outcome.result.receipt.total, 560);
+  assert.match(outcome.messages[0].text, /Leveringsområde: Tangen/);
+  assert.match(outcome.messages[0].text, /Levering: 100 kr/);
+  assert.match(outcome.messages[0].text, /TOTALT: 560 kr/);
+});
+test("a typed address with extra words keeps the customer's words and still gets a price", async () => {
+  const outcome = await send(
+    body({
+      address: undefined,
+      addressText: "Testveien 12, leilighet 3",
+      quotedTotal: undefined,
+    }),
+  );
+  assert.equal(outcome.response.status, 200);
+  assert.equal(outcome.result.receipt.address.label, "Testveien 12, leilighet 3");
+  assert.equal(outcome.result.receipt.deliveryFee, 100);
+  assert.match(outcome.messages[0].text, /Leveringsadresse: Testveien 12, leilighet 3/);
+});
+test("a typed address is priced from the pickup place as well", async () => {
+  const outcome = await send(
+    body({
+      kind: "request",
+      restaurantId: undefined,
+      type: "Dagligvarer",
+      place: "Kiwi Tangen",
+      description: "2 liter melk",
+      address: undefined,
+      addressText: "Testveien 12",
+      quotedTotal: undefined,
+    }),
+  );
+  assert.equal(outcome.response.status, 200);
+  assert.equal(outcome.result.receipt.deliveryFee, 100);
+});
+test("a typed address is never blocked by a failing or slow address lookup", async () => {
+  const failing = await send(
+    body({ address: undefined, addressText: "Testveien 12", quotedTotal: undefined }),
+    mockNetwork({ addressFailure: true }),
+  );
+  assert.equal(failing.response.status, 200);
+  assert.equal(failing.result.receipt.deliveryFee, null);
+  assert.equal(failing.messages.length, 1);
+  const messages = [];
+  const started = Date.now();
+  const response = await orderHandler(
+    request(body({ address: undefined, addressText: "Testveien 12", quotedTotal: undefined })),
+    {
+      env,
+      now: () => openTime,
+      fetchFn: async (url, options) => {
+        if (new URL(url).hostname === "ws.geonorge.no") return new Promise(() => {});
+        messages.push(JSON.parse(options.body));
+        return Response.json({ ok: true });
+      },
+    },
+  );
+  const result = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(result.receipt.deliveryFee, null);
+  assert.equal(messages.length, 1);
+  assert.ok(Date.now() - started < 6000);
+});
+test("a house letter typed with a space is searched as one house number", async () => {
+  const searched = [];
+  const fetchFn = async (url) => {
+    searched.push(new URL(url).searchParams.get("sok"));
+    return Response.json({ adresser: [] });
+  };
+  await searchAddresses("Testveien 12 B", fetchFn);
+  await searchAddresses("testveien 12 b, 1450 Nesoddtangen", fetchFn);
+  await searchAddresses("Testveien 12 Bjørnemyr", fetchFn);
+  assert.deepEqual(searched, [
+    "Testveien* 12B",
+    "testveien* 12b, 1450 Nesoddtangen*",
+    "Testveien* 12 Bjørnemyr*",
+  ]);
 });

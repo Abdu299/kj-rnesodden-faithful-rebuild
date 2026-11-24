@@ -56,6 +56,8 @@ export async function searchAddresses(query, fetchFn = fetch) {
   const prefix = query
     .trim()
     .replace(/\s+/g, " ")
+    // "Testveien 12 B" is registered as "Testveien 12B".
+    .replace(/(\d) ([a-zæøå])(?![a-zæøå0-9])/gi, "$1$2")
     .split(" ")
     .map((word) => (/^\d/.test(word) || word.endsWith("*") ? word : `${word}*`))
     .join(" ");
