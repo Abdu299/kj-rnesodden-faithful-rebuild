@@ -103,8 +103,8 @@ function Home({
           <h1>
             {title ?? (
               <>
-                Take away
-                <br />
+                Take away{" "}
+                <br className="h1-break" />
                 på Nesodden
               </>
             )}

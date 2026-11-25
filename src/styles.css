@@ -976,6 +976,14 @@
 .delivery-prices > div:last-child { border: 0; }
 .delivery-prices b { white-space: nowrap; font-weight: 700; color: #ffb45c; }
 .delivery-prices p { margin: 0; line-height: 1.4; font-size: 15px; max-width: none; }
+@media (min-width: 851px) {
+  .home-intro { row-gap: 10px; align-items: center; }
+  .home-intro > div:first-child { display: contents; }
+  .home-intro h1 { grid-column: 1 / -1; }
+  .home-intro h1 .h1-break { display: none; }
+  .home-intro > div:first-child > p { grid-column: 1; margin: 0; }
+  .delivery-prices { grid-column: 2; }
+}
 .restaurant-picker { max-width: 1220px; margin: 0 auto; background: rgba(46,55,84,.97); padding: 26px 24px; border-radius: 14px; }
 .restaurant-picker > h2 { font-size: 24px; font-weight: 800; margin: 0 0 8px; }
 .picker-intro { color: #c9ccd6; margin: 4px 0 20px; font-size: 14px; }
