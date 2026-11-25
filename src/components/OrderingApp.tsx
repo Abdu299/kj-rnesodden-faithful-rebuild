@@ -154,9 +154,6 @@ function Home({
                   <span>{r.address}</span>
                 </p>
                 <Status restaurant={r} now={now} />
-                {lowestDeliveryFee(r.id) !== null && (
-                  <span className="card-fee">Levering fra {formatKr(lowestDeliveryFee(r.id)!)}</span>
-                )}
                 <span className="card-cta">
                   {r.orderingMode === "menu" ? "Se menyen" : "Send forespørsel"}
                   <ArrowRight size={16} />
