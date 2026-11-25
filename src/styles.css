@@ -975,6 +975,8 @@
 .delivery-prices > div { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px solid #ffffff22; font-size: 14px; }
 .delivery-prices > div:last-child { border: 0; }
 .delivery-prices b { white-space: nowrap; font-weight: 600; }
+.delivery-prices p { margin: 0; line-height: 1.45; }
+.card-fee { display: block; font-size: 13px; font-weight: 600; color: #555; margin: 0 0 10px; }
 .restaurant-picker { max-width: 1220px; margin: 0 auto; background: rgba(46,55,84,.97); padding: 26px 24px; border-radius: 14px; }
 .restaurant-picker > h2 { font-size: 24px; font-weight: 800; margin: 0; }
 .picker-intro { color: #c9ccd6; margin: 4px 0 20px; font-size: 14px; }

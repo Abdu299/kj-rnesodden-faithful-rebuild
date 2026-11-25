@@ -78,6 +78,12 @@ function Footer() {
     </footer>
   );
 }
+function lowestDeliveryFee(restaurantId: string): number | null {
+  const fees = zones
+    .map((zone) => deliveryFeeForRestaurants([restaurantId], zone.id))
+    .filter((fee): fee is number => fee !== null);
+  return fees.length ? Math.min(...fees) : null;
+}
 function Home({
   now,
   onSelect,
@@ -89,6 +95,7 @@ function Home({
   title?: ReactNode;
   intro?: string;
 }) {
+  const lowestFee = Math.min(...restaurants.map((r) => lowestDeliveryFee(r.id) ?? Infinity));
   return (
     <>
       <section className="home-intro">
@@ -108,13 +115,12 @@ function Home({
           </p>
         </div>
         <div className="delivery-prices">
-          <h2>Områdesatser for levering</h2>
-          {zones.filter((zone) => ["tangen", "alvaern", "fjellstrand", "fagerstrand"].includes(zone.id)).map((zone) => (
-            <div key={zone.name}>
-              <span>{zone.name}</span>
-              <b>{formatKr(zone.fee)}</b>
-            </div>
-          ))}
+          <h2>Levering fra {formatKr(lowestFee)}</h2>
+          <p>
+            Du ser prisen i kurven når du skriver adressen.
+            <br />
+            Du betaler når maten er levert.
+          </p>
         </div>
       </section>
       <main className="restaurant-picker" id="restauranter">
@@ -153,6 +159,9 @@ function Home({
                   <span>{r.address}</span>
                 </p>
                 <Status restaurant={r} now={now} />
+                {lowestDeliveryFee(r.id) !== null && (
+                  <span className="card-fee">Levering fra {formatKr(lowestDeliveryFee(r.id)!)}</span>
+                )}
                 <span className="card-cta">
                   {r.orderingMode === "menu" ? "Se menyen" : "Send forespørsel"}
                   <ArrowRight size={16} />
