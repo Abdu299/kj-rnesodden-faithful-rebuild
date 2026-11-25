@@ -65,6 +65,24 @@ function duplicateHostRedirect(request: Request): Response | undefined {
   });
 }
 
+// Sider som er tatt ut, men som Google fortsatt viser. 301 så besøket og lenkene ikke går tapt.
+const MOVED: Record<string, string> = {
+  "/restauranter/mama-greek-kitchen": "/",
+};
+
+// Skråstrek på slutten (/om-oss/) er samme side som uten. 308 sier at det er permanent.
+function pathRedirect(request: Request): Response | undefined {
+  if (request.method !== "GET" && request.method !== "HEAD") return undefined;
+  const url = new URL(request.url);
+  const path = url.pathname.length > 1 ? url.pathname.replace(/\/+$/, "") : url.pathname;
+  if (path.startsWith("/api/") || path.startsWith("/k/")) return undefined;
+  const moved = MOVED[path];
+  if (moved) return new Response(null, { status: 301, headers: { location: `${PRIMARY_ORIGIN}${moved}` } });
+  if (path !== url.pathname)
+    return new Response(null, { status: 308, headers: { location: `${PRIMARY_ORIGIN}${path}${url.search}` } });
+  return undefined;
+}
+
 // Umami-telling via egen adresse, så annonseblokkere ikke stopper den (docs.umami.is/docs/bypass-ad-blockers).
 // /k/s.js er skriptet, /k/api/send tar imot tellingen og sender den videre med besøkendes IP,
 // ellers ville alle besøkende sett ut som én.
@@ -127,6 +145,8 @@ export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     const redirect = duplicateHostRedirect(request);
     if (redirect) return redirect;
+    const moved = pathRedirect(request);
+    if (moved) return moved;
     try {
       const stats = await statsProxy(request);
       if (stats) return stats;

@@ -1,7 +1,9 @@
 export type PlaceFaq = { q: string; a: string };
+export type PlaceAddress = { street: string; postalCode: string; locality: string; lat: number; lon: number };
 export type Place = {
   id: string;
   slug: string;
+  address?: PlaceAddress;
   seoName: string;
   dish: string;
   intro: string;

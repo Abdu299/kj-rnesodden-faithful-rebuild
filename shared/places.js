@@ -8,6 +8,8 @@ export const places = [
   {
     id: "signalen",
     slug: "signalen",
+    // Kartverket 2026-11-25
+    address: { street: "Tangenveien 3", postalCode: "1450", locality: "Nesoddtangen", lat: 59.87072, lon: 10.65581 },
     seoName: "Signalen Nesodden",
     dish: "Pizza",
     intro:
@@ -23,6 +25,8 @@ export const places = [
   {
     id: "tonys",
     slug: "tonys-sushi",
+    // Kartverket 2026-11-25
+    address: { street: "Kapellveien 84", postalCode: "1452", locality: "Nesoddtangen", lat: 59.84952, lon: 10.65877 },
     seoName: "Tonys Sushi Nesodden",
     dish: "Sushi og thaimat",
     intro:
@@ -38,6 +42,8 @@ export const places = [
   {
     id: "jafs",
     slug: "jafs",
+    // Kartverket 2026-11-25
+    address: { street: "Kapellveien 2", postalCode: "1452", locality: "Nesoddtangen", lat: 59.84545, lon: 10.67066 },
     seoName: "JAFS Nesodden",
     dish: "Burger og kebab",
     intro:
@@ -57,6 +63,8 @@ export const places = [
   {
     id: "jonathan",
     slug: "jonathan-sushi",
+    // Kartverket 2026-11-25
+    address: { street: "Vestveien 51", postalCode: "1452", locality: "Nesoddtangen", lat: 59.85592, lon: 10.66082 },
     seoName: "Jonathan Sushi Nesodden",
     dish: "Sushi",
     intro:
@@ -76,6 +84,8 @@ export const places = [
   {
     id: "bistro",
     slug: "flaskebekk-bistro",
+    // Kartverket 2026-11-25
+    address: { street: "Kapellveien 84", postalCode: "1452", locality: "Nesoddtangen", lat: 59.84952, lon: 10.65877 },
     seoName: "Flaskebekk Bistro Nesodden",
     dish: "Kinesisk mat og dim sum",
     intro:
@@ -95,6 +105,8 @@ export const places = [
   {
     id: "osolemio",
     slug: "o-sole-mio",
+    // Kartverket 2026-11-25
+    address: { street: "Tangenveien 129", postalCode: "1450", locality: "Nesoddtangen", lat: 59.86027, lon: 10.66545 },
     seoName: "O' Sole Mio Nesodden",
     dish: "Pizza",
     intro:
@@ -122,6 +134,8 @@ export const places = [
   {
     id: "fagerstrand",
     slug: "fagerstrand-grill",
+    // Kartverket 2026-11-25
+    address: { street: "Myklerudveien 5", postalCode: "1454", locality: "Fagerstrand", lat: 59.73803, lon: 10.59562 },
     seoName: "Fagerstrand Grill Nesodden",
     dish: "Pizza, burger og kebab",
     intro:

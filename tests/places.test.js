@@ -64,3 +64,12 @@ test("sitemap lists the overview and every place page", () => {
     );
   }
 });
+
+test("every place has a street address, postal code and map point for Google", () => {
+  for (const place of places) {
+    assert.ok(place.address, place.id);
+    assert.match(place.address.postalCode, /^\d{4}$/, place.id);
+    assert.ok(place.address.street.length > 3 && place.address.locality.length > 3, place.id);
+    assert.ok(place.address.lat > 59 && place.address.lat < 60 && place.address.lon > 10 && place.address.lon < 11, place.id);
+  }
+});

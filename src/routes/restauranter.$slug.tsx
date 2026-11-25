@@ -72,10 +72,15 @@ function restaurantSchema(page: PlacePage) {
     url,
     address: {
       "@type": "PostalAddress",
-      streetAddress: restaurant.address,
-      addressLocality: "Nesodden",
+      streetAddress: place.address?.street ?? restaurant.address,
+      ...(place.address ? { postalCode: place.address.postalCode } : {}),
+      addressLocality: place.address?.locality ?? "Nesodden",
+      addressRegion: "Akershus",
       addressCountry: "NO",
     },
+    ...(place.address
+      ? { geo: { "@type": "GeoCoordinates", latitude: place.address.lat, longitude: place.address.lon } }
+      : {}),
     ...(restaurant.orderingMode === "menu" ? { hasMenu: url } : {}),
         // hours[0] er søndag. Stengte dager (null) utelates.
         ...(restaurant.hours

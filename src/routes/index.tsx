@@ -17,7 +17,11 @@ const LOCAL_BUSINESS_SCHEMA = {
   email: "kjrnesodden@gmail.com",
   priceRange: `${Math.min(...zones.map((zone) => zone.fee))} til ${Math.max(...zones.map((zone) => zone.fee))} kr per levering`,
   areaServed: { "@type": "AdministrativeArea", name: "Nesodden kommune" },
+  sameAs: ["https://www.facebook.com/61592634265932", "https://www.instagram.com/kjornesodden/"],
 };
+
+const LOWEST_FEE = Math.min(...zones.map((zone) => zone.fee));
+const DESCRIPTION = `Bestill mat fra Signalen, Tonys Sushi, JAFS, O' Sole Mio og flere på Nesodden. Vi kjører maten hjem fra ${LOWEST_FEE} kr, og du betaler når den kommer.`;
 
 
 export const Route = createFileRoute("/")({
@@ -26,13 +30,12 @@ export const Route = createFileRoute("/")({
       { title: "KjørNesodden | Mat levert hjem fra restauranter på Nesodden" },
       {
         name: "description",
-        content:
-          "KjørNesodden tilbyr rask og rimelig levering fra restauranter og lokale butikker på Nesodden. Bestill enkelt og spar tid.",
+        content: DESCRIPTION,
       },
       { property: "og:title", content: "KjørNesodden | Mat levert hjem fra restauranter på Nesodden" },
       {
         property: "og:description",
-        content: "Rask og rimelig levering fra restauranter og butikker på Nesodden.",
+        content: DESCRIPTION,
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/` },
