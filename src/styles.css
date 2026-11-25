@@ -967,18 +967,18 @@
 .site-header nav > a.current { background: #ff9418; color: #1b1206; }
 .cart-trigger { display: flex; gap: 7px; align-items: center; border: 1.5px solid #ff9418; color: #ffb45c; background: transparent; padding: 9px 13px; border-radius: 8px; font-weight: 700 !important; white-space: nowrap; }
 .cart-trigger.has-items { background: #ff9418; color: #17213b; }
-.home-intro { max-width: 1300px; margin: auto; padding: 42px 40px 56px; display: grid; grid-template-columns: 1fr 380px; gap: 55px; align-items: center; }
-.home-intro h1 { font-size: clamp(40px, 5.6vw, 76px); font-weight: 800; line-height: 1.02; letter-spacing: -.035em; margin: 0; }
-.home-intro p { font-size: 18px; line-height: 1.65; max-width: 630px; margin: 24px 0 0; color: #eef; }
-.delivery-prices { background: rgba(23,33,59,.83); border-radius: 14px; padding: 18px 20px; }
+.home-intro { max-width: 1300px; margin: auto; padding: 28px 40px 26px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
+.home-intro h1 { font-size: clamp(36px, 4.4vw, 60px); font-weight: 800; line-height: 1.02; letter-spacing: -.035em; margin: 0; }
+.home-intro p { font-size: 18px; line-height: 1.6; max-width: 630px; margin: 12px 0 0; color: #eef; }
+.delivery-prices { background: rgba(23,33,59,.83); border-radius: 999px; padding: 12px 20px; white-space: nowrap; }
 .delivery-prices h2 { font-size: 15px; font-weight: 800; color: #ffb45c; margin: 0 0 6px; }
 .delivery-prices > div { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px solid #ffffff22; font-size: 14px; }
 .delivery-prices > div:last-child { border: 0; }
-.delivery-prices b { white-space: nowrap; font-weight: 600; }
-.delivery-prices p { margin: 0; line-height: 1.45; }
+.delivery-prices b { white-space: nowrap; font-weight: 700; color: #ffb45c; }
+.delivery-prices p { margin: 0; line-height: 1.4; font-size: 15px; max-width: none; }
 .card-fee { display: block; font-size: 13px; font-weight: 600; color: #555; margin: 0 0 10px; }
 .restaurant-picker { max-width: 1220px; margin: 0 auto; background: rgba(46,55,84,.97); padding: 26px 24px; border-radius: 14px; }
-.restaurant-picker > h2 { font-size: 24px; font-weight: 800; margin: 0; }
+.restaurant-picker > h2 { font-size: 24px; font-weight: 800; margin: 0 0 8px; }
 .picker-intro { color: #c9ccd6; margin: 4px 0 20px; font-size: 14px; }
 .restaurant-cards { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; }
 .restaurant-card { display: flex; flex-direction: column; text-align: left; color: #17213b; border: 2px solid white; background: white; border-radius: 13px; overflow: hidden; padding: 0; transition: border-color .15s, transform .15s; min-width: 0; }
@@ -1148,7 +1148,7 @@
 .spin { animation: kn-spin 1s linear infinite; }
 @keyframes kn-spin { to { transform: rotate(360deg); } }
 @media (max-width: 1100px) {
-  .home-intro { gap: 30px; grid-template-columns: 1fr 350px; padding-inline: 25px; }
+  .home-intro { gap: 30px; grid-template-columns: 1fr auto; padding-inline: 25px; }
   .restaurant-picker { margin-inline: 24px; }
   .restaurant-cards { grid-template-columns: repeat(3,minmax(0,1fr)); }
   .restaurant-layout { padding-inline: 24px; gap: 20px; grid-template-columns: minmax(0,1fr) 310px; }
@@ -1157,10 +1157,10 @@
   .dish-image { width: 75px; height: 70px; }
 }
 @media (max-width: 850px) {
-  .home-intro { grid-template-columns: 1fr; padding-block: 28px 34px; gap: 25px; }
-  .home-intro h1 { font-size: 52px; }
+  .home-intro { grid-template-columns: 1fr; padding-block: 20px 20px; gap: 14px; align-items: start; }
+  .home-intro h1 { font-size: 44px; }
   .home-intro p { font-size: 16px; }
-  .delivery-prices { width: min(480px,100%); }
+  .delivery-prices { justify-self: start; max-width: 100%; }
   .restaurant-cards { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .restaurant-layout { display: block; }
   .opening-hours { flex: 0 0 100%; width: 100%; min-width: 0; margin-left: 0; font-size: 14px; }
@@ -1185,10 +1185,12 @@
   .site-header nav > a { padding: 8px; font-size: 12px; }
   .cart-trigger { padding: 8px; gap: 5px; font-size: 11px !important; }
   .cart-trigger svg { width: 16px; }
-  .home-intro { padding: 24px 20px 30px; }
-  .home-intro h1 { font-size: clamp(35px,9.3vw,48px); line-height: 1.06; }
-  .home-intro p { margin-top: 18px; font-size: 14px; line-height: 1.65; }
-  .delivery-prices { padding: 14px 16px; }
+  .home-intro { padding: 14px 20px 16px; gap: 12px; }
+  .home-intro h1 { font-size: clamp(28px,8vw,34px); line-height: 1.06; }
+  .home-intro p { margin-top: 8px; font-size: 15px; line-height: 1.55; }
+  .delivery-prices { padding: 8px 12px; white-space: normal; border-radius: 14px; }
+  .delivery-prices p { font-size: 13px; margin: 0; }
+  .delivery-prices span { white-space: nowrap; }
   .delivery-prices > div { font-size: 12px; }
   .restaurant-picker { padding: 20px 12px; margin-inline: 12px; }
   .restaurant-picker > h2 { font-size: 20px; }
@@ -1251,6 +1253,7 @@
   .dialog-actions { grid-template-columns: 1fr; }
 }
 @media (max-width: 359px) {
+  .delivery-prices span { white-space: normal; }
   .restaurant-cards { grid-template-columns: 1fr; }
   .restaurant-photo { height: 160px; }
   .restaurant-card h3 { font-size: 19px; }

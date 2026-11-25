@@ -111,23 +111,18 @@ function Home({
           </h1>
           <p>
             {intro ??
-              "Velg restaurant, legg maten i kurven, så henter vi den og kjører den hjem til deg. Du betaler når varene er levert."}
+              "Velg restaurant, legg i kurven, så kjører vi maten hjem til deg."}
           </p>
         </div>
         <div className="delivery-prices">
-          <h2>Levering fra {formatKr(lowestFee)}</h2>
           <p>
-            Du ser prisen i kurven når du skriver adressen.
-            <br />
-            Du betaler når maten er levert.
+            <b>Levering fra {formatKr(lowestFee)}</b>
+            <span> · Betal når maten kommer</span>
           </p>
         </div>
       </section>
       <main className="restaurant-picker" id="restauranter">
         <h2>Restauranter på Nesodden</h2>
-        <p className="picker-intro">
-          Finn din favoritt på Nesodden. Se menyen eller send oss et ønske.
-        </p>
         <ReviewsBadge />
         <div className="restaurant-cards">
           {restaurants.map((r) => (
