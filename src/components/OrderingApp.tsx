@@ -103,9 +103,9 @@ function Home({
           <h1>
             {title ?? (
               <>
-                Bestill med
+                Take away
                 <br />
-                KjørNesodden!
+                på Nesodden
               </>
             )}
           </h1>
