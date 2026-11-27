@@ -207,9 +207,8 @@ function Samleside() {
           </nav>
           <h1>Restauranter på Nesodden</h1>
           <p>
-            {stor(antall(ALLE.length))} spisesteder på {OMRADER}, med meny, priser og åpningstider.
-            Bestill på nett, så henter vi maten og kjører den hjem til deg. Levering fra {FRA}, og du
-            betaler når maten kommer.
+            {stor(antall(ALLE.length))} spisesteder på {OMRADER}, med meny og åpningstider. Bestill på
+            nett, så kjører vi maten hjem til deg fra {FRA}.
           </p>
         </div>
       </section>
@@ -221,12 +220,12 @@ function Samleside() {
               {g.id === "andre" ? g.name : `Restauranter på ${g.name}`}
               <span className="samle-antall">{antall(g.pages.length)} {g.pages.length === 1 ? "sted" : "steder"}</span>
             </h2>
-            {g.tekst && <p className="samle-omrade-tekst">{g.tekst}</p>}
             <div className="samle-liste">
               {g.pages.map((p) => (
                 <Rad page={p} now={now} key={p.place.id} />
               ))}
             </div>
+            {g.tekst && <p className="samle-omrade-tekst">{g.tekst}</p>}
           </section>
         ))}
 

@@ -124,7 +124,12 @@ function Home({
         </div>
       </section>
       <main className="restaurant-picker" id="restauranter">
-        <h2>Restauranter på Nesodden</h2>
+        <div className="picker-topp">
+          <h2>Restauranter på Nesodden</h2>
+          <Link className="picker-omrade" to="/restauranter">
+            Se dem etter område <ArrowRight size={14} />
+          </Link>
+        </div>
         <ReviewsBadge />
         <div className="restaurant-cards">
           {restaurants.map((r) => (

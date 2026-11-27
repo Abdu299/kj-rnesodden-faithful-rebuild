@@ -1747,3 +1747,22 @@ a.review-card:hover, a.review-card:focus-visible { border-color: #ff9418; transf
   .samle-knapp { grid-column: 1 / -1; width: 100%; }
 }.samle-omrade-tekst { margin: 8px 0 0; color: #5a6070; font-size: 15px; line-height: 1.6; max-width: 70ch; }
 .samle-tekst p.samle-tider { font-size: 13px; color: #3d4457; }
+
+/* 2026-11-27: lenke til samlesiden øverst ved restaurantkortene, og lavere topp på samlesiden */
+.picker-topp { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; margin: 0 0 8px; }
+.picker-topp h2 { font-size: 24px; font-weight: 800; margin: 0; }
+.picker-omrade { display: inline-flex; align-items: center; gap: 4px; color: #ffb45c; font-size: 14px; font-weight: 700; text-decoration: none; }
+.picker-omrade:hover { text-decoration: underline; text-underline-offset: 3px; }
+.samle-page .samle-hero { min-height: 0; padding-bottom: 76px; }
+.samle-page .about-intro { padding-top: 34px; }
+.samle-page .about-intro h1 { font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.05; }
+.samle-page .about-intro p { margin-top: 12px; font-size: 1rem; line-height: 1.6; }
+.samle-page .samle-crumbs { margin-bottom: 10px; }
+.samle-page .about-content { margin-top: -56px; }
+@media (max-width: 700px) {
+  .samle-page .about-intro { padding-top: 18px; width: calc(100% - 32px); }
+  .samle-page .about-intro p { font-size: .95rem; }
+  .samle-page .samle-hero { padding-bottom: 66px; }
+  .samle-page .about-content { width: calc(100% - 24px); }
+}
+.samle-page .samle-omrade-tekst { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid #eceef3; font-size: 14px; }
