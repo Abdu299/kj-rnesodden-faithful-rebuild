@@ -110,7 +110,7 @@ test("pickup and destination determine delivery, with the two special Fagerstran
 test("server calculates Fagerstrand pickup and rejects stale destination-only quotes", async () => {
   const record = { ...addressRecord, postnummer: "1454", poststed: "FAGERSTRAND",
     representasjonspunkt: { lat: 59.7375, lon: 10.594 } };
-  const restaurant = catalog.find((item) => item.id === "mamagreek");
+  const restaurant = catalog.find((item) => item.id === "fagerstrand");
   const item = restaurant.categories[0].items[0];
   const price = item.variants[0].price;
   const payload = body({ restaurantId: restaurant.id,
@@ -569,13 +569,12 @@ test("the legacy free-text API also survives an address provider outage", async 
   assert.equal(outcome.result.receipt.deliveryFee, null);
   assert.match(outcome.messages[0].text, /Ukjent gate 7/);
 });
-test("O' Sole Mio and Mama Greek use the supplied hours on every day of the week", () => {
+// Mama Greek ble tatt ut av siden 21.11.2026, derfor bare O' Sole Mio her.
+test("O' Sole Mio uses the supplied hours on every day of the week", () => {
   const sole = catalog.find((r) => r.id === "osolemio");
-  const mama = catalog.find((r) => r.id === "mamagreek");
   for (let offset = 0; offset < 7; offset++) {
     const base = new Date(new Date("2026-09-27T00:00:00Z").getTime() + offset * 86400000);
     const at = (minute) => new Date(base.getTime() + (minute - 120) * 60000);
-    assert.deepEqual(mama.hours[offset], [660, 1200]);
     // O' Sole Mio: søndag 15 til 21, stengt mandag og tirsdag, ellers 15.30 til 21.30
     if (offset === 1 || offset === 2) {
       assert.equal(sole.hours[offset], null);
@@ -584,7 +583,7 @@ test("O' Sole Mio and Mama Greek use the supplied hours on every day of the week
     const start = offset === 0 ? 900 : 930;
     const end = offset === 0 ? 1260 : 1290;
     if (offset !== 1 && offset !== 2) assert.deepEqual(sole.hours[offset], [start, end]);
-    const cases = [[mama, 660, 1200]];
+    const cases = [];
     if (offset !== 1 && offset !== 2) cases.push([sole, start, end]);
     for (const [r, opening, closing] of cases) {
       assert.equal(openingStatus(r, at(opening - 1)).open, false);
