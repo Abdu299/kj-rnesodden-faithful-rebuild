@@ -89,6 +89,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       // Google Search Console (Onlinemarkedsføring.no). Må ikke fjernes, da mister vi tilgangen.
       { name: "google-site-verification", content: "nH1EK5qc3e244DmZ0Dwqv48w5sl1JICXtRPAnwipmh8" },
+      // Bing Webmaster Tools, oystein.owesen@gmail.com (2026-11-27). Må ikke fjernes.
+      { name: "msvalidate.01", content: "2F4D4606C4D48A4F26FEBC9973E9730E" },
       { title: "KjørNesodden | Rask levering på Nesodden" },
       {
         name: "description",
