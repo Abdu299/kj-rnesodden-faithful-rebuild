@@ -48,6 +48,7 @@ export const Route = createFileRoute("/restauranter/$slug")({
           children: JSON.stringify(
             breadcrumbSchema([
               { name: "Forsiden", url: `${SITE_URL}/` },
+              { name: "Restauranter på Nesodden", url: `${SITE_URL}/restauranter` },
               { name: page.restaurant.name, url },
             ]),
           ),

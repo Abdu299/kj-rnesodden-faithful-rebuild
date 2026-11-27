@@ -1745,4 +1745,5 @@ a.review-card:hover, a.review-card:focus-visible { border-color: #ff9418; transf
   .samle-tekst h3 { font-size: 17px; }
   .samle-tekst p { font-size: 13px; }
   .samle-knapp { grid-column: 1 / -1; width: 100%; }
-}
+}.samle-omrade-tekst { margin: 8px 0 0; color: #5a6070; font-size: 15px; line-height: 1.6; max-width: 70ch; }
+.samle-tekst p.samle-tider { font-size: 13px; color: #3d4457; }

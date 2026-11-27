@@ -5,7 +5,25 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SITE_IMAGE, SITE_URL } from "../lib/site";
 import { breadcrumbSchema, lowestFee, placePages, placeUrl, type PlacePage } from "../lib/places";
 import { formatKr } from "../lib/catalog";
-import { openingStatus } from "../../shared/order-rules.js";
+import { openingStatus, formatTime } from "../../shared/order-rules.js";
+
+// Åpningstider som kort tekst, for eksempel «man til ons 14.00 til 21.00, tor til søn 11.00 til 21.00».
+// Står i HTML-en fra serveren, så Google leser den. «Åpent nå» settes i nettleseren.
+const KORT = ["søn", "man", "tir", "ons", "tor", "fre", "lør"];
+const UKE = [1, 2, 3, 4, 5, 6, 0];
+function tider(hours: ([number, number] | null)[] | null | undefined) {
+  if (!hours) return "";
+  const dager = UKE.map((d) => ({ d, t: hours[d] ? `${formatTime(hours[d]![0])} til ${formatTime(hours[d]![1])}` : "stengt" }));
+  const biter: string[] = [];
+  for (let i = 0; i < dager.length; ) {
+    let j = i;
+    while (j + 1 < dager.length && dager[j + 1].t === dager[i].t) j++;
+    const fra = KORT[dager[i].d], til = KORT[dager[j].d];
+    biter.push(`${i === j ? fra : `${fra} til ${til}`} ${dager[i].t}`);
+    i = j + 1;
+  }
+  return biter.join(", ");
+}
 
 // Samleside for de brede søkene («restaurant nesodden», «take away nesodden»).
 // Forsiden er der man bestiller. Denne siden er for den som kommer fra Google og vil se
@@ -17,9 +35,24 @@ const URL_HER = `${SITE_URL}/restauranter`;
 // Område etter hvor stedet ligger, ikke postnummer (Flaskebekk har postnummer 1452 Nesoddtangen).
 // Nytt sted? Legg det til her. Står det ikke her, havner det under «Andre steder».
 const AREAS = [
-  { id: "nesoddtangen", name: "Nesoddtangen", places: ["signalen", "osolemio", "jonathan", "jafs"] },
-  { id: "flaskebekk", name: "Flaskebekk", places: ["tonys", "bistro"] },
-  { id: "fagerstrand", name: "Fagerstrand", places: ["fagerstrand"] },
+  {
+    id: "nesoddtangen",
+    name: "Nesoddtangen",
+    places: ["signalen", "osolemio", "jonathan", "jafs"],
+    tekst: "Napolitansk pizza hos Signalen ved sjøen og hos O' Sole Mio i Tangenveien, sushi og bao hos Jonathan i Vestveien, og burger og kebab hos JAFS i Kapellveien.",
+  },
+  {
+    id: "flaskebekk",
+    name: "Flaskebekk",
+    places: ["tonys", "bistro"],
+    tekst: "Tonys Sushi og Thai og Flaskebekk Bistro holder til i samme hus i Kapellveien 84, ved Flaskebekk senter. Her får du sushi, thai og kinesisk mat med dim sum.",
+  },
+  {
+    id: "fagerstrand",
+    name: "Fagerstrand",
+    places: ["fagerstrand"],
+    tekst: "Fagerstrand Grill i Myklerudveien 5 lager pizza, burger og kebab. Bor du på Fagerstrand, koster levering herfra 100 kr.",
+  },
 ];
 
 const TALL = ["null", "ett", "to", "tre", "fire", "fem", "seks", "sju", "åtte", "ni", "ti"];
@@ -41,7 +74,7 @@ const grupper = (() => {
     return { ...area, pages };
   }).filter((a) => a.pages.length);
   const resten = placePages.filter((p) => !brukt.has(p.place.id));
-  if (resten.length) ut.push({ id: "andre", name: "Andre steder", places: [], pages: resten });
+  if (resten.length) ut.push({ id: "andre", name: "Andre steder", places: [], tekst: "", pages: resten });
   return ut;
 })();
 
@@ -52,8 +85,8 @@ const OMRADER = liste(grupper.filter((g) => g.id !== "andre").map((g) => g.name)
 const medMat = (ord: string) =>
   ALLE.filter((p) => p.restaurant.cuisine.toLowerCase().includes(ord)).map((p) => p.restaurant.name);
 
-const TITLE = "Restauranter på Nesodden | Take away og levering | KjørNesodden";
-const DESCRIPTION = `${stor(antall(ALLE.length))} restauranter på ${OMRADER} med meny, priser og åpningstider. Bestill take away på nett og få maten kjørt hjem fra ${FRA}.`;
+const TITLE = "Restauranter på Nesodden | Meny og åpningstider | KjørNesodden";
+const DESCRIPTION = `${stor(antall(ALLE.length))} restauranter på ${OMRADER} med meny, priser og åpningstider. Bestill på nett og få maten kjørt hjem fra ${FRA}.`;
 
 const FAQ = [
   {
@@ -138,6 +171,7 @@ function Rad({ page, now }: { page: PlacePage; now: Date | null }) {
         <p>
           {r.cuisine} · {gate}
         </p>
+        {tider(r.hours) && <p className="samle-tider">Åpningstider: {tider(r.hours)}</p>}
         {status && (
           <span className={`opening-status ${status.open ? "is-open" : "is-closed"}`}>
             <span aria-hidden="true">●</span> {status.text}
@@ -187,6 +221,7 @@ function Samleside() {
               {g.id === "andre" ? g.name : `Restauranter på ${g.name}`}
               <span className="samle-antall">{antall(g.pages.length)} {g.pages.length === 1 ? "sted" : "steder"}</span>
             </h2>
+            {g.tekst && <p className="samle-omrade-tekst">{g.tekst}</p>}
             <div className="samle-liste">
               {g.pages.map((p) => (
                 <Rad page={p} now={now} key={p.place.id} />
