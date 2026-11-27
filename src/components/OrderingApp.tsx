@@ -70,6 +70,8 @@ function Footer() {
         <p>Du betaler når varene er levert.</p>
         <Link to="/" hash="restauranter">Restauranter</Link>
         <span> · </span>
+        <Link to="/restauranter">Restauranter på Nesodden</Link>
+        <span> · </span>
         <Link to="/om-oss">Om oss</Link>
         <span> · </span>
         <Link to="/personvern">Personvern</Link>
@@ -186,6 +188,9 @@ function Home({
             </div>
           </button>
         </div>
+        <p className="picker-alle">
+          <Link to="/restauranter">Se alle restaurantene etter område</Link>
+        </p>
         <Reviews />
       </main>
     </>

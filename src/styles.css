@@ -1716,3 +1716,33 @@ a.review-card:hover, a.review-card:focus-visible { border-color: #ff9418; transf
 .reviews-track a.review-card { -webkit-user-drag: none; }/* Responsiv sjekk 2026-10-23: «Om oss» på én linje i toppen, og omtalemerket bryter pent på smal skjerm */
 .site-header nav > a { white-space: nowrap; }
 @media (max-width: 420px) { .reviews-head-side .reviews-badge { flex-wrap: wrap; row-gap: 2px; } }
+/* Samlesiden /restauranter (2026-11-27). Samme farger, knapp og statusprikk som kortene på forsiden. */
+.samle-hero { min-height: 420px; }
+.samle-crumbs { font-size: 13px; font-weight: 600; margin-bottom: 18px; color: rgba(255,255,255,.75); }
+.samle-crumbs a { color: #ff9418; text-underline-offset: 3px; }
+.samle-content { display: grid; gap: 22px; }
+.samle-omrade, .samle-faq { padding: 28px 30px; }
+.samle-omrade h2 { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; font-size: clamp(1.35rem, 2.4vw, 1.8rem); }
+.samle-antall { font-size: 13px; font-weight: 700; letter-spacing: 0; color: #8a90a2; }
+.samle-liste { margin-top: 14px; }
+.samle-rad { display: grid; grid-template-columns: 160px minmax(0,1fr) auto; align-items: center; gap: 18px; padding: 14px 0; border-top: 1px solid #eceef3; color: #17213b; text-decoration: none; }
+.samle-rad:first-child { border-top: 0; }
+.samle-rad img { width: 160px; height: 110px; object-fit: cover; border-radius: 10px; background: #eee7dc; }
+.samle-tekst h3 { margin: 0 0 4px; font-size: 19px; font-weight: 800; color: #12151c; }
+.samle-tekst p { margin: 0 0 4px; color: #5a6070; font-size: 14px; line-height: 1.5; }
+.samle-knapp { margin: 0; padding: 11px 16px; white-space: nowrap; }
+.samle-rad:hover .samle-knapp { filter: brightness(1.05); }
+.samle-rad:hover h3 { color: #aa561c; }
+.samle-tilbake { margin: 18px 0 0; color: #5a6070; font-size: 14px; }
+.samle-tilbake a { color: #aa561c; font-weight: 700; }
+.picker-alle { margin: 16px 0 0; text-align: center; font-size: 14px; }
+.picker-alle a { color: #ffb45c; font-weight: 700; text-underline-offset: 3px; }
+@media (max-width: 700px) {
+  .samle-hero { min-height: 0; padding-bottom: 90px; }
+  .samle-omrade, .samle-faq { padding: 20px 16px; }
+  .samle-rad { grid-template-columns: 96px minmax(0,1fr); gap: 12px; }
+  .samle-rad img { width: 96px; height: 80px; }
+  .samle-tekst h3 { font-size: 17px; }
+  .samle-tekst p { font-size: 13px; }
+  .samle-knapp { grid-column: 1 / -1; width: 100%; }
+}

@@ -56,7 +56,7 @@ test("titles stay within what Google shows", () => {
 });
 
 test("sitemap lists the overview and every place page", () => {
-  assert.equal(sitemap.includes("<loc>https://www.kjornesodden.no/restauranter</loc>"), false);
+  assert.ok(sitemap.includes("<loc>https://www.kjornesodden.no/restauranter</loc>"), "samlesiden /restauranter mangler i sitemap.xml");
   for (const place of places) {
     assert.ok(
       sitemap.includes(`<loc>https://www.kjornesodden.no${placePath(place)}</loc>`),

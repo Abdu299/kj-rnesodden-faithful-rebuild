@@ -67,7 +67,7 @@ function duplicateHostRedirect(request: Request): Response | undefined {
 
 // Sider som er tatt ut, men som Google fortsatt viser. 301 så besøket og lenkene ikke går tapt.
 const MOVED: Record<string, string> = {
-  "/restauranter/mama-greek-kitchen": "/",
+  "/restauranter/mama-greek-kitchen": "/restauranter",
 };
 
 // Skråstrek på slutten (/om-oss/) er samme side som uten. 308 sier at det er permanent.
