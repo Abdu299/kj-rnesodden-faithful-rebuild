@@ -22,7 +22,7 @@ import {
   type Restaurant,
   restaurants,
 } from "../lib/catalog";
-import { dayNames, formatTime, openingStatus, deliveryFeeForRestaurants, deliveryFeeForPlace, pickupRestaurantIds } from "../../shared/order-rules.js";
+import { dayNames, formatTime, openingStatus, deliveryFeeForRestaurants, deliveryFeeForPlace, pickupRestaurantIds, campaignGifts } from "../../shared/order-rules.js";
 
 export type Customer = { fullName: string; phone: string; note: string };
 export type CheckoutProps = {
@@ -226,6 +226,15 @@ export function CartPanel({
                 )
               );
             })}
+            {campaignGifts(restaurant, lines).map((gift) => (
+              <div className="cart-line cart-gift" key={gift.name}>
+                <div>
+                  <b>{gift.name}</b>
+                  <span className="cart-line-total">Gratis</span>
+                </div>
+                <span className="cart-gift-count">{gift.quantity} stk</span>
+              </div>
+            ))}
           </div>
           <form onSubmit={submit} className="checkout-form">
             <AddressInput

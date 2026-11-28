@@ -1,6 +1,6 @@
 import catalog from "./catalog.json" with { type: "json" };
 import { OrderError, verifyAddress, searchAddresses } from "./address-service.js";
-import { openingStatus, deliveryFeeForRestaurants, deliveryFeeForPlace, pickupRestaurantIds } from "./order-rules.js";
+import { openingStatus, deliveryFeeForRestaurants, deliveryFeeForPlace, pickupRestaurantIds, campaignGifts } from "./order-rules.js";
 import { resolveTypedAddress } from "./address-match.js";
 
 const inFlight = new Map();
@@ -79,6 +79,8 @@ export function validateMenuOrder(body, address, now = new Date()) {
       lineTotal: unitPrice * line.quantity,
     };
   });
+  for (const gift of campaignGifts(restaurant, body.items))
+    lines.push({ name: gift.name, variant: "", options: [], quantity: gift.quantity, unitPrice: 0, lineTotal: 0 });
   const subtotal = lines.reduce((sum, line) => sum + line.lineTotal, 0);
   const deliveryFee = deliveryFeeForRestaurants([restaurant.id], address.zone?.id);
   const total = deliveryFee === null ? null : subtotal + deliveryFee;

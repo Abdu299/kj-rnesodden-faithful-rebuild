@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import catalog from "../shared/catalog.json" with { type: "json" };
-import { deliveryZone, deliveryFeeForRoute, deliveryFeeForRestaurants, openingStatus, osloTime } from "../shared/order-rules.js";
+import { deliveryZone, deliveryFeeForRoute, deliveryFeeForRestaurants, openingStatus, osloTime, campaignGifts } from "../shared/order-rules.js";
 import {
   addressHandler,
   normalizeAddress,
@@ -853,4 +853,50 @@ test("a house letter typed with a space is searched as one house number", async 
     "testveien* 12b, 1450 Nesoddtangen*",
     "Testveien* 12 Bjørnemyr*",
   ]);
+});
+
+// Juletilbudet til Fagerstrand Grill: to pizzaer gir stor Cola og to rømmedressinger.
+const fagerstrand = catalog.find((restaurant) => restaurant.id === "fagerstrand");
+const kategori = (id) => fagerstrand.categories.find((category) => category.id === id).items;
+const linje = (item, quantity) => ({ itemId: item.id, variantId: item.variants[0].id, optionIds: [], quantity });
+
+test("juletilbud: ingenting gratis med én pizza eller med andre varer", () => {
+  assert.deepEqual(campaignGifts(fagerstrand, [linje(kategori("pizza")[0], 1)]), []);
+  assert.deepEqual(campaignGifts(fagerstrand, [linje(kategori("burger")[0], 4)]), []);
+  assert.deepEqual(campaignGifts(signalen, [linje(signalen.categories[0].items[0], 4)]), []);
+});
+
+test("juletilbud: to pizzaer gir ett sett, også to ulike pizzaer", () => {
+  const forventet = [
+    { name: "Juletilbud: Stor Cola", quantity: 1 },
+    { name: "Juletilbud: Rømmedressing", quantity: 2 },
+  ];
+  assert.deepEqual(campaignGifts(fagerstrand, [linje(kategori("pizza")[0], 2)]), forventet);
+  assert.deepEqual(
+    campaignGifts(fagerstrand, [linje(kategori("pizza")[0], 1), linje(kategori("pizza")[1], 1)]),
+    forventet,
+  );
+  assert.deepEqual(campaignGifts(fagerstrand, [linje(kategori("pizza")[0], 3)]), forventet);
+});
+
+test("juletilbud: fire pizzaer gir to Cola og fire dressinger", () => {
+  assert.deepEqual(campaignGifts(fagerstrand, [linje(kategori("pizza")[0], 4)]), [
+    { name: "Juletilbud: Stor Cola", quantity: 2 },
+    { name: "Juletilbud: Rømmedressing", quantity: 4 },
+  ]);
+});
+
+test("juletilbud: gratislinjene følger med i bestillingen og endrer ikke prisen", () => {
+  const pizza = kategori("pizza")[0];
+  const order = validateMenuOrder(
+    { restaurantId: "fagerstrand", items: [linje(pizza, 2)] },
+    { label: "Testveien 12", zone: null },
+    openTime,
+  );
+  assert.equal(order.subtotal, pizza.variants[0].price * 2);
+  assert.equal(order.lines.length, 3);
+  assert.deepEqual(
+    order.lines.slice(1).map((line) => [line.quantity, line.name, line.lineTotal]),
+    [[1, "Juletilbud: Stor Cola", 0], [2, "Juletilbud: Rømmedressing", 0]],
+  );
 });

@@ -9187,7 +9187,15 @@
       "title": "Kjøp to pizzaer, få Cola og dressing gratis",
       "text": "Når du kjøper to pizzaer hos Fagerstrand Grill, får du stor Cola og to rømmedressinger helt gratis. God jul!",
       "image": "/images/fg-juletilbud.webp",
-      "alt": "Juletilbud hos Fagerstrand Grill: kjøp to pizzaer og få stor Cola og to rømmedressinger gratis"
+      "alt": "Juletilbud hos Fagerstrand Grill: kjøp to pizzaer og få stor Cola og to rømmedressinger gratis",
+      "gift": {
+        "categoryId": "pizza",
+        "per": 2,
+        "lines": [
+          { "name": "Stor Cola", "quantity": 1 },
+          { "name": "Rømmedressing", "quantity": 2 }
+        ]
+      }
     },
     "hours": [
       [

@@ -28,7 +28,15 @@ export type Restaurant = {
   hours: ([number, number] | null)[] | null;
   holiday?: { from: string; until: string };
   // Tilbud fra restauranten, vises på restaurantsiden og som merke på kortet.
-  campaign?: { label: string; title: string; text: string; image: string; alt: string };
+  campaign?: {
+    label: string;
+    title: string;
+    text: string;
+    image: string;
+    alt: string;
+    // Gratisvarer som legges i kurven av seg selv: ett sett per «per» varer i kategorien.
+    gift?: { categoryId: string; per: number; lines: { name: string; quantity: number }[] };
+  };
   orderingMode: "menu" | "request";
   note: string;
   sources: { label: string; url: string }[];

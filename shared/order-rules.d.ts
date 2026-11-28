@@ -21,3 +21,16 @@ export function openingStatus(
   },
   date?: Date,
 ): { open: boolean; known: boolean; text: string };
+export function campaignGifts(
+  restaurant:
+    | {
+        campaign?: {
+          label: string;
+          gift?: { categoryId: string; per: number; lines: { name: string; quantity: number }[] };
+        };
+        categories: { id: string; items: { id: string }[] }[];
+      }
+    | null
+    | undefined,
+  items: { itemId: string; quantity: number }[],
+): { name: string; quantity: number }[];

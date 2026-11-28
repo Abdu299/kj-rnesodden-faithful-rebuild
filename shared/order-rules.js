@@ -210,3 +210,23 @@ export function openingStatus(restaurant, date = new Date()) {
   }
   return { open: false, known: true, text: "Stengt" };
 }
+
+// Gratisvarer fra restaurantens tilbud (catalog.json: campaign.gift).
+// Ett sett per «per» varer i kategorien. Brukes av kurven og av serveren,
+// slik at linjene i bestillingen alltid er de samme som kunden så.
+export function campaignGifts(restaurant, items) {
+  const gift = restaurant?.campaign?.gift;
+  if (!gift || !Array.isArray(items)) return [];
+  const ids = new Set(
+    (restaurant.categories.find((category) => category.id === gift.categoryId)?.items ?? []).map(
+      (item) => item.id,
+    ),
+  );
+  const count = items.reduce((sum, line) => sum + (ids.has(line.itemId) ? line.quantity : 0), 0);
+  const sets = Math.floor(count / gift.per);
+  if (!sets) return [];
+  return gift.lines.map((line) => ({
+    name: `${restaurant.campaign.label}: ${line.name}`,
+    quantity: line.quantity * sets,
+  }));
+}
