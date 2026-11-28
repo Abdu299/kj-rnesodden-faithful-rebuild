@@ -147,6 +147,7 @@ function Home({
                   width="600"
                   height="340"
                 />
+                {r.campaign && <span className="card-campaign">{r.campaign.label}</span>}
                 {r.logo && (
                   <span className="restaurant-logo">
                     <img src={r.logo} alt={`${r.name} logo`} />
@@ -281,6 +282,16 @@ function Menu({
           </details>
         </div>
       </section>
+      {restaurant.campaign && (
+        <aside className="menu-campaign" aria-label={restaurant.campaign.label}>
+          <img src={restaurant.campaign.image} alt={restaurant.campaign.alt} width="720" height="1088" loading="lazy" />
+          <div>
+            <span className="menu-campaign-label">{restaurant.campaign.label}</span>
+            <h2>{restaurant.campaign.title}</h2>
+            <p>{restaurant.campaign.text}</p>
+          </div>
+        </aside>
+      )}
       <nav className="menu-tabs" aria-label="Menykategorier">
         <div>
           {restaurant.categories.map((c) => (

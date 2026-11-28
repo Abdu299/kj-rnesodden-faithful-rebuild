@@ -27,6 +27,8 @@ export type Restaurant = {
   banner: string;
   hours: ([number, number] | null)[] | null;
   holiday?: { from: string; until: string };
+  // Tilbud fra restauranten, vises på restaurantsiden og som merke på kortet.
+  campaign?: { label: string; title: string; text: string; image: string; alt: string };
   orderingMode: "menu" | "request";
   note: string;
   sources: { label: string; url: string }[];

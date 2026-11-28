@@ -1766,3 +1766,13 @@ a.review-card:hover, a.review-card:focus-visible { border-color: #ff9418; transf
   .samle-page .about-content { width: calc(100% - 24px); }
 }
 .samle-page .samle-omrade-tekst { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid #eceef3; font-size: 14px; }
+
+/* Tilbud fra restauranten (catalog.json: campaign) */
+.menu-campaign{display:grid;grid-template-columns:minmax(0,260px) 1fr;gap:24px;align-items:center;max-width:1100px;margin:20px auto 0;padding:16px;border:1px solid #e5d9c9;border-radius:var(--radius-xl);background:#fff}
+.menu-campaign img{width:100%;height:auto;border-radius:var(--radius-lg);display:block}
+.menu-campaign h2{margin:6px 0 8px;font-size:1.4rem;line-height:1.25}
+.menu-campaign p{margin:0;font-size:1.05rem;line-height:1.5}
+.menu-campaign-label,.card-campaign{display:inline-block;background:#c62828;color:#fff;font-weight:700;font-size:.8rem;letter-spacing:.02em;padding:4px 10px;border-radius:999px}
+.restaurant-photo{position:relative}
+.card-campaign{position:absolute;top:10px;left:10px;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+@media (max-width:720px){.menu-campaign{grid-template-columns:1fr;margin:16px 12px 0;gap:14px}.menu-campaign img{max-width:360px;margin:0 auto}}

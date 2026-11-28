@@ -9182,6 +9182,13 @@
     "image": "/images/fg-kort-2.webp",
     "logo": "/images/fg-logo.webp",
     "banner": "/images/fg-banner-2.webp",
+    "campaign": {
+      "label": "Juletilbud",
+      "title": "Kjøp to pizzaer, få Cola og dressing gratis",
+      "text": "Når du kjøper to pizzaer hos Fagerstrand Grill, får du stor Cola og to rømmedressinger helt gratis. God jul!",
+      "image": "/images/fg-juletilbud.webp",
+      "alt": "Juletilbud hos Fagerstrand Grill: kjøp to pizzaer og få stor Cola og to rømmedressinger gratis"
+    },
     "hours": [
       [
         660,
